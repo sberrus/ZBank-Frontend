@@ -1,0 +1,27 @@
+.background {
+	height: 100vh;
+}
+
+.background .layer {
+	height: 50vh;
+	width: inherit;
+}
+.background > .layer-top {
+	background-color: #1d1d1d;
+}
+.background > .layer-bottom {
+	background-image: linear-gradient(#1d1d1d, #3f0071);
+}
+
+.logo-container {
+	padding: 20%;
+}
+
+.login-form-container {
+	background-color: #ffffff18;
+	border-radius: 0.5rem;
+}
+
+.login-form-body * {
+	text-shadow: 0px 0px 1px #000;
+}
