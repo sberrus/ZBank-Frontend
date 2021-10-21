@@ -12,7 +12,7 @@ const RegisterForm = () => {
 				<form action="">
 					<div className="mb-3 d-flex justify-content-center flex-column">
 						<label htmlFor="" className="d-block fw-light">
-							ID Usuario
+							Nombre de usuario
 						</label>
 						<input type="text" name="" id="" className="rounded" />
 					</div>
@@ -22,6 +22,29 @@ const RegisterForm = () => {
 						</label>
 						<input
 							type="password"
+							name=""
+							id=""
+							className="rounded"
+						/>
+					</div>
+					<div className="mb-4 d-flex justify-content-center flex-column">
+						<label htmlFor="" className="d-block fw-light">
+							Confirmar contraseña
+						</label>
+						<input
+							type="password"
+							name=""
+							id=""
+							className="rounded"
+						/>
+					</div>
+					<div className="mb-4 d-flex justify-content-center flex-column">
+						<label htmlFor="" className="d-block fw-light">
+							Código de invitación
+						</label>
+						<input
+							type="number"
+							inputMode="numeric"
 							name=""
 							id=""
 							className="rounded"
