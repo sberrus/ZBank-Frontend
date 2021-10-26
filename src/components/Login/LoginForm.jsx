@@ -1,17 +1,27 @@
 import React from "react";
 import { Link } from "react-router-dom";
 const LoginForm = () => {
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		alert("Relajate vale ¿Porqué eres así?");
+	};
+
 	return (
 		<div className="container-fluid w-75 py-4 login-form-container">
 			<div className="blur-bg"></div>
 			<div className="login-form-body">
 				<h3 className="text-center mb-5">Bienvenido</h3>
-				<form action="">
+				<form action="" onSubmit={handleSubmit}>
 					<div className="mb-3 d-flex justify-content-center flex-column">
 						<label htmlFor="" className="d-block fw-light">
 							ID Usuario
 						</label>
-						<input type="text" name="" id="" className="rounded" />
+						<input
+							type="text"
+							name=""
+							id="userID"
+							className="rounded"
+						/>
 					</div>
 					<div className="mb-4 d-flex justify-content-center flex-column">
 						<label htmlFor="" className="d-block fw-light">
@@ -20,7 +30,7 @@ const LoginForm = () => {
 						<input
 							type="password"
 							name=""
-							id=""
+							id="password"
 							className="rounded"
 						/>
 						<Link

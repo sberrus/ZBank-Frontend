@@ -1,16 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "./Header.css"
 
 const Header = () => {
 	return (
-		<div className="position-sticky top-0">
+		<div className="position-sticky w-100 top-0" id="navBarHeader">
 			<nav className="navbar navbar-dark bg-dark">
 				<div className="container">
-					<Link to="/" className="navbar-brand" >
+					<Link to="/" className="navbar-brand">
 						ZBank
 					</Link>
 					<button
-						class="navbar-toggler"
+						className="navbar-toggler"
 						type="button"
 						data-bs-toggle="collapse"
 						data-bs-target="#navbarNav"
@@ -18,25 +19,27 @@ const Header = () => {
 						aria-expanded="false"
 						aria-label="Toggle navigation"
 					>
-						<span class="navbar-toggler-icon"></span>
+						<span className="navbar-toggler-icon"></span>
 					</button>
-					<div class="collapse navbar-collapse" id="navbarNav">
-						<ul class="navbar-nav">
-							<li class="nav-item">
-								<Link
-									class="nav-link active"
-									aria-current="page"
-									href="#"
-								></Link>
-							</li>
-							<li class="nav-item">
-								<Link class="nav-link" to="/user-panel">
-									User Panel
+					<div className="collapse navbar-collapse" id="navbarNav">
+						<ul className="navbar-nav">
+							<li className="nav-item"></li>
+							<li className="nav-item">
+								<Link className="nav-link" to="/user">
+									User
 								</Link>
 							</li>
-							<li class="nav-item">
-								<Link class="nav-link" to="/transactions">
-									Transactions
+							<li className="nav-item">
+								<Link className="nav-link" to="/transaction">
+									Transaction
+								</Link>
+							</li>
+							<li className="nav-item">
+								<Link
+									className="nav-link"
+									to="/transaction-forzed-error"
+								>
+									Forzed 404
 								</Link>
 							</li>
 						</ul>

@@ -2,6 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const RegisterForm = () => {
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		alert("Aún no se puede, no seas impaciente vale");
+	};
+
 	return (
 		<div className="container w-75 py-4 login-form-container">
 			<div className="login-form-body">
@@ -9,7 +14,7 @@ const RegisterForm = () => {
 					Volver a Login
 				</Link>
 				<h3 className="text-center mb-5">Registrarse</h3>
-				<form action="">
+				<form action="" onSubmit={handleSubmit}>
 					<div className="mb-3 d-flex justify-content-center flex-column">
 						<label htmlFor="" className="d-block fw-light">
 							Nombre de usuario

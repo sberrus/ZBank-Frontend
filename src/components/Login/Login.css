@@ -1,15 +1,15 @@
-.background {
-	height: 100vh;
+#background {
+	height: 93vh;
 }
 
-.background .layer {
-	height: 50vh;
+#background .layer {
+	height: 50%;
 	width: inherit;
 }
-.background > .layer-top {
+#background > .layer-top {
 	background-color: #1d1d1d;
 }
-.background > .layer-bottom {
+#background > .layer-bottom {
 	background-image: linear-gradient(#1d1d1d, #3f0071);
 }
 
@@ -22,6 +22,7 @@
 	border-radius: 0.5rem;
 }
 
-.login-form-body * {
-	text-shadow: 0px 0px 1px #000;
+#loginForm {
+	top: 0;
+	margin-top: 7vh;
 }
