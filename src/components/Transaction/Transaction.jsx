@@ -74,8 +74,8 @@ const Transaction = () => {
 				<table className="table text-light">
 					<thead>
 						<tr>
-							<th scope="col">ID Transacción</th>
-							<th scope="col">ID Emisor</th>
+							<th scope="col">Emisor</th>
+							<th scope="col">Ingreso/Egreso</th>
 						</tr>
 					</thead>
 					<tbody>

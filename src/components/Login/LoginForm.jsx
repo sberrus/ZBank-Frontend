@@ -1,9 +1,24 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 const LoginForm = () => {
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-		alert("Relajate vale ¿Porqué eres así?");
+		axios({
+			method: "post",
+			url: "https://zbank.samdev.es/v1/auth",
+			data: {
+				username: "samdev",
+				password: "123456",
+			},
+		})
+			.then(({ data }) => {
+				//enviar token a componente padre para renderizar
+				localStorage.setItem("token", data.token);
+
+				console.log(data);
+			})
+			.catch((err) => console.log(err));
 	};
 
 	return (
