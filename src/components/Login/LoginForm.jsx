@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import bootstrap from "bootstrap/dist/js/bootstrap.bundle";
 import axios from "axios";
-const LoginForm = () => {
+const LoginForm = (props) => {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
-	const [errorMsg, setErrorMsg] = useState(null);
+	const [, setErrorMsg] = useState(null);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -17,10 +17,11 @@ const LoginForm = () => {
 				password,
 			},
 		})
-			.then((data) => {
+			.then(({ data }) => {
 				//enviar token a componente padre para renderizar
 				localStorage.setItem("token", data.token);
 				console.log(data);
+				props.history.push("/");
 			})
 			.catch((err) => {
 				console.log(err);

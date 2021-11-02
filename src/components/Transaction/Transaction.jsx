@@ -42,7 +42,6 @@ const Transaction = () => {
 								<label htmlFor="">Monto</label>
 								<input
 									type="number"
-									inputMode="numeric"
 									id="receptorID"
 									inputMode="numeric"
 								/>

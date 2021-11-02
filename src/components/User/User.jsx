@@ -1,25 +1,38 @@
 //imports
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import BarChart from "./components/BarChart";
 import { Link, Redirect } from "react-router-dom";
+import axios from "axios";
 
 //_partials
 import Header2 from "../_partials/Header2";
 import "./User.css";
 const User = () => {
-	const [userLogged, setUserLogged] = useState(() => {
-		const user = localStorage.token;
-		console.log(user);
-		if (!user) return null;
-		return user;
+	const [tokenExists] = useState(() => {
+		const token = localStorage.token;
+		if (!token) return null;
+		return token;
 	});
-	return userLogged ? (
+	const [user, setUser] = useState(null);
+	const [userTransactions, setUserTransactions] = useState(null);
+	useEffect(() => {
+		axios
+			.get("https://zbank.samdev.es/v1/users?userID=4f62")
+			.then(({ data }) => setUser(data));
+		axios
+			.get("https://zbank.samdev.es/v1/transactions?accountID=4f62")
+			.then(({ data }) => {
+				setUserTransactions(data);
+			});
+	}, []);
+
+	return tokenExists ? (
 		<div className="container p-0">
-			<Header2 />
+			<Header2 user={user} />
 			<hr />
 
 			<div id="canva-grafico">
-				<BarChart />
+				<BarChart userTransactions={userTransactions} />
 			</div>
 			<hr />
 			<div className="w-100">
