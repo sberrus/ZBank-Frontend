@@ -1,10 +1,37 @@
-import React from "react";
+//Imports
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import bootstrap from "bootstrap/dist/js/bootstrap.bundle";
+
+//Components
+import ErrorPopUp from "../_partials/ErrorPopUp/ErrorPopUp";
 
 const RegisterForm = () => {
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		alert("Aún no se puede, no seas impaciente vale");
+	const [errorMsg, setErrorMsg] = useState(null);
+	const { register, handleSubmit } = useForm();
+
+	const onSubmit = (data, e) => {
+		console.log(data, e);
+		setErrorMsg(null);
+	};
+	const onError = (error, e) => {
+		const errorStack = Object.keys(error).reverse();
+		if (errorStack.includes("username")) {
+			setErrorMsg("Nombre de Usuario Obligatorio");
+		}
+		if (errorStack.includes("password")) {
+			setErrorMsg("Contraseña Obligatori");
+		}
+		if (errorStack.includes("passwordConfirm")) {
+			setErrorMsg("Debe introducir una confirmación");
+		}
+		if (errorStack.includes("invitationCode")) {
+			setErrorMsg("ID Code de partida Obligatoria");
+		}
+		var toastLiveExample = document.getElementById("liveToast");
+		var toast = new bootstrap.Toast(toastLiveExample);
+		toast.show();
 	};
 
 	return (
@@ -14,12 +41,19 @@ const RegisterForm = () => {
 					Volver a Login
 				</Link>
 				<h3 className="text-center mb-5">Registrarse</h3>
-				<form action="" onSubmit={handleSubmit}>
+				<form action="" onSubmit={handleSubmit(onSubmit, onError)}>
 					<div className="mb-3 d-flex justify-content-center flex-column">
 						<label htmlFor="" className="d-block fw-light">
 							Nombre de usuario
 						</label>
-						<input type="text" name="" id="" className="rounded" />
+						<input
+							type="text"
+							{...register("username", {
+								required: true,
+								maxLength: 15,
+							})}
+							className="rounded"
+						/>
 					</div>
 					<div className="mb-4 d-flex justify-content-center flex-column">
 						<label htmlFor="" className="d-block fw-light">
@@ -27,8 +61,11 @@ const RegisterForm = () => {
 						</label>
 						<input
 							type="password"
-							name=""
-							id=""
+							{...register("password", {
+								required: true,
+								maxLength: 20,
+								minLength: 5,
+							})}
 							className="rounded"
 						/>
 					</div>
@@ -38,8 +75,11 @@ const RegisterForm = () => {
 						</label>
 						<input
 							type="password"
-							name=""
-							id=""
+							{...register("passwordConfirm", {
+								required: true,
+								maxLength: 20,
+								minLength: 5,
+							})}
 							className="rounded"
 						/>
 					</div>
@@ -50,8 +90,11 @@ const RegisterForm = () => {
 						<input
 							type="number"
 							inputMode="numeric"
-							name=""
-							id=""
+							{...register("invitationCode", {
+								required: true,
+								minLength: 4,
+								maxLength: 4,
+							})}
 							className="rounded"
 						/>
 					</div>
@@ -62,6 +105,7 @@ const RegisterForm = () => {
 					</div>
 				</form>
 			</div>
+			{errorMsg && <ErrorPopUp msg={{ body: errorMsg }} />}
 		</div>
 	);
 };

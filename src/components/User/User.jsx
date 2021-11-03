@@ -8,7 +8,7 @@ import axios from "axios";
 import Header2 from "../_partials/Header2";
 import "./User.css";
 const User = () => {
-	const [tokenExists] = useState(() => {
+	const [currentUser] = useState(() => {
 		const token = localStorage.token;
 		if (!token) return null;
 		return token;
@@ -31,9 +31,12 @@ const User = () => {
 				});
 		};
 		callData();
+		return () => {
+			setUser({});
+		};
 	}, [setUser, setUserTransactions]);
 
-	return tokenExists ? (
+	return currentUser ? (
 		<div className="container p-0">
 			<Header2 user={user} />
 			<hr />
@@ -90,7 +93,10 @@ const User = () => {
 							))}
 						</tbody>
 					</table>
-					<Link to="/" className="link-primary text-center col-12 d-block my-2">
+					<Link
+						to="/"
+						className="link-primary text-center col-12 d-block my-2"
+					>
 						Ver todas las transacciones
 					</Link>
 				</div>

@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import bootstrap from "bootstrap/dist/js/bootstrap.bundle";
 import axios from "axios";
+import ErrorPopUp from "../_partials/ErrorPopUp/ErrorPopUp";
 const LoginForm = (props) => {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
-	const [, setErrorMsg] = useState(null);
+	const [errorMsg, setErrorMsg] = useState(null);
+	const _msg = { body: "hola body", header: "hola header" };
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -20,6 +22,10 @@ const LoginForm = (props) => {
 			.then(({ data }) => {
 				//enviar token a componente padre para renderizar
 				localStorage.setItem("token", data.token);
+				localStorage.setItem(
+					"currentUser",
+					JSON.stringify(data.usuario)
+				);
 				console.log(data);
 				props.history.push("/");
 			})
@@ -85,22 +91,7 @@ const LoginForm = (props) => {
 							¿No tienes cuenta menor? Registrate
 						</Link>
 					</div>
-					<div class="position-fixed bottom-0 end-0 col-12 bg-dark">
-						<div
-							id="liveToast"
-							class="toast bg-dark"
-							role="alert"
-							aria-live="assertive"
-							aria-atomic="true"
-						>
-							<div class="toast-header bg-danger text-dark">
-								<strong class="me-auto">
-									{"Error al iniciar sesión"}
-								</strong>
-							</div>
-							<div class="toast-body">{"Mensaje del error"}</div>
-						</div>
-					</div>
+					{errorMsg && <ErrorPopUp msg={_msg} />}
 				</form>
 			</div>
 		</div>

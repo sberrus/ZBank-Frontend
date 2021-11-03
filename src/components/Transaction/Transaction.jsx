@@ -1,15 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
+import { Redirect } from "react-router";
+import { withRouter } from "react-router-dom";
 import Header2 from "../_partials/Header2";
 import "./Transaction.css";
 
 const Transaction = () => {
+	const [currentUser] = useState(() => {
+		const user = JSON.parse(localStorage.currentUser);
+		if (!user) return null;
+		return user;
+	});
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
 	};
 
-	return (
+	console.log(currentUser);
+	return currentUser ? (
 		<div className="vh-100 container p-0">
-			<Header2 />
+			<Header2 user={currentUser} />
 			<section id="transactionHeader">
 				<hr />
 				<div className="d-flex flex-row-reverse">
@@ -119,7 +128,9 @@ const Transaction = () => {
 			</section>
 			{/**Fin Lista de Transacciones */}
 		</div>
+	) : (
+		<Redirect to="/login" />
 	);
 };
 
-export default Transaction;
+export default withRouter(Transaction);
