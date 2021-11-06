@@ -13,6 +13,7 @@ const Transaction = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		console.log("form sent");
 	};
 
 	console.log(currentUser);
@@ -54,15 +55,6 @@ const Transaction = () => {
 									id="receptorID"
 									inputMode="numeric"
 								/>
-							</div>
-							<div className="d-flex flex-column">
-								<label htmlFor="">Mensaje</label>
-								<textarea
-									name=""
-									id="msgArea"
-									cols="30"
-									rows="5"
-								></textarea>
 							</div>
 							<div className="d-flex flex-row-reverse">
 								<button className="btn btn-success col-4 mt-4">

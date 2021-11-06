@@ -9,7 +9,7 @@ import Header2 from "../_partials/Header2";
 import "./User.css";
 const User = () => {
 	const [currentUser] = useState(() => {
-		const token = localStorage.token;
+		const token = localStorage.currentUser;
 		if (!token) return null;
 		return token;
 	});
@@ -39,7 +39,6 @@ const User = () => {
 	return currentUser ? (
 		<div className="container p-0">
 			<Header2 user={user} />
-			<hr />
 
 			{userTransactions && (
 				<div id="canva-grafico">

@@ -3,9 +3,8 @@ import YodaProfilePicture from "../../static/yodabb.jpg";
 import { Redirect } from "react-router";
 
 const Header2 = ({ user }) => {
-	console.log(user);
 	return user ? (
-		<nav className="navbar navbar-dark bg-dark" role="navigation">
+		<nav className="navbar navbar-dark bg-dark my-2" role="navigation">
 			<div className="container-fluid">
 				<div className="row col-12 p-0">
 					<div className="col-12 d-flex">

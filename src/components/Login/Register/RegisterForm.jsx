@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import bootstrap from "bootstrap/dist/js/bootstrap.bundle";
 
 //Components
-import ErrorPopUp from "../_partials/ErrorPopUp/ErrorPopUp";
+import ErrorPopUp from "../../_partials/ErrorPopUp/ErrorPopUp";
 
 const RegisterForm = () => {
 	const [errorMsg, setErrorMsg] = useState(null);
