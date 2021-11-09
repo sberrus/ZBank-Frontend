@@ -7,12 +7,12 @@ import axios from "axios";
 //_partials
 import Header2 from "../_partials/Header2";
 import "./User.css";
+import UseAuth from "../../Contexts/Auth/UseAuth";
 const User = () => {
-	const [currentUser] = useState(() => {
-		const token = localStorage.currentUser;
-		if (!token) return null;
-		return token;
-	});
+	//Contexto
+	const auth = UseAuth();
+
+	//Component Data
 	const [user, setUser] = useState(null);
 	const [userTransactions, setUserTransactions] = useState(null);
 	useEffect(() => {
@@ -20,7 +20,9 @@ const User = () => {
 		const callData = async () => {
 			await axios
 				.get(`https://zbank.samdev.es/v1/users?userID=${_userID}`)
-				.then(({ data }) => setUser(data));
+				.then(({ data }) => {
+					setUser(data);
+				});
 			await axios
 				.get(
 					`https://zbank.samdev.es/v1/transactions?accountID=${_userID}`
@@ -36,9 +38,9 @@ const User = () => {
 		};
 	}, [setUser, setUserTransactions]);
 
-	return currentUser ? (
+	return auth.isLogged() ? (
 		<div className="container p-0">
-			<Header2 user={user} />
+			{user && <Header2 user={user} />}
 
 			{userTransactions && (
 				<div id="canva-grafico">
@@ -102,7 +104,7 @@ const User = () => {
 			)}
 		</div>
 	) : (
-		<Redirect to="/login" />
+		<Redirect to="/" />
 	);
 };
 

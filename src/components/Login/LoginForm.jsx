@@ -1,12 +1,28 @@
+//Imports
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import bootstrap from "bootstrap/dist/js/bootstrap.bundle";
 import axios from "axios";
+
+//Components
 import ErrorPopUp from "../_partials/ErrorPopUp/ErrorPopUp";
-const LoginForm = (props) => {
-	const [username, setUsername] = useState("");
-	const [password, setPassword] = useState("");
+
+//Contexto
+import UseAuth from "../../Contexts/Auth/UseAuth";
+
+const LoginForm = () => {
+	//History hook
+	const history = useHistory();
+
+	//Contexto
+	const auth = UseAuth();
+
+	//Form Inputs
+	//todo: Implementar uso de react hook form para manipular el formulario
+	const [username, setUsername] = useState("samdev2");
+	const [password, setPassword] = useState("123456");
 	const [errorMsg, setErrorMsg] = useState(null);
+
 	const _msg = { body: "hola body", header: "hola header" };
 
 	const handleSubmit = (e) => {
@@ -26,8 +42,8 @@ const LoginForm = (props) => {
 					"currentUser",
 					JSON.stringify(data.usuario)
 				);
-				console.log(data);
-				props.history.push("/");
+				auth.login(data.usuario);
+				history.push("/dashboard");
 			})
 			.catch((err) => {
 				console.log(err);

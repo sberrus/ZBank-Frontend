@@ -5,18 +5,13 @@ import Header2 from "../_partials/Header2";
 import "./Transaction.css";
 
 const Transaction = () => {
-	const [currentUser] = useState(() => {
-		const user = JSON.parse(localStorage.currentUser);
-		if (!user) return null;
-		return user;
-	});
+	const [currentUser] = useState(null);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		console.log("form sent");
 	};
 
-	console.log(currentUser);
 	return currentUser ? (
 		<div className="vh-100 container p-0">
 			<Header2 user={currentUser} />
@@ -121,7 +116,7 @@ const Transaction = () => {
 			{/**Fin Lista de Transacciones */}
 		</div>
 	) : (
-		<Redirect to="/login" />
+		<Redirect to="/" />
 	);
 };
 

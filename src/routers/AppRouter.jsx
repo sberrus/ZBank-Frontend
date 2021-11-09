@@ -23,7 +23,9 @@ export default function AppRouter() {
 			<PrivateRoute exact path="/transaction" component={Transaction} />
 
 			{/* 404 handlers */}
-			<Route path="*" component={Login} />
+			<Route path="*">
+				<Route component={Error404} />
+			</Route>
 		</Switch>
 	);
 }

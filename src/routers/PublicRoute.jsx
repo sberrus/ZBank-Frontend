@@ -1,12 +1,12 @@
 //imports
 import { Redirect } from "react-router-dom";
+import UseAuth from "../Contexts/Auth/UseAuth";
 
 //context
-const userLogged = false;
 
-//TODO: Crear contexto de authenticación para manejar las rutas.
-const PublicRoute = ({ component: Component, ...props }) => {
-	return !userLogged ? <Component /> : <Redirect to="/dashboard" />;
+const PublicRoute = ({ component: Component }) => {
+	const auth = UseAuth();
+	return !auth.isLogged() ? <Component /> : <Redirect to="/dashboard" />;
 };
 
 export default PublicRoute;
