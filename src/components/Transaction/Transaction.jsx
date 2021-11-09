@@ -1,20 +1,21 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router";
 import { withRouter } from "react-router-dom";
-import Header2 from "../_partials/Header2";
+import UseAuth from "../../Contexts/Auth/UseAuth";
+import Header from "../_partials/Header";
 import "./Transaction.css";
 
 const Transaction = () => {
-	const [currentUser] = useState(null);
+	const auth = UseAuth();
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		console.log("form sent");
 	};
 
-	return currentUser ? (
+	return auth.isLogged() ? (
 		<div className="vh-100 container p-0">
-			<Header2 user={currentUser} />
+			<Header user={auth.user} />
 			<section id="transactionHeader">
 				<hr />
 				<div className="d-flex flex-row-reverse">
