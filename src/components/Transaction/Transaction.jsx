@@ -1,26 +1,71 @@
-import React, { useState } from "react";
-import { Redirect } from "react-router";
-import { withRouter } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { withRouter, useHistory } from "react-router-dom";
 import UseAuth from "../../Contexts/Auth/UseAuth";
 import Header from "../_partials/Header";
 import "./Transaction.css";
 
 const Transaction = () => {
+	//Contexto de loggeo
 	const auth = UseAuth();
 
-	const handleSubmit = (e) => {
+	//useHistory
+	const history = useHistory();
+
+	//Component Data
+	const [transactions, setTransactions] = useState(null);
+
+	//Transaference Input Data
+	const [receiver, setReceiver] = useState("");
+	const [sender, setSender] = useState("");
+	const [ammount, setAmmount] = useState("");
+
+	useEffect(() => {
+		const { userID } = JSON.parse(localStorage.getItem("currentUser"));
+		setSender(userID);
+
+		const callData = async () => {
+			await axios
+				.get(
+					`https://zbank.samdev.es/v1/transactions?accountID=${userID}`
+				)
+				.then(({ data }) => {
+					const last6Transactions = data.slice(-6).reverse();
+					setTransactions(last6Transactions);
+				});
+		};
+		callData();
+		return () => {};
+	}, []);
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-		console.log("form sent");
+		await axios({
+			method: "post",
+			url: "https://zbank.samdev.es/v1/transactions",
+			data: {
+				sender,
+				receiver,
+				ammount,
+			},
+		})
+			.then(({ data }) => {
+				//enviar token a componente padre para renderizar
+				console.log("Transferencia enviada con exito", data);
+				history.push("/dashboard");
+			})
+			.catch((err) => {
+				console.log(err);
+			});
 	};
 
-	return auth.isLogged() ? (
+	return (
 		<div className="vh-100 container p-0">
 			<Header user={auth.user} />
 			<section id="transactionHeader">
 				<hr />
 				<div className="d-flex flex-row-reverse">
 					<button
-						class="btn btn-primary"
+						className="btn btn-primary"
 						type="button"
 						data-bs-toggle="collapse"
 						data-bs-target="#collapseExample"
@@ -32,16 +77,18 @@ const Transaction = () => {
 				</div>
 			</section>
 			{/** Login Form */}
-			<div class="collapse mt-2 " id="collapseExample">
-				<div class="card card-body bg-dark border">
+			<div className="collapse mt-2 " id="collapseExample">
+				<div className="card card-body bg-dark border">
 					<section>
 						<form action="" onSubmit={handleSubmit}>
 							<div className="d-flex flex-column">
 								<label htmlFor="">ID Receptor</label>
 								<input
-									type="number"
 									id="receptorID"
-									inputMode="numeric"
+									value={receiver}
+									onChange={(e) => {
+										setReceiver(e.target.value);
+									}}
 								/>
 							</div>
 							<div className="d-flex flex-column">
@@ -50,10 +97,17 @@ const Transaction = () => {
 									type="number"
 									id="receptorID"
 									inputMode="numeric"
+									value={ammount}
+									onChange={(e) => {
+										setAmmount(e.target.value);
+									}}
 								/>
 							</div>
 							<div className="d-flex flex-row-reverse">
-								<button className="btn btn-success col-4 mt-4">
+								<button
+									className="btn btn-success col-4 mt-4"
+									type="submit"
+								>
 									Enviar
 								</button>
 							</div>
@@ -67,58 +121,104 @@ const Transaction = () => {
 			{/**Lista de Transacciones */}
 			<section id="tableTransaction" className="mt-1">
 				<h2>Historial de Transacciones</h2>
-				<table className="table text-light">
-					<thead>
-						<tr>
-							<th scope="col">Emisor</th>
-							<th scope="col">Ingreso/Egreso</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<th scope="row">1s21</th>
-							<td>123s</td>
-							<td>
-								<button
-									to="/transaction"
-									className="btn btn-outline-primary"
-								>
-									...
-								</button>
-							</td>
-						</tr>
-						<tr>
-							<th scope="row">2</th>
-							<td>Jacob</td>
-							<td>
-								<button
-									to="/transaction"
-									className="btn btn-outline-primary"
-								>
-									...
-								</button>
-							</td>
-						</tr>
-						<tr>
-							<th scope="row">3</th>
-							<td>Larry the Bird</td>
-							<td>
-								<button
-									to="/transaction"
-									className="btn btn-outline-primary"
-								>
-									...
-								</button>
-							</td>
-						</tr>
-					</tbody>
-				</table>
+				{transactions && (
+					<>
+						{/* TABLE */}
+						<div className="w-100">
+							<h2>Últimos registros</h2>
+							<table className="table table-dark text-light">
+								<thead>
+									<tr>
+										<th scope="col">Emisor/Receptor</th>
+										<th scope="col">Monto</th>
+									</tr>
+								</thead>
+								<tbody>
+									{transactions.map((transaction) => (
+										<tr key={transaction.transactionID}>
+											<td>
+												{auth.user.userID ===
+												transaction.sender ? (
+													<>
+														<span className="d-block fw-bold">
+															[Username]
+														</span>
+														<small className="d-block">
+															[concepto]
+														</small>
+														<small className="text-secondary">
+															{transaction.date
+																.split("T")[0]
+																.replaceAll(
+																	"-",
+																	"/"
+																)}
+															{"  "}
+															{
+																transaction.date
+																	.split(
+																		"T"
+																	)[1]
+																	.split(
+																		"."
+																	)[0]
+															}
+														</small>
+													</>
+												) : (
+													<>
+														<span className="d-block fw-bold">
+															[Username]
+														</span>
+														<small className="d-block">
+															[concepto]
+														</small>
+														<small className="text-secondary">
+															{transaction.date
+																.split("T")[0]
+																.replaceAll(
+																	"-",
+																	"/"
+																)}
+															{"  "}
+															{
+																transaction.date
+																	.split(
+																		"T"
+																	)[1]
+																	.split(
+																		"."
+																	)[0]
+															}
+														</small>
+													</>
+												)}
+											</td>
+											{auth.user.userID ===
+											transaction.sender ? (
+												<td className="fw-bold text-danger">
+													-{transaction.ammount}
+													&nbsp;
+													<i className="bi bi-caret-down"></i>
+												</td>
+											) : (
+												<td className="fw-bold text-success">
+													{transaction.ammount}
+													&nbsp;&nbsp;
+													<i className="bi bi-caret-up"></i>
+												</td>
+											)}
+										</tr>
+									))}
+								</tbody>
+							</table>
+						</div>
+						{/* TABLE END */}
+					</>
+				)}
 			</section>
 			{/**Fin Lista de Transacciones */}
 		</div>
-	) : (
-		<Redirect to="/" />
 	);
 };
-
 export default withRouter(Transaction);

@@ -1,5 +1,5 @@
 //Imports
-import { Redirect, useHistory } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 
 //Estilos
 import "./Header.css";
@@ -11,8 +11,6 @@ import YodaProfilePicture from "../../static/yodabb.jpg";
 import UseAuth from "../../Contexts/Auth/UseAuth";
 
 const Header = ({ user }) => {
-	//history hook
-	const history = useHistory();
 	//Context
 	const auth = UseAuth();
 
@@ -24,20 +22,22 @@ const Header = ({ user }) => {
 			<div className="container-fluid">
 				<div className="d-flex justify-content-between col-12">
 					<div className="col-2" id="imgContainer">
-						<a href="/dashboard">
+						<Link to="/dashboard">
 							<img
 								src={YodaProfilePicture}
 								className="rounded-circle border border-3 border-success"
 								alt="[]"
 								id="userProfileImg"
 							/>
-						</a>
+						</Link>
 					</div>
 					<div className="pt-1 ps-3 col-9" id="uernameContainer">
-						<span className="fw-bold" id="username">
+						<h5 className="fw-bold p-0 m-0" id="username">
 							{user.username}
-						</span>
-						<br />
+						</h5>
+						<small id="userID" className="d-block">
+							ID: {user.userID}
+						</small>
 						<h2 className="text-success" id="account-balance">
 							{new Intl.NumberFormat("de-DE").format(
 								parseInt(user.balance)

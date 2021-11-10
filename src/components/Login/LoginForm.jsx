@@ -25,9 +25,9 @@ const LoginForm = () => {
 
 	const _msg = { body: "hola body", header: "hola header" };
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-		axios({
+		await axios({
 			method: "post",
 			url: "https://zbank.samdev.es/v1/auth",
 			data: {
