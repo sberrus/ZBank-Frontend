@@ -5,6 +5,8 @@ import { Route, Switch } from "react-router-dom";
 import Login from "../components/Login/Login";
 import User from "../components/User/User";
 import Transaction from "../components/Transaction/Transaction";
+import RegisterForm from "../components/Login/Register/RegisterForm";
+import ForgotPassword from "../components/Login/ForgotPassword/ForgotPassword";
 
 //Rutes Conditioning
 import PublicRoute from "./PublicRoute";
@@ -18,6 +20,12 @@ export default function AppRouter() {
 		<Switch>
 			{/* Rutas Públicas */}
 			<PublicRoute exact path="/" component={Login} />
+			<PublicRoute exact path="/register" component={RegisterForm} />
+			<PublicRoute
+				exact
+				path="/forgot-password"
+				component={ForgotPassword}
+			/>
 			{/* Rutas Privadas */}
 			<PrivateRoute exact path="/dashboard" component={User} />
 			<PrivateRoute exact path="/transaction" component={Transaction} />
