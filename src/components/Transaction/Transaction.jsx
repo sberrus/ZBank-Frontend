@@ -13,7 +13,7 @@ const Transaction = () => {
 	const history = useHistory();
 
 	//Component Data
-	const [transactions, setTransactions] = useState(null);
+	const [transactions, setTransactions] = useState([].fill(null, 0, 6));
 
 	//Transaference Input Data
 	const [receiver, setReceiver] = useState("");
@@ -27,11 +27,11 @@ const Transaction = () => {
 		const callData = async () => {
 			await axios
 				.get(
-					`https://zbank.samdev.es/v1/transactions?accountID=${userID}`
+					`https://zbank.samdev.es/v1/transactions?accountID=${userID}`,
+					{ headers: { "x-token": localStorage.getItem("x-token") } }
 				)
 				.then(({ data }) => {
-					const last6Transactions = data.slice(-6).reverse();
-					setTransactions(last6Transactions);
+					setTransactions(data.reversedArr);
 				});
 		};
 		callData();
@@ -47,6 +47,7 @@ const Transaction = () => {
 				receiver,
 				ammount,
 			},
+			headers: { "x-token": localStorage.getItem("x-token") },
 		})
 			.then(({ data }) => {
 				//enviar token a componente padre para renderizar
@@ -135,13 +136,17 @@ const Transaction = () => {
 								</thead>
 								<tbody>
 									{transactions.map((transaction) => (
-										<tr key={transaction.transactionID}>
+										<tr key={transaction._id}>
 											<td>
 												{auth.user.userID ===
-												transaction.sender ? (
+												transaction.sender.uid ? (
 													<>
 														<span className="d-block fw-bold">
-															[Username]
+															{
+																transaction
+																	.sender
+																	.username
+															}
 														</span>
 														<small className="d-block">
 															[concepto]
@@ -168,7 +173,11 @@ const Transaction = () => {
 												) : (
 													<>
 														<span className="d-block fw-bold">
-															[Username]
+															{
+																transaction
+																	.sender
+																	.username
+															}
 														</span>
 														<small className="d-block">
 															[concepto]
@@ -195,7 +204,7 @@ const Transaction = () => {
 												)}
 											</td>
 											{auth.user.userID ===
-											transaction.sender ? (
+											transaction.sender.uid ? (
 												<td className="fw-bold text-danger">
 													-{transaction.ammount}
 													&nbsp;

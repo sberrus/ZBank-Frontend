@@ -21,6 +21,16 @@ const RegisterForm = () => {
 	//react-form-hook
 	const { register, handleSubmit } = useForm();
 
+	useEffect(() => {
+		const inputs = document.querySelectorAll("input");
+		inputs.forEach((input) => {
+			input.addEventListener("focus", () => {
+				setErrorMsg(null);
+			});
+		});
+		return () => {};
+	}, []);
+
 	const onSubmit = async ({
 		username,
 		password,
@@ -39,7 +49,8 @@ const RegisterForm = () => {
 				invitationCode,
 			},
 		})
-			.then(({ data }) => {
+			.then(({ data }, e) => {
+				e.preventDefault();
 				console.log(data);
 				//Enviar datos a auth y a localstorage
 				// localStorage.setItem("token", data.token);
@@ -50,15 +61,15 @@ const RegisterForm = () => {
 			})
 			.catch((err) => {
 				const error =
-					err.response.data.error ||
-					err.response.data[0].msg ||
+					err.response?.data?.error ||
+					err.response?.data[0]?.msg ||
 					"Error al registrar al usuario - any";
 				setErrorMsg(error);
 			});
 	};
 
 	//handle errors
-	const onError = (error, e) => {
+	const onError = (error) => {
 		const errorStack = Object.keys(error);
 		if (errorStack.includes("username")) {
 			setErrorMsg("Nombre de Usuario Obligatorio");
@@ -73,16 +84,6 @@ const RegisterForm = () => {
 			setErrorMsg("ID Code de partida Obligatoria");
 		}
 	};
-
-	useEffect(() => {
-		const inputs = document.querySelectorAll("input");
-		inputs.forEach((input) => {
-			input.addEventListener("change", (e) => {
-				setErrorMsg(null);
-			});
-		});
-		return () => {};
-	}, []);
 
 	return (
 		<div className="container w-75 py-4 login-form-container">
@@ -146,6 +147,7 @@ const RegisterForm = () => {
 							className="rounded"
 						/>
 					</div>
+					{errorMsg && <ErrorAlert msg={errorMsg} type={"danger"} />}
 					<div className="d-flex flex-column w-50 m-auto">
 						<button className="btn btn-primary float-end mb-1 float-end">
 							Registrarse
@@ -153,7 +155,6 @@ const RegisterForm = () => {
 					</div>
 				</form>
 			</div>
-			{errorMsg && <ErrorAlert msg={errorMsg} type={"danger"} />}
 		</div>
 	);
 };

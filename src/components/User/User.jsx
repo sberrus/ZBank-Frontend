@@ -17,7 +17,9 @@ const User = () => {
 	const history = useHistory();
 
 	//Component Data
-	const [userTransactions, setUserTransactions] = useState(null);
+	const [userTransactions, setUserTransactions] = useState(
+		[].fill(null, 0, 6)
+	);
 	const [user, setUser] = useState(null);
 
 	useEffect(() => {
@@ -25,22 +27,27 @@ const User = () => {
 
 		const callData = async () => {
 			await axios
-				.get(`https://zbank.samdev.es/v1/users?userID=${userID}`)
+				.get(`https://zbank.samdev.es/v1/users?userID=${userID}`, {
+					headers: { "x-token": localStorage.getItem("x-token") },
+				})
 				.then(({ data }) => {
 					setUser(data);
 					auth.login(data);
 				});
 			await axios
 				.get(
-					`https://zbank.samdev.es/v1/transactions?accountID=${userID}`
+					`https://zbank.samdev.es/v1/transactions?accountID=${userID}`,
+					{
+						headers: { "x-token": localStorage.getItem("x-token") },
+					}
 				)
 				.then(({ data }) => {
-					const last6Transactions = data.slice(-6).reverse();
-					setUserTransactions(last6Transactions);
+					setUserTransactions(data.reversedArr);
 				});
 		};
 		callData();
 		return () => {};
+		// eslint-disable-next-line
 	}, []);
 
 	const goToTransaction = () => {
@@ -50,6 +57,11 @@ const User = () => {
 	return (
 		<div className="container p-0">
 			{user && <Header user={user} />}
+			<nav>
+				<Link to="/transaction" className="btn btn-success">
+					Transaction
+				</Link>
+			</nav>
 
 			{userTransactions && (
 				<>
@@ -59,11 +71,6 @@ const User = () => {
 							user={auth.user}
 						/>
 					</div>
-					<nav>
-						<Link to="/transaction" className="btn btn-success">
-							Transaction
-						</Link>
-					</nav>
 					{/* TABLE */}
 					<div className="w-100">
 						<h2>Últimos registros</h2>
@@ -77,12 +84,12 @@ const User = () => {
 							<tbody>
 								{userTransactions.map((transaction) => (
 									<tr
-										key={transaction.transactionID}
+										key={transaction._id}
 										onClick={goToTransaction}
 									>
 										<td>
 											{auth.user.userID ===
-											transaction.sender ? (
+											transaction.sender.uid ? (
 												<>
 													<span className="d-block fw-bold">
 														[Username]
@@ -131,7 +138,7 @@ const User = () => {
 											)}
 										</td>
 										{auth.user.userID ===
-										transaction.sender ? (
+										transaction.sender.uid ? (
 											<td className="fw-bold text-danger">
 												-{transaction.ammount}
 												&nbsp;

@@ -1,14 +1,13 @@
 //Imports
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import bootstrap from "bootstrap/dist/js/bootstrap.bundle";
 import axios from "axios";
 
 //Components
-import ErrorPopUp from "../_partials/ErrorPopUp/ErrorPopUp";
 
 //Contexto
 import UseAuth from "../../Contexts/Auth/UseAuth";
+import ErrorAlert from "./Register/_Partials/ErrorAlert";
 
 const LoginForm = () => {
 	//History hook
@@ -23,8 +22,6 @@ const LoginForm = () => {
 	const [password, setPassword] = useState("123456");
 	const [errorMsg, setErrorMsg] = useState(null);
 
-	const _msg = { body: "hola body", header: "hola header" };
-
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		await axios({
@@ -34,25 +31,39 @@ const LoginForm = () => {
 				username,
 				password,
 			},
+			headers: {
+				"x-token": localStorage.getItem("x-token"),
+			},
 		})
 			.then(({ data }) => {
 				//enviar token a componente padre para renderizar
-				localStorage.setItem("token", data.token);
+				localStorage.setItem("x-token", data.token);
 				localStorage.setItem(
 					"currentUser",
 					JSON.stringify(data.usuario)
 				);
 				auth.login(data.usuario);
+				auth.registerToken(data.token);
 				history.push("/dashboard");
 			})
 			.catch((err) => {
-				console.log(err);
-				setErrorMsg("Algo ha petao xd");
-				var toastLiveExample = document.getElementById("liveToast");
-				var toast = new bootstrap.Toast(toastLiveExample);
-				toast.show();
+				const error =
+					err.response?.data?.error ||
+					err.response?.data[0]?.msg ||
+					"Error al registrar al usuario - Revisar";
+				setErrorMsg(error);
 			});
 	};
+	useEffect(() => {
+		const inputs = document.querySelectorAll("input");
+		inputs.forEach((input) => {
+			input.addEventListener("change", () => {
+				setErrorMsg(null);
+			});
+		});
+
+		return () => {};
+	}, []);
 
 	return (
 		<div className="container-fluid w-75 py-4 login-form-container">
@@ -98,6 +109,8 @@ const LoginForm = () => {
 							¿Olvidaste tu contraseña?
 						</Link>
 					</div>
+					{errorMsg && <ErrorAlert msg={errorMsg} type={"danger"} />}
+
 					<div className="d-flex flex-column w-75 m-auto">
 						<button className="btn btn-primary float-end mb-1 float-end">
 							Entrar
@@ -107,7 +120,6 @@ const LoginForm = () => {
 							¿No tienes cuenta menor? Registrate
 						</Link>
 					</div>
-					{errorMsg && <ErrorPopUp msg={_msg} />}
 				</form>
 			</div>
 		</div>
