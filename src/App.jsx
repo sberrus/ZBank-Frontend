@@ -1,6 +1,8 @@
 import "./App.css";
 import AppRouter from "./routers/AppRouter";
 import { BrowserRouter as Router } from "react-router-dom";
+import bootstrap from "bootstrap/dist/js/bootstrap.bundle";
+
 import AuthProvider from "./Contexts/Auth/AuthProvider";
 
 function App() {

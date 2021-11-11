@@ -2,12 +2,11 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import bootstrap from "bootstrap/dist/js/bootstrap.bundle";
 
 //Components
-import ErrorPopUp from "../../_partials/ErrorPopUp/ErrorPopUp";
 import axios from "axios";
 import UseAuth from "../../../Contexts/Auth/UseAuth";
+import ErrorAlert from "./_Partials/ErrorAlert";
 
 const RegisterForm = () => {
 	//Contexto
@@ -22,13 +21,22 @@ const RegisterForm = () => {
 	//react-form-hook
 	const { register, handleSubmit } = useForm();
 
-	const onSubmit = async ({ username, password }) => {
+	const onSubmit = async ({
+		username,
+		password,
+		passwordConfirm,
+		invitationCode,
+	}) => {
+		console.log({ username, password, passwordConfirm, invitationCode });
+
 		await axios({
 			method: "post",
 			url: "https://zbank.samdev.es/v1/users",
 			data: {
 				username,
 				password,
+				passwordConfirm,
+				invitationCode,
 			},
 		})
 			.then(({ data }) => {
@@ -38,37 +46,41 @@ const RegisterForm = () => {
 				localStorage.setItem("currentUser", JSON.stringify(data.user));
 				auth.login(data.user);
 				history.push("/dashboard");
+				setErrorMsg(null);
 			})
 			.catch((err) => {
-				console.log(err);
-				setErrorMsg("Algun error del servidor");
+				const error =
+					err.response.data.error ||
+					err.response.data[0].msg ||
+					"Error al registrar al usuario - any";
+				setErrorMsg(error);
 			});
-		console.log(username, password);
-		setErrorMsg(null);
 	};
 
 	//handle errors
 	const onError = (error, e) => {
-		const errorStack = Object.keys(error).reverse();
+		const errorStack = Object.keys(error);
 		if (errorStack.includes("username")) {
 			setErrorMsg("Nombre de Usuario Obligatorio");
 		}
 		if (errorStack.includes("password")) {
-			setErrorMsg("Contraseña Obligatori");
+			setErrorMsg("Contraseña Obligatoria");
 		}
 		if (errorStack.includes("passwordConfirm")) {
 			setErrorMsg("La contraseñas introducidas no coinciden");
 		}
 		if (errorStack.includes("invitationCode")) {
-			console.log(error);
 			setErrorMsg("ID Code de partida Obligatoria");
 		}
-		var toastLiveExample = document.getElementById("liveToast");
-		var toast = new bootstrap.Toast(toastLiveExample);
-		toast.show();
 	};
 
 	useEffect(() => {
+		const inputs = document.querySelectorAll("input");
+		inputs.forEach((input) => {
+			input.addEventListener("change", (e) => {
+				setErrorMsg(null);
+			});
+		});
 		return () => {};
 	}, []);
 
@@ -130,8 +142,6 @@ const RegisterForm = () => {
 							inputMode="numeric"
 							{...register("invitationCode", {
 								required: true,
-								minLength: 4,
-								maxLength: 4,
 							})}
 							className="rounded"
 						/>
@@ -143,7 +153,7 @@ const RegisterForm = () => {
 					</div>
 				</form>
 			</div>
-			{errorMsg && <ErrorPopUp msg={{ body: errorMsg }} />}
+			{errorMsg && <ErrorAlert msg={errorMsg} type={"danger"} />}
 		</div>
 	);
 };
