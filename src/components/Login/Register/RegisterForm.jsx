@@ -49,9 +49,7 @@ const RegisterForm = () => {
 				invitationCode,
 			},
 		})
-			.then(({ data }, e) => {
-				e.preventDefault();
-				console.log(data);
+			.then(({ data }) => {
 				//Enviar datos a auth y a localstorage
 				// localStorage.setItem("token", data.token);
 				localStorage.setItem("currentUser", JSON.stringify(data.user));
@@ -60,6 +58,7 @@ const RegisterForm = () => {
 				setErrorMsg(null);
 			})
 			.catch((err) => {
+				console.log(err);
 				const error =
 					err.response?.data?.error ||
 					err.response?.data[0]?.msg ||

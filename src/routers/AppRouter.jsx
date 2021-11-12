@@ -4,9 +4,10 @@ import { Route, Switch } from "react-router-dom";
 //Routes
 import Login from "../components/Login/Login";
 import User from "../components/User/User";
-import Transaction from "../components/Transaction/Transaction";
+import Transactions from "../components/Transactions/Transactions";
 import RegisterForm from "../components/Login/Register/RegisterForm";
 import ForgotPassword from "../components/Login/ForgotPassword/ForgotPassword";
+import Transaction from "../components/Transactions/Transaction";
 
 //Rutes Conditioning
 import PublicRoute from "./PublicRoute";
@@ -28,6 +29,7 @@ export default function AppRouter() {
 			/>
 			{/* Rutas Privadas */}
 			<PrivateRoute exact path="/dashboard" component={User} />
+			<PrivateRoute exact path="/transactions" component={Transactions} />
 			<PrivateRoute exact path="/transaction" component={Transaction} />
 
 			{/* 404 handlers */}

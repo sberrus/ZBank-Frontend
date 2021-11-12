@@ -3,7 +3,7 @@ import axios from "axios";
 import { withRouter, useHistory } from "react-router-dom";
 import UseAuth from "../../Contexts/Auth/UseAuth";
 import Header from "../_partials/Header";
-import "./Transaction.css";
+import "./Transactions.css";
 
 const Transaction = () => {
 	//Contexto de loggeo
@@ -25,14 +25,22 @@ const Transaction = () => {
 		setSender(userID);
 
 		const callData = async () => {
-			await axios
-				.get(
-					`https://zbank.samdev.es/v1/transactions?accountID=${userID}`,
-					{ headers: { "x-token": localStorage.getItem("x-token") } }
-				)
-				.then(({ data }) => {
-					setTransactions(data.reversedArr);
-				});
+			try {
+				await axios
+					.get(
+						`https://zbank.samdev.es/v1/transactions?accountID=${userID}`,
+						{
+							headers: {
+								"x-token": localStorage.getItem("x-token"),
+							},
+						}
+					)
+					.then(({ data }) => {
+						setTransactions(data.reversedArr);
+					});
+			} catch (error) {
+				console.log(error);
+			}
 		};
 		callData();
 		return () => {};

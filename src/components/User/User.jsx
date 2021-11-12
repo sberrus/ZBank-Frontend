@@ -43,6 +43,9 @@ const User = () => {
 				)
 				.then(({ data }) => {
 					setUserTransactions(data.reversedArr);
+				})
+				.catch((error) => {
+					console.log(error);
 				});
 		};
 		callData();
@@ -50,16 +53,19 @@ const User = () => {
 		// eslint-disable-next-line
 	}, []);
 
-	const goToTransaction = () => {
-		history.push("/transaction");
+	const goToTransaction = (e) => {
+		const transactionID = e.currentTarget.id;
+		const route = `transaction?transactionID=${transactionID}`;
+		console.log(transactionID, route);
+		history.push(route);
 	};
 
 	return (
 		<div className="container p-0">
 			{user && <Header user={user} />}
 			<nav>
-				<Link to="/transaction" className="btn btn-success">
-					Transaction
+				<Link to="/transactions" className="btn btn-success">
+					Transactions
 				</Link>
 			</nav>
 
@@ -85,17 +91,34 @@ const User = () => {
 								{userTransactions.map((transaction) => (
 									<tr
 										key={transaction._id}
-										onClick={goToTransaction}
+										id={transaction._id}
+										onClick={(e) => {
+											goToTransaction(e);
+										}}
 									>
 										<td>
 											{auth.user.userID ===
 											transaction.sender.uid ? (
 												<>
-													<span className="d-block fw-bold">
-														[Username]
+													<span className="d-block">
+														<i className="bi bi-arrow-90deg-down text-danger"></i>
+														<span className="d-inline-block ms-1">
+															{
+																transaction
+																	.sender
+																	.username
+															}
+														</span>
 													</span>
 													<small className="d-block">
-														[concepto]
+														<i className="bi bi-arrow-return-right text-success"></i>
+														<span className="d-inline-block ms-1">
+															{
+																transaction
+																	.receiver
+																	.username
+															}
+														</span>
 													</small>
 													<small className="text-secondary">
 														{transaction.date
