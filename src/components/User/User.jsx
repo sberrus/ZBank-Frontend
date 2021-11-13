@@ -1,8 +1,8 @@
 //imports
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import BarChart from "./components/BarChart";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 //Context
 import UseAuth from "../../Contexts/Auth/UseAuth";
@@ -10,8 +10,8 @@ import UseAuth from "../../Contexts/Auth/UseAuth";
 //_partials
 import Header from "../_partials/Header/Header";
 import "./User.css";
-import CashOut from "./components/CashOut";
 import Table from "./components/Table";
+import NewTransaction from "./components/NewTransaction";
 
 const User = () => {
 	//Contexto
@@ -22,6 +22,7 @@ const User = () => {
 		[].fill(null, 0, 6)
 	);
 	const [user, setUser] = useState(null);
+	const [render, setRender] = useState(false);
 
 	useEffect(() => {
 		const { userID } = JSON.parse(localStorage.getItem("currentUser"));
@@ -52,16 +53,21 @@ const User = () => {
 		callData();
 		return () => {};
 		// eslint-disable-next-line
-	}, []);
+	}, [render]);
 
 	return (
 		<div className="container p-0">
 			{user && <Header user={user} />}
 			<nav className="d-flex justify-content-between">
-				<Link to="/transactions" className="btn btn-success">
-					Enviar Dinero [icon]
+				<NewTransaction setRender={setRender} render={render} cashout />
+				{/* <NewTransaction
+					setRender={setRender}
+					render={render}
+					btnTitle={"Transferir"}
+				/> */}
+				<Link to="/transactions" className="btn btn-primary">
+					Transferencias
 				</Link>
-				<CashOut />
 			</nav>
 
 			{userTransactions && (

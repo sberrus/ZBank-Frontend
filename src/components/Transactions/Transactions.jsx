@@ -4,6 +4,7 @@ import { withRouter, useHistory } from "react-router-dom";
 import UseAuth from "../../Contexts/Auth/UseAuth";
 import Header from "../_partials/Header/Header";
 import "./Transactions.css";
+import ErrorAlert from "../_partials/ErrorAlert";
 
 const Transaction = () => {
 	//Contexto de loggeo
@@ -19,6 +20,7 @@ const Transaction = () => {
 	const [receiver, setReceiver] = useState("");
 	const [sender, setSender] = useState("");
 	const [ammount, setAmmount] = useState("");
+	const [error, setError] = useState(null);
 
 	useEffect(() => {
 		const { userID } = JSON.parse(localStorage.getItem("currentUser"));
@@ -63,7 +65,12 @@ const Transaction = () => {
 				history.push("/dashboard");
 			})
 			.catch((err) => {
-				console.log(err);
+				const error =
+					err.response.data[0]?.msg ||
+					err.response.data.error ||
+					"Erro al realizar la consulta, seguro estas pelando bolas - esto no deberia verse lol";
+				setError(error);
+				console.log(err.response.data);
 			});
 	};
 
@@ -129,110 +136,39 @@ const Transaction = () => {
 			<hr />
 			{/**Lista de Transacciones */}
 			<section id="tableTransaction" className="mt-1">
-				<h2>Historial de Transacciones</h2>
-				{transactions && (
-					<>
-						{/* TABLE */}
-						<div className="w-100">
-							<h2>Últimos registros</h2>
-							<table className="table table-dark text-light">
-								<thead>
-									<tr>
-										<th scope="col">Emisor/Receptor</th>
-										<th scope="col">Monto</th>
-									</tr>
-								</thead>
-								<tbody>
-									{transactions.map((transaction) => (
-										<tr key={transaction._id}>
-											<td>
-												{auth.user.userID ===
-												transaction.sender.uid ? (
-													<>
-														<span className="d-block fw-bold">
-															{
-																transaction
-																	.sender
-																	.username
-															}
-														</span>
-														<small className="d-block">
-															[concepto]
-														</small>
-														<small className="text-secondary">
-															{transaction.date
-																.split("T")[0]
-																.replaceAll(
-																	"-",
-																	"/"
-																)}
-															{"  "}
-															{
-																transaction.date
-																	.split(
-																		"T"
-																	)[1]
-																	.split(
-																		"."
-																	)[0]
-															}
-														</small>
-													</>
-												) : (
-													<>
-														<span className="d-block fw-bold">
-															{
-																transaction
-																	.sender
-																	.username
-															}
-														</span>
-														<small className="d-block">
-															[concepto]
-														</small>
-														<small className="text-secondary">
-															{transaction.date
-																.split("T")[0]
-																.replaceAll(
-																	"-",
-																	"/"
-																)}
-															{"  "}
-															{
-																transaction.date
-																	.split(
-																		"T"
-																	)[1]
-																	.split(
-																		"."
-																	)[0]
-															}
-														</small>
-													</>
-												)}
-											</td>
-											{auth.user.userID ===
-											transaction.sender.uid ? (
-												<td className="fw-bold text-danger">
-													-{transaction.ammount}
-													&nbsp;
-													<i className="bi bi-caret-down"></i>
-												</td>
-											) : (
-												<td className="fw-bold text-success">
-													{transaction.ammount}
-													&nbsp;&nbsp;
-													<i className="bi bi-caret-up"></i>
-												</td>
-											)}
-										</tr>
-									))}
-								</tbody>
-							</table>
-						</div>
-						{/* TABLE END */}
-					</>
-				)}
+				<form action="" onSubmit={handleSubmit}>
+					<div className="d-flex flex-column">
+						<label htmlFor="">ID Receptor</label>
+						<input
+							id="receptorID"
+							value={receiver}
+							onChange={(e) => {
+								setReceiver(e.target.value);
+							}}
+						/>
+					</div>
+					<div className="d-flex flex-column">
+						<label htmlFor="">Monto</label>
+						<input
+							type="number"
+							id="receptorID"
+							inputMode="numeric"
+							value={ammount}
+							onChange={(e) => {
+								setAmmount(e.target.value);
+							}}
+						/>
+					</div>
+					{error && <ErrorAlert msg={error} type="danger" />}
+					<div className="d-flex flex-row-reverse">
+						<button
+							className="btn btn-success col-4 mt-4"
+							type="submit"
+						>
+							Enviar
+						</button>
+					</div>
+				</form>
 			</section>
 			{/**Fin Lista de Transacciones */}
 		</div>
