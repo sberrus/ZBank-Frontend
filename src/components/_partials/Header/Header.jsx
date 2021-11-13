@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 import "./Header.css";
 
 //TODO: Crear funcionalidad para avatares.
-import YodaProfilePicture from "../../static/yodabb.jpg";
+import YodaProfilePicture from "../../../static/yodabb.jpg";
 
 //Contexto
-import UseAuth from "../../Contexts/Auth/UseAuth";
+import UseAuth from "../../../Contexts/Auth/UseAuth";
 
 const Header = () => {
 	//Context
@@ -51,7 +51,7 @@ const Header = () => {
 							className="d-flex justify-content-center align-content-center col-1 m-auto"
 						>
 							<button
-								className="btn btn-danger"
+								className="btn btn-outline-danger"
 								onClick={() => {
 									handleLogout();
 								}}

@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useState } from "react/cjs/react.development";
 import UseAuth from "../../Contexts/Auth/UseAuth";
-import Header from "../_partials/Header";
+import Header from "../_partials/Header/Header";
 
 const Transaction = () => {
 	//contexto

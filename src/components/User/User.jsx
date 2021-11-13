@@ -8,8 +8,9 @@ import axios from "axios";
 import UseAuth from "../../Contexts/Auth/UseAuth";
 
 //_partials
-import Header from "../_partials/Header";
+import Header from "../_partials/Header/Header";
 import "./User.css";
+import CashOut from "./components/CashOut";
 
 const User = () => {
 	//Contexto
@@ -63,10 +64,11 @@ const User = () => {
 	return (
 		<div className="container p-0">
 			{user && <Header user={user} />}
-			<nav>
+			<nav className="d-flex justify-content-between">
 				<Link to="/transactions" className="btn btn-success">
-					Transactions
+					Enviar Dinero [icon]
 				</Link>
+				<CashOut />
 			</nav>
 
 			{userTransactions && (

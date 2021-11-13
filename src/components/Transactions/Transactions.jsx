@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { withRouter, useHistory } from "react-router-dom";
 import UseAuth from "../../Contexts/Auth/UseAuth";
-import Header from "../_partials/Header";
+import Header from "../_partials/Header/Header";
 import "./Transactions.css";
 
 const Transaction = () => {
