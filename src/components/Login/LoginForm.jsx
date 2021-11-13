@@ -18,8 +18,8 @@ const LoginForm = () => {
 
 	//Form Inputs
 	//todo: Implementar uso de react hook form para manipular el formulario
-	const [username, setUsername] = useState("samdev2");
-	const [password, setPassword] = useState("123456");
+	const [username, setUsername] = useState("");
+	const [password, setPassword] = useState("");
 	const [errorMsg, setErrorMsg] = useState(null);
 
 	const handleSubmit = async (e) => {

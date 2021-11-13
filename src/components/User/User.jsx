@@ -101,8 +101,9 @@ const User = () => {
 											transaction.sender.uid ? (
 												<>
 													<span className="d-block">
+														{/* Usuario envia dinero */}
 														<i className="bi bi-arrow-90deg-down text-danger"></i>
-														<span className="d-inline-block ms-1">
+														<span className="d-inline-block ms-1 text-danger fw-bold">
 															{
 																transaction
 																	.sender
@@ -137,11 +138,26 @@ const User = () => {
 												</>
 											) : (
 												<>
-													<span className="d-block fw-bold">
-														[Username]
+													{/* Usuario recive dinero */}
+													<span className="d-block">
+														<i className="bi bi-arrow-90deg-down text-danger"></i>
+														<span className="d-inline-block ms-1">
+															{
+																transaction
+																	.sender
+																	.username
+															}
+														</span>
 													</span>
 													<small className="d-block">
-														[concepto]
+														<i className="bi bi-arrow-return-right text-success"></i>
+														<span className="d-inline-block ms-1 text-success">
+															{
+																transaction
+																	.receiver
+																	.username
+															}
+														</span>
 													</small>
 													<small className="text-secondary">
 														{transaction.date
