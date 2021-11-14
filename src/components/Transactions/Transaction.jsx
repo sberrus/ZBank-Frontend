@@ -40,7 +40,7 @@ const Transaction = () => {
 
 	return (
 		<div>
-			<Header />
+			{auth.user && <Header />}
 			{info && (
 				<>
 					<small className="text-secondary">
