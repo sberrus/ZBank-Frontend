@@ -1,18 +1,21 @@
 import axios from "axios";
 import React, { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import { useState } from "react/cjs/react.development";
 import UseAuth from "../../Contexts/Auth/UseAuth";
+import NewTransaction from "../User/components/NewTransaction";
 import Header from "../_partials/Header/Header";
 
 const Transaction = () => {
 	//contexto
 	const auth = UseAuth();
-
+	//states
+	const [info, setInfo] = useState(null);
+	//history
+	const history = useHistory();
 	const { search } = useLocation();
 	const query = new URLSearchParams(search);
 	const transactionID = query.get("transactionID");
-	const [info, setInfo] = useState(null);
 	useEffect(() => {
 		const callData = async () => {
 			await axios
@@ -66,13 +69,43 @@ const Transaction = () => {
 						"Sin Concepto"
 					)}
 					<div className="position-fixed bottom-0 w-100 d-flex justify-content-center">
-						<button className="btn btn-success">
-							Enviar dinero a{" "}
-							{info.sender.uid === auth.user.userID
-								? info.receiver.username
-								: info.sender.username}
-							<i className="bi bi-send"></i>
-						</button>
+						{info.sender.uid === auth.user.userID ? (
+							<>
+								{/* <NewTransaction
+									btnTitle={`Enviar dinero a ${info.receiver.username}`}
+									receiverID={info.receiver.uid}
+								/> */}
+								<button
+									className="btn btn-success"
+									onClick={() => {
+										history.push(
+											`/transactions?receiverID=${info.receiver.uid}`
+										);
+									}}
+								>
+									Enviar dinero a {info.receiver.username}
+									<i className="bi bi-send"></i>
+								</button>
+							</>
+						) : (
+							<>
+								{/* <NewTransaction
+										btnTitle={`Enviar dinero a ${info.sender.username}`}
+										receiverID={info.sender.uid}
+									/> */}
+								<button
+									className="btn btn-success"
+									onClick={() => {
+										history.push(
+											`/transactions?receiverID=${info.sender.uid}`
+										);
+									}}
+								>
+									Enviar dinero a {info.sender.username}
+									<i className="bi bi-send"></i>
+								</button>
+							</>
+						)}
 					</div>
 				</>
 			)}

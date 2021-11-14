@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { withRouter, useHistory } from "react-router-dom";
+import { withRouter, useHistory, useLocation } from "react-router-dom";
 import UseAuth from "../../Contexts/Auth/UseAuth";
 import Header from "../_partials/Header/Header";
 import "./Transactions.css";
@@ -10,16 +10,25 @@ const Transaction = () => {
 	//Contexto de loggeo
 	const auth = UseAuth();
 
+	//location
+	const { search } = useLocation();
+
+	//Transaference Input Data
+	const [receiver, setReceiver] = useState((receiver) => {
+		//params
+		console.log(search);
+		const query = new URLSearchParams(search);
+		return query.get("receiverID") ? query.get("receiverID") : "";
+	});
+
+	const [ammount, setAmmount] = useState("");
+	const [error, setError] = useState(null);
+
 	//useHistory
 	const history = useHistory();
 
 	//Component Data
 	// const [transactions, setTransactions] = useState([].fill(null, 0, 6));
-
-	//Transaference Input Data
-	const [receiver, setReceiver] = useState("");
-	const [ammount, setAmmount] = useState("");
-	const [error, setError] = useState(null);
 
 	// useEffect(() => {
 	// 	// const { userID } = JSON.parse(localStorage.getItem("currentUser"));
@@ -83,6 +92,7 @@ const Transaction = () => {
 						<input
 							id="receptorID"
 							value={receiver}
+							autoComplete="false"
 							onChange={(e) => {
 								setReceiver(e.target.value);
 							}}
@@ -95,6 +105,7 @@ const Transaction = () => {
 							id="receptorID"
 							inputMode="numeric"
 							value={ammount}
+							autoComplete="false"
 							onChange={(e) => {
 								setAmmount(e.target.value);
 							}}

@@ -18,6 +18,7 @@ const User = () => {
 	const auth = UseAuth();
 
 	//Component Data
+	//TODO: mejorar comportamiento para nuevos usuarios sin transferencias para evitar que se vea feo el grafico
 	const [userTransactions, setUserTransactions] = useState(
 		[].fill(null, 0, 6)
 	);

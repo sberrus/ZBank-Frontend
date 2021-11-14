@@ -6,10 +6,16 @@ import UseAuth from "../../../Contexts/Auth/UseAuth";
 //partials
 import ErrorAlert from "../../_partials/ErrorAlert";
 
-const NewTransaction = ({ btnTitle, cashout, setRender, render }) => {
+const NewTransaction = ({
+	btnTitle,
+	cashout,
+	setRender,
+	render,
+	receiverID,
+}) => {
 	//states
 	const [receiver, setReceiver] = useState("");
-	const [ammount, setAmmount] = useState("0");
+	const [ammount, setAmmount] = useState("");
 	const [error, setError] = useState(null);
 
 	//Contexto
@@ -89,9 +95,11 @@ const NewTransaction = ({ btnTitle, cashout, setRender, render }) => {
 									<input
 										type="number"
 										id="ammount"
-										className="bg-dark"
+										className="bg-dark border-bottom"
 										min="0"
 										inputMode="numeric"
+										autoComplete="false"
+										placeholder="Indique Cantidad"
 										value={ammount}
 										onChange={(e) => {
 											setAmmount(e.target.value);

@@ -66,7 +66,7 @@ const LoginForm = () => {
 	}, []);
 
 	return (
-		<div className="container-fluid w-75 py-4 login-form-container">
+		<div className="container-fluid p-3 login-form-container">
 			<div className="blur-bg"></div>
 			<div className="login-form-body">
 				<h3 className="text-center mb-5">Bienvenido</h3>

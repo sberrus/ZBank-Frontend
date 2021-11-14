@@ -93,6 +93,7 @@ const RegisterForm = () => {
 						<input
 							type="text"
 							max="15"
+							autoComplete="false"
 							{...register("username", {
 								required: true,
 								maxLength: 15,
@@ -108,6 +109,7 @@ const RegisterForm = () => {
 							type="password"
 							min="5"
 							max="20"
+							autoComplete="false"
 							{...register("password", {
 								required: true,
 								maxLength: 20,
@@ -124,6 +126,7 @@ const RegisterForm = () => {
 							type="password"
 							min="5"
 							max="20"
+							autoComplete="false"
 							{...register("passwordConfirm", {
 								required: true,
 								maxLength: 20,

@@ -11,12 +11,11 @@ import ForgotPassword from "./ForgotPassword/ForgotPassword";
 const Login = (props) => {
 	return (
 		<div id="background">
-			<div className="layer layer-top"></div>
-			<section className="position-absolute col-12" id="loginForm">
+			<section className="m-auto" id="loginForm">
 				<div className="logo-container d-flex align-content-center justify-content-center">
 					<span>[logo]</span>
 				</div>
-				<div className="d-flex align-content-center justify-content-center">
+				<div className="d-flex align-content-center justify-content-center p-4">
 					<Switch>
 						<Route path="/register" component={RegisterForm} />
 						<Route
@@ -33,7 +32,6 @@ const Login = (props) => {
 					</Switch>
 				</div>
 			</section>
-			<div className="layer layer-bottom"></div>
 		</div>
 	);
 };
