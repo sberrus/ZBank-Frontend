@@ -14,46 +14,44 @@ const Transaction = () => {
 	const history = useHistory();
 
 	//Component Data
-	const [transactions, setTransactions] = useState([].fill(null, 0, 6));
+	// const [transactions, setTransactions] = useState([].fill(null, 0, 6));
 
 	//Transaference Input Data
 	const [receiver, setReceiver] = useState("");
-	const [sender, setSender] = useState("");
 	const [ammount, setAmmount] = useState("");
 	const [error, setError] = useState(null);
 
-	useEffect(() => {
-		const { userID } = JSON.parse(localStorage.getItem("currentUser"));
-		setSender(userID);
-
-		const callData = async () => {
-			try {
-				await axios
-					.get(
-						`https://zbank.samdev.es/v1/transactions?accountID=${userID}`,
-						{
-							headers: {
-								"x-token": localStorage.getItem("x-token"),
-							},
-						}
-					)
-					.then(({ data }) => {
-						setTransactions(data.reversedArr);
-					});
-			} catch (error) {
-				console.log(error);
-			}
-		};
-		callData();
-		return () => {};
-	}, []);
+	// useEffect(() => {
+	// 	// const { userID } = JSON.parse(localStorage.getItem("currentUser"));
+	// 	// setSender(userID);
+	// 	// const callData = async () => {
+	// 	// 	try {
+	// 	// 		await axios
+	// 	// 			.get(
+	// 	// 				`https://zbank.samdev.es/v1/transactions?accountID=${userID}`,
+	// 	// 				{
+	// 	// 					headers: {
+	// 	// 						"x-token": localStorage.getItem("x-token"),
+	// 	// 					},
+	// 	// 				}
+	// 	// 			)
+	// 	// 			.then(({ data }) => {
+	// 	// 				setTransactions(data.reversedArr);
+	// 	// 			});
+	// 	// 	} catch (error) {
+	// 	// 		console.log(error);
+	// 	// 	}
+	// 	// };
+	// 	// callData();
+	// 	return () => {};
+	// }, []);
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		await axios({
 			method: "post",
 			url: "https://zbank.samdev.es/v1/transactions",
 			data: {
-				sender,
+				sender: auth.user.userID,
 				receiver,
 				ammount,
 			},
@@ -77,64 +75,7 @@ const Transaction = () => {
 	return (
 		<div className="vh-100 container p-0">
 			<Header user={auth.user} />
-			<section id="transactionHeader">
-				<hr />
-				<div className="d-flex flex-row-reverse">
-					<button
-						className="btn btn-primary"
-						type="button"
-						data-bs-toggle="collapse"
-						data-bs-target="#collapseExample"
-						aria-expanded="false"
-						aria-controls="collapseExample"
-					>
-						Nueva Transferencia
-					</button>
-				</div>
-			</section>
-			{/** Login Form */}
-			<div className="collapse mt-2 " id="collapseExample">
-				<div className="card card-body bg-dark border">
-					<section>
-						<form action="" onSubmit={handleSubmit}>
-							<div className="d-flex flex-column">
-								<label htmlFor="">ID Receptor</label>
-								<input
-									id="receptorID"
-									value={receiver}
-									onChange={(e) => {
-										setReceiver(e.target.value);
-									}}
-								/>
-							</div>
-							<div className="d-flex flex-column">
-								<label htmlFor="">Monto</label>
-								<input
-									type="number"
-									id="receptorID"
-									inputMode="numeric"
-									value={ammount}
-									onChange={(e) => {
-										setAmmount(e.target.value);
-									}}
-								/>
-							</div>
-							<div className="d-flex flex-row-reverse">
-								<button
-									className="btn btn-success col-4 mt-4"
-									type="submit"
-								>
-									Enviar
-								</button>
-							</div>
-						</form>
-					</section>
-				</div>
-			</div>
-
-			{/**Fin Login Form */}
-			<hr />
-			{/**Lista de Transacciones */}
+			{/* Formulario de transacciones */}
 			<section id="tableTransaction" className="mt-1">
 				<form action="" onSubmit={handleSubmit}>
 					<div className="d-flex flex-column">

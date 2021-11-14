@@ -5,18 +5,14 @@ import { useForm } from "react-hook-form";
 
 //Components
 import axios from "axios";
-import UseAuth from "../../../Contexts/Auth/UseAuth";
 import ErrorAlert from "./_Partials/ErrorAlert";
 
 const RegisterForm = () => {
-	//Contexto
-	const auth = UseAuth();
+	//error logic states
+	const [errorMsg, setErrorMsg] = useState(null);
 
 	//useHistory
 	const history = useHistory();
-
-	//error logic states
-	const [errorMsg, setErrorMsg] = useState(null);
 
 	//react-form-hook
 	const { register, handleSubmit } = useForm();
@@ -50,15 +46,11 @@ const RegisterForm = () => {
 		})
 			.then(({ data }) => {
 				//Enviar datos a auth y a localstorage
-				// localStorage.setItem("token", data.token);
-				localStorage.setItem("currentUser", JSON.stringify(data.user));
-				localStorage.setItem("x-token", JSON.stringify(data.token));
-				auth.login(data.user);
-				history.push("/dashboard");
+				history.push("/");
 				setErrorMsg(null);
 			})
 			.catch((err) => {
-				console.log(err);
+				console.log(err.response);
 				const error =
 					err.response?.data?.error ||
 					err.response?.data[0]?.msg ||
@@ -69,7 +61,9 @@ const RegisterForm = () => {
 
 	//handle errors
 	const onError = (error) => {
+		console.log(error);
 		const errorStack = Object.keys(error);
+		console.log(errorStack.includes("username"));
 		if (errorStack.includes("username")) {
 			setErrorMsg("Nombre de Usuario Obligatorio");
 		}
@@ -98,6 +92,7 @@ const RegisterForm = () => {
 						</label>
 						<input
 							type="text"
+							max="15"
 							{...register("username", {
 								required: true,
 								maxLength: 15,
@@ -111,6 +106,8 @@ const RegisterForm = () => {
 						</label>
 						<input
 							type="password"
+							min="5"
+							max="20"
 							{...register("password", {
 								required: true,
 								maxLength: 20,
@@ -125,6 +122,8 @@ const RegisterForm = () => {
 						</label>
 						<input
 							type="password"
+							min="5"
+							max="20"
 							{...register("passwordConfirm", {
 								required: true,
 								maxLength: 20,
@@ -133,7 +132,7 @@ const RegisterForm = () => {
 							className="rounded"
 						/>
 					</div>
-					<div className="mb-4 d-flex justify-content-center flex-column">
+					{/* <div className="mb-4 d-flex justify-content-center flex-column">
 						<label htmlFor="" className="d-block fw-light">
 							Código de invitación
 						</label>
@@ -145,7 +144,7 @@ const RegisterForm = () => {
 							})}
 							className="rounded"
 						/>
-					</div>
+					</div> */}
 					{errorMsg && <ErrorAlert msg={errorMsg} type={"danger"} />}
 					<div className="d-flex flex-column w-50 m-auto">
 						<button className="btn btn-primary float-end mb-1 float-end">
