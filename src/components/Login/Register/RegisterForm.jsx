@@ -46,13 +46,13 @@ const RegisterForm = () => {
 				username,
 				password,
 				passwordConfirm,
-				invitationCode,
 			},
 		})
 			.then(({ data }) => {
 				//Enviar datos a auth y a localstorage
 				// localStorage.setItem("token", data.token);
 				localStorage.setItem("currentUser", JSON.stringify(data.user));
+				localStorage.setItem("x-token", JSON.stringify(data.token));
 				auth.login(data.user);
 				history.push("/dashboard");
 				setErrorMsg(null);
