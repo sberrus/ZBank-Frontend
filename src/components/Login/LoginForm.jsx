@@ -28,7 +28,7 @@ const LoginForm = () => {
 			method: "post",
 			url: "https://zbank.samdev.es/v1/auth",
 			data: {
-				username,
+				username: username.toLowerCase(),
 				password,
 			},
 			headers: {

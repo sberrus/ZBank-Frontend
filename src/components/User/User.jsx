@@ -61,14 +61,14 @@ const User = () => {
 			{user && <Header user={user} />}
 			<nav className="d-flex justify-content-between">
 				<NewTransaction setRender={setRender} render={render} cashout />
-				{/* <NewTransaction
+				<NewTransaction
 					setRender={setRender}
 					render={render}
 					btnTitle={"Transferir"}
-				/> */}
-				<Link to="/transactions" className="btn btn-primary">
+				/>
+				{/* <Link to="/transactions" className="btn btn-primary">
 					Transferencias
-				</Link>
+				</Link> */}
 			</nav>
 
 			{userTransactions && (

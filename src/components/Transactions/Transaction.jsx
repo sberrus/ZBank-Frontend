@@ -1,9 +1,13 @@
+//Imports
 import axios from "axios";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useHistory } from "react-router-dom";
-import { useState } from "react/cjs/react.development";
+
+//Context
 import UseAuth from "../../Contexts/Auth/UseAuth";
-import NewTransaction from "../User/components/NewTransaction";
+
+//Components
+// import NewTransaction from "../User/components/NewTransaction";
 import Header from "../_partials/Header/Header";
 
 const Transaction = () => {

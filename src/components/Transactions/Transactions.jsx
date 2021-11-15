@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { withRouter, useHistory, useLocation } from "react-router-dom";
 import UseAuth from "../../Contexts/Auth/UseAuth";
@@ -92,7 +92,7 @@ const Transaction = () => {
 						<input
 							id="receptorID"
 							value={receiver}
-							autoComplete="false"
+							autoComplete="off"
 							onChange={(e) => {
 								setReceiver(e.target.value);
 							}}
@@ -105,7 +105,7 @@ const Transaction = () => {
 							id="receptorID"
 							inputMode="numeric"
 							value={ammount}
-							autoComplete="false"
+							autoComplete="off"
 							onChange={(e) => {
 								setAmmount(e.target.value);
 							}}

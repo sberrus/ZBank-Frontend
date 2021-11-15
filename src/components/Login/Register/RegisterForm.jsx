@@ -39,12 +39,12 @@ const RegisterForm = () => {
 			method: "post",
 			url: "https://zbank.samdev.es/v1/users",
 			data: {
-				username,
+				username: username.toLowerCase(),
 				password,
 				passwordConfirm,
 			},
 		})
-			.then(({ data }) => {
+			.then(() => {
 				//Enviar datos a auth y a localstorage
 				history.push("/");
 				setErrorMsg(null);
@@ -63,7 +63,6 @@ const RegisterForm = () => {
 	const onError = (error) => {
 		console.log(error);
 		const errorStack = Object.keys(error);
-		console.log(errorStack.includes("username"));
 		if (errorStack.includes("username")) {
 			setErrorMsg("Nombre de Usuario Obligatorio");
 		}
@@ -93,7 +92,7 @@ const RegisterForm = () => {
 						<input
 							type="text"
 							max="15"
-							autoComplete="false"
+							autoComplete="off"
 							{...register("username", {
 								required: true,
 								maxLength: 15,
@@ -109,7 +108,7 @@ const RegisterForm = () => {
 							type="password"
 							min="5"
 							max="20"
-							autoComplete="false"
+							autoComplete="off"
 							{...register("password", {
 								required: true,
 								maxLength: 20,
@@ -126,7 +125,7 @@ const RegisterForm = () => {
 							type="password"
 							min="5"
 							max="20"
-							autoComplete="false"
+							autoComplete="off"
 							{...register("passwordConfirm", {
 								required: true,
 								maxLength: 20,

@@ -42,7 +42,7 @@ const NewTransaction = ({
 				setAmmount(0);
 			})
 			.catch((err) => {
-				console.log(err.response);
+				console.log(err.response.data);
 				setError(err.response.data[0].msg);
 			});
 	};
@@ -61,7 +61,6 @@ const NewTransaction = ({
 			<div
 				className="modal fade"
 				id="cashoutModal"
-				data-bs-backdrop="static"
 				data-bs-keyboard="false"
 				tabIndex="-1"
 				aria-labelledby="staticBackdropLabel"
@@ -98,7 +97,7 @@ const NewTransaction = ({
 										className="bg-dark border-bottom"
 										min="0"
 										inputMode="numeric"
-										autoComplete="false"
+										autoComplete="off"
 										placeholder="Indique Cantidad"
 										value={ammount}
 										onChange={(e) => {
@@ -139,7 +138,6 @@ const NewTransaction = ({
 			<div
 				className="modal fade"
 				id="transferModal"
-				data-bs-backdrop="static"
 				data-bs-keyboard="false"
 				tabIndex="-1"
 				aria-labelledby="staticBackdropLabel"
@@ -168,6 +166,8 @@ const NewTransaction = ({
 									<input
 										id="receptorID"
 										value={receiver}
+										autoComplete="off"
+										placeholder="Indique ID del receptor"
 										onChange={(e) => {
 											setReceiver(e.target.value);
 										}}
@@ -180,7 +180,9 @@ const NewTransaction = ({
 										id="ammount"
 										inputMode="numeric"
 										min="0"
+										autoComplete="off"
 										value={ammount}
+										placeholder="Indique el monto a transferir"
 										onChange={(e) => {
 											setAmmount(e.target.value);
 										}}

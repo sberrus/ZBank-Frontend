@@ -12,7 +12,6 @@ const Table = ({ userTransactions }) => {
 		const transactionID = e.currentTarget.id;
 		const route = `transaction?transactionID=${transactionID}`;
 		console.log(transactionID, route);
-		history.push(route);
 	};
 	return (
 		<div>
