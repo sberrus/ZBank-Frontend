@@ -3,7 +3,7 @@
 	background-color: #1d1d1d;
 }
 
-#cashout input {
+.transfer-input {
 	font-size: 1.5em;
 	font-weight: bold;
 	color: aliceblue;

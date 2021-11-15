@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import BarChart from "./components/BarChart";
 import axios from "axios";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 //Context
 import UseAuth from "../../Contexts/Auth/UseAuth";
@@ -11,7 +11,7 @@ import UseAuth from "../../Contexts/Auth/UseAuth";
 import Header from "../_partials/Header/Header";
 import "./User.css";
 import Table from "./components/Table";
-import NewTransaction from "./components/NewTransaction";
+import NewTransaction from "./components/NewTransaction/NewTransactionHOC";
 
 const User = () => {
 	//Contexto

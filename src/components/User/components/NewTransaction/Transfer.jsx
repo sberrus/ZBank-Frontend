@@ -1,36 +1,31 @@
-//imports
-import { useState } from "react";
+//Imports
+import React, { useState } from "react";
 import axios from "axios";
-import UseAuth from "../../../Contexts/Auth/UseAuth";
+//Context
+import UseAuth from "../../../../Contexts/Auth/UseAuth";
+//Components
+import ErrorAlert from "../../../_partials/ErrorAlert";
 
-//partials
-import ErrorAlert from "../../_partials/ErrorAlert";
-
-const NewTransaction = ({
-	btnTitle,
-	cashout,
-	setRender,
-	render,
-	receiverID,
-}) => {
-	//states
-	const [receiver, setReceiver] = useState("");
-	const [ammount, setAmmount] = useState("");
-	const [error, setError] = useState(null);
-
-	//Contexto
+const Transfer = ({ btnTitle, setRender, render }) => {
+	//Context
 	const auth = UseAuth();
 
-	//Enviar Transferencia
+	//states handleSubmit (normal)
+	const [receiver, setReceiver] = useState("");
+	const [ammount, setAmmount] = useState("");
+
+	//states handle error
+	const [error, setError] = useState(null);
+
 	const handleSubmit = async (e) => {
-		console.log(ammount);
 		e.preventDefault();
+		console.log(ammount);
 		await axios({
 			method: "post",
 			url: "https://zbank.samdev.es/v1/transactions",
 			data: {
 				sender: auth.user.userID,
-				receiver: receiver || "admi",
+				receiver: receiver,
 				ammount,
 			},
 			headers: { "x-token": localStorage.getItem("x-token") },
@@ -47,84 +42,7 @@ const NewTransaction = ({
 			});
 	};
 
-	return cashout === true ? (
-		<>
-			<button
-				type="button"
-				className="btn btn-primary"
-				data-bs-toggle="modal"
-				data-bs-target="#cashoutModal"
-			>
-				Retirar Efectivo <i className="bi bi-cash"></i>
-			</button>
-
-			<div
-				className="modal fade"
-				id="cashoutModal"
-				data-bs-keyboard="false"
-				tabIndex="-1"
-				aria-labelledby="staticBackdropLabel"
-				aria-hidden="true"
-			>
-				<div className="modal-dialog">
-					<div className="modal-content bg-dark">
-						<div className="modal-header">
-							<h5
-								className="modal-title"
-								id="staticBackdropLabel"
-							>
-								Retirar Efectivo
-							</h5>
-							<button
-								type="button"
-								className="btn-close"
-								data-bs-dismiss="modal"
-								aria-label="Close"
-							></button>
-						</div>
-						<div className="modal-body">
-							<form onSubmit={handleSubmit} id="newTransaction">
-								<div
-									className="d-flex flex-column"
-									id="cashout"
-								>
-									<label htmlFor="">
-										Seleccione Monto a Retirar
-									</label>
-									<input
-										type="number"
-										id="ammount"
-										className="bg-dark border-bottom"
-										min="0"
-										inputMode="numeric"
-										autoComplete="off"
-										placeholder="Indique Cantidad"
-										value={ammount}
-										onChange={(e) => {
-											setAmmount(e.target.value);
-										}}
-									/>
-								</div>
-								{error && (
-									<ErrorAlert msg={error} type="danger" />
-								)}
-							</form>
-						</div>
-						<div className="modal-footer">
-							<button
-								type="submit"
-								form="newTransaction"
-								className="btn btn-success"
-							>
-								Transferir efectivo{" "}
-								<i className="bi bi-cash"></i>
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</>
-	) : (
+	return (
 		<>
 			<button
 				type="button"
@@ -160,14 +78,14 @@ const NewTransaction = ({
 							></button>
 						</div>
 						<div className="modal-body">
-							<form onSubmit={handleSubmit} id="newTransaction">
+							<form onSubmit={handleSubmit} id="transactionForm">
 								<div className="d-flex flex-column">
 									<label htmlFor="">ID Receptor</label>
 									<input
 										id="receptorID"
-										value={receiver}
 										autoComplete="off"
 										placeholder="Indique ID del receptor"
+										value={receiver}
 										onChange={(e) => {
 											setReceiver(e.target.value);
 										}}
@@ -178,11 +96,12 @@ const NewTransaction = ({
 									<input
 										type="number"
 										id="ammount"
-										inputMode="numeric"
+										className="bg-dark border-bottom transfer-input"
 										min="0"
+										inputMode="numeric"
 										autoComplete="off"
+										placeholder="Monto a Transferir"
 										value={ammount}
-										placeholder="Indique el monto a transferir"
 										onChange={(e) => {
 											setAmmount(e.target.value);
 										}}
@@ -196,7 +115,7 @@ const NewTransaction = ({
 						<div className="modal-footer">
 							<button
 								type="submit"
-								form="newTransaction"
+								form="transactionForm"
 								className="btn btn-success"
 							>
 								Realizar Transferencia{" "}
@@ -210,4 +129,4 @@ const NewTransaction = ({
 	);
 };
 
-export default NewTransaction;
+export default Transfer;
