@@ -1,5 +1,5 @@
 //Imports
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 //Context
 import UseAuth from "../../../../Contexts/Auth/UseAuth";
@@ -62,7 +62,6 @@ const Transfer = ({ btnTitle, setRender, render }) => {
 			<div
 				className="modal fade"
 				id="transferModal"
-				data-bs-keyboard="false"
 				tabIndex="-1"
 				aria-labelledby="staticBackdropLabel"
 				aria-hidden="true"
@@ -85,9 +84,8 @@ const Transfer = ({ btnTitle, setRender, render }) => {
 							></button>
 						</div>
 						<div className="modal-body">
-							<form onSubmit={handleSubmit} id="transactionForm">
+							<form onSubmit={handleSubmit} id="transactionForm" className="my-3">
 								<div className="d-flex flex-column">
-									<label htmlFor="">ID Receptor</label>
 									<input
 										id="receptorID"
 										className="transfer-input bg-dark border-bottom"
@@ -100,7 +98,6 @@ const Transfer = ({ btnTitle, setRender, render }) => {
 									/>
 								</div>
 								<div className="d-flex flex-column">
-									<label htmlFor="">Monto</label>
 									<input
 										type="number"
 										id="ammount"

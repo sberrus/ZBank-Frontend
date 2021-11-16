@@ -1,5 +1,5 @@
 //imports
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import UseAuth from "../../../../Contexts/Auth/UseAuth";
 import axios from "axios";
 //components
@@ -15,6 +15,9 @@ const CashOut = ({ setRender, render }) => {
 
 	//states handle error
 	const [error, setError] = useState(null);
+
+	//ref
+	const exitButton = useRef(null);
 
 	//Enviar Transferencia
 	const handleSubmitCashout = async (e) => {
@@ -34,6 +37,7 @@ const CashOut = ({ setRender, render }) => {
 				console.log("Transferencia enviada con exito", data);
 				setRender(!render);
 				setAmmount("");
+				exitButton.current.click();
 			})
 			.catch((err) => {
 				console.log(err.response.data);
@@ -73,6 +77,7 @@ const CashOut = ({ setRender, render }) => {
 								className="btn-close btn-close-white"
 								data-bs-dismiss="modal"
 								aria-label="Close"
+								ref={exitButton}
 							></button>
 						</div>
 						<div className="modal-body">
@@ -84,9 +89,6 @@ const CashOut = ({ setRender, render }) => {
 									className="d-flex flex-column"
 									id="cashout"
 								>
-									<label htmlFor="">
-										Seleccione Monto a Retirar
-									</label>
 									<input
 										type="number"
 										id="ammount"

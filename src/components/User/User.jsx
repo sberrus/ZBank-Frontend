@@ -18,10 +18,12 @@ const User = () => {
 	const auth = UseAuth();
 
 	//Component Data
-	//TODO: mejorar comportamiento para nuevos usuarios sin transferencias para evitar que se vea feo el grafico
+	//TODO: Mejorar despliegue de información del gráfico para que no se cargue una sola barra si solo hay una transacción. Que tenga 6 lementos y que vayan acoplandose el resto uno detras del otro
 	const [userTransactions, setUserTransactions] = useState(
 		[].fill(null, 0, 6)
 	);
+
+	//States
 	const [user, setUser] = useState(null);
 	const [render, setRender] = useState(false);
 
