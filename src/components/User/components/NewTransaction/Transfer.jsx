@@ -34,7 +34,8 @@ const Transfer = ({ btnTitle, setRender, render }) => {
 				//enviar token a componente padre para renderizar
 				console.log("Transferencia enviada con exito", data);
 				setRender(!render);
-				setAmmount(0);
+				setAmmount("");
+				setReceiver("");
 			})
 			.catch((err) => {
 				console.log(err.response.data);
@@ -72,7 +73,7 @@ const Transfer = ({ btnTitle, setRender, render }) => {
 							</h5>
 							<button
 								type="button"
-								className="btn-close"
+								className="btn-close btn-close-white"
 								data-bs-dismiss="modal"
 								aria-label="Close"
 							></button>
@@ -83,6 +84,7 @@ const Transfer = ({ btnTitle, setRender, render }) => {
 									<label htmlFor="">ID Receptor</label>
 									<input
 										id="receptorID"
+										className="transfer-input bg-dark border-bottom"
 										autoComplete="off"
 										placeholder="Indique ID del receptor"
 										value={receiver}

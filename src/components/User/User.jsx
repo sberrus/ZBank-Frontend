@@ -66,9 +66,6 @@ const User = () => {
 					render={render}
 					btnTitle={"Transferir"}
 				/>
-				{/* <Link to="/transactions" className="btn btn-primary">
-					Transferencias
-				</Link> */}
 			</nav>
 
 			{userTransactions && (

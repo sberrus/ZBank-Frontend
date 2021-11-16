@@ -54,12 +54,12 @@ const CashOut = ({ setRender, render }) => {
 			<div
 				className="modal fade"
 				id="cashoutModal"
-				data-bs-keyboard="false"
+				yboard="false"
 				tabIndex="-1"
 				aria-labelledby="staticBackdropLabel"
 				aria-hidden="true"
 			>
-				<div className="modal-dialog">
+				<div className="modal-dialog ">
 					<div className="modal-content bg-dark">
 						<div className="modal-header">
 							<h5
@@ -70,7 +70,7 @@ const CashOut = ({ setRender, render }) => {
 							</h5>
 							<button
 								type="button"
-								className="btn-close"
+								className="btn-close btn-close-white"
 								data-bs-dismiss="modal"
 								aria-label="Close"
 							></button>
