@@ -5,6 +5,7 @@ import axios from "axios";
 import UseAuth from "../../../../Contexts/Auth/UseAuth";
 //Components
 import ErrorAlert from "../../../_partials/ErrorAlert";
+import { useRef } from "react/cjs/react.development";
 
 const Transfer = ({ btnTitle, setRender, render }) => {
 	//Context
@@ -16,6 +17,9 @@ const Transfer = ({ btnTitle, setRender, render }) => {
 
 	//states handle error
 	const [error, setError] = useState(null);
+
+	//ref
+	const exitButton = useRef(null);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -36,6 +40,7 @@ const Transfer = ({ btnTitle, setRender, render }) => {
 				setRender(!render);
 				setAmmount("");
 				setReceiver("");
+				exitButton.current.click();
 			})
 			.catch((err) => {
 				console.log(err.response.data);
@@ -76,6 +81,7 @@ const Transfer = ({ btnTitle, setRender, render }) => {
 								className="btn-close btn-close-white"
 								data-bs-dismiss="modal"
 								aria-label="Close"
+								ref={exitButton}
 							></button>
 						</div>
 						<div className="modal-body">
