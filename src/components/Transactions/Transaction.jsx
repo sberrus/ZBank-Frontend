@@ -38,12 +38,9 @@ const Transaction = () => {
 		};
 		callData();
 	}, [transactionID]);
-	//TODO: A partir de esta query, buscar la información de esta transferencia
-	//TODO: Crear boton para "Repetir transferencia usando estos datos"
-	//TODO: VER SI ES FACTIBLE HACER UNA VISTA CON TODAS LAS TRASNFERENCIAS DEL RECEIVER DE ESA TRANSFERENCIA O DEL SENDER. TOMANDO EN CUENTA SI ES UN INGRESO O EGRESO.
 
 	return (
-		<div>
+		<>
 			{auth.user && <Header />}
 			{info && (
 				<>
@@ -53,13 +50,13 @@ const Transaction = () => {
 					</small>
 					<h1>Monto: {info.ammount}</h1>
 					<hr />
-					<div className="row border-bottom">
-						<div className="col-6 py-2 ">
+					<div className="d-flex justify-content-between border-bottom">
+						<div className="col-6">
 							<span>
 								Emisor: <span>{info.sender.username}</span>
 							</span>{" "}
 						</div>
-						<div className="col-6 py-2">
+						<div className="col-6 text-end">
 							<span>Receptor:</span>{" "}
 							<span>{info.receiver.username}</span>
 						</div>
@@ -72,13 +69,9 @@ const Transaction = () => {
 					) : (
 						"Sin Concepto"
 					)}
-					<div className="position-fixed bottom-0 w-100 d-flex justify-content-center">
+					<div className="position-absolute bottom-0 d-flex justify-content-center w-100 pb-3">
 						{info.sender.uid === auth.user.userID ? (
 							<>
-								{/* <NewTransaction
-									btnTitle={`Enviar dinero a ${info.receiver.username}`}
-									receiverID={info.receiver.uid}
-								/> */}
 								<button
 									className="btn btn-success"
 									onClick={() => {
@@ -93,10 +86,6 @@ const Transaction = () => {
 							</>
 						) : (
 							<>
-								{/* <NewTransaction
-										btnTitle={`Enviar dinero a ${info.sender.username}`}
-										receiverID={info.sender.uid}
-									/> */}
 								<button
 									className="btn btn-success"
 									onClick={() => {
@@ -113,7 +102,7 @@ const Transaction = () => {
 					</div>
 				</>
 			)}
-		</div>
+		</>
 	);
 };
 

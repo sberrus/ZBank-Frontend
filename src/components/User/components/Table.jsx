@@ -1,17 +1,17 @@
-// import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import UseAuth from "../../../Contexts/Auth/UseAuth";
 
 const Table = ({ userTransactions }) => {
 	//Context
 	const auth = UseAuth();
 	//history
-	// const history = useHistory();
+	const history = useHistory();
 
 	//transactions details
 	const goToTransaction = (e) => {
 		const transactionID = e.currentTarget.id;
 		const route = `transaction?transactionID=${transactionID}`;
-		console.log(transactionID, route);
+		history.push(route);
 	};
 	return (
 		<div>

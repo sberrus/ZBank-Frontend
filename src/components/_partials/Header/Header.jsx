@@ -19,7 +19,7 @@ const Header = () => {
 	};
 	return (
 		<>
-			<nav className="navbar navbar-dark bg-dark my-2" role="navigation">
+			<nav className="navbar navbar-dark bg-dark mb-2" role="navigation">
 				<div className="container-fluid">
 					<div className="d-flex justify-content-between col-12">
 						<div className="col-2" id="imgContainer">

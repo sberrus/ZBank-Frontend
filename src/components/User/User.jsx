@@ -25,7 +25,10 @@ const User = () => {
 
 	//States
 	const [user, setUser] = useState(null);
-	const [render, setRender] = useState(false);
+
+	const updateUser = (data) => {
+		auth.login(data);
+	};
 
 	useEffect(() => {
 		const { userID } = JSON.parse(localStorage.getItem("currentUser"));
@@ -37,7 +40,7 @@ const User = () => {
 				})
 				.then(({ data }) => {
 					setUser(data);
-					auth.login(data);
+					updateUser(data);
 				});
 			await axios
 				.get(
@@ -54,21 +57,16 @@ const User = () => {
 				});
 		};
 		callData();
-		return () => {};
 		// eslint-disable-next-line
-	}, [render]);
+	}, []);
 
 	return (
 		<div className="container p-0">
 			{user && <Header user={user} />}
-			<nav className="d-flex justify-content-between">
-				{/* <NewTransaction setRender={setRender} render={render} cashout />
-				<NewTransaction
-					setRender={setRender}
-					render={render}
-					btnTitle={"Transferir"}
-				/> */}
-				<Link to="/transactions">Operaciones</Link>
+			<nav className="d-flex justify-content-end">
+				<Link to="/transactions" className="btn btn-primary">
+					Operaciones
+				</Link>
 			</nav>
 
 			{userTransactions && (

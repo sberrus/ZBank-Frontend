@@ -50,7 +50,8 @@ const LoginForm = () => {
 				const error =
 					err.response?.data?.error ||
 					err.response?.data[0]?.msg ||
-					"Error al registrar al usuario - Revisar";
+					err.response?.data?.msg ||
+					"Error al iniciar Sesión - FrontEnd";
 				setErrorMsg(error);
 			});
 	};
@@ -61,7 +62,6 @@ const LoginForm = () => {
 				setErrorMsg(null);
 			});
 		});
-
 	}, []);
 
 	return (

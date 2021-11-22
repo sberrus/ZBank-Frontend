@@ -14,46 +14,18 @@ const Transaction = () => {
 	const { search } = useLocation();
 
 	//Transaference Input Data
+	const [ammount, setAmmount] = useState("");
+	const [error, setError] = useState(null);
+	const [concept, setConcept] = useState("");
 	const [receiver, setReceiver] = useState((receiver) => {
 		//params
-		console.log(search);
 		const query = new URLSearchParams(search);
 		return query.get("receiverID") ? query.get("receiverID") : "";
 	});
 
-	const [ammount, setAmmount] = useState("");
-	const [error, setError] = useState(null);
-
 	//useHistory
 	const history = useHistory();
 
-	//Component Data
-	// const [transactions, setTransactions] = useState([].fill(null, 0, 6));
-
-	// useEffect(() => {
-	// 	// const { userID } = JSON.parse(localStorage.getItem("currentUser"));
-	// 	// setSender(userID);
-	// 	// const callData = async () => {
-	// 	// 	try {
-	// 	// 		await axios
-	// 	// 			.get(
-	// 	// 				`https://zbank.samdev.es/v1/transactions?accountID=${userID}`,
-	// 	// 				{
-	// 	// 					headers: {
-	// 	// 						"x-token": localStorage.getItem("x-token"),
-	// 	// 					},
-	// 	// 				}
-	// 	// 			)
-	// 	// 			.then(({ data }) => {
-	// 	// 				setTransactions(data.reversedArr);
-	// 	// 			});
-	// 	// 	} catch (error) {
-	// 	// 		console.log(error);
-	// 	// 	}
-	// 	// };
-	// 	// callData();
-	// 	return () => {};
-	// }, []);
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		await axios({
@@ -63,6 +35,7 @@ const Transaction = () => {
 				sender: auth.user.userID,
 				receiver,
 				ammount,
+				concept,
 			},
 			headers: { "x-token": localStorage.getItem("x-token") },
 		})
@@ -108,6 +81,18 @@ const Transaction = () => {
 							autoComplete="off"
 							onChange={(e) => {
 								setAmmount(e.target.value);
+							}}
+						/>
+					</div>
+					<div className="d-flex flex-column">
+						<label htmlFor="">Concepto</label>
+						<textarea
+							id="concept"
+							value={concept}
+							rows="5"
+							autoComplete="off"
+							onChange={(e) => {
+								setConcept(e.target.value);
 							}}
 						/>
 					</div>
