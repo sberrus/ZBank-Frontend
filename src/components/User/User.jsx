@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import BarChart from "./components/BarChart";
 import axios from "axios";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 //Context
 import UseAuth from "../../Contexts/Auth/UseAuth";
@@ -11,7 +11,7 @@ import UseAuth from "../../Contexts/Auth/UseAuth";
 import Header from "../_partials/Header/Header";
 import "./User.css";
 import Table from "./components/Table";
-import NewTransaction from "./components/NewTransaction/NewTransactionHOC";
+// import NewTransaction from "./components/NewTransaction/NewTransactionHOC";
 
 const User = () => {
 	//Contexto
@@ -62,12 +62,13 @@ const User = () => {
 		<div className="container p-0">
 			{user && <Header user={user} />}
 			<nav className="d-flex justify-content-between">
-				<NewTransaction setRender={setRender} render={render} cashout />
+				{/* <NewTransaction setRender={setRender} render={render} cashout />
 				<NewTransaction
 					setRender={setRender}
 					render={render}
 					btnTitle={"Transferir"}
-				/>
+				/> */}
+				<Link to="/transactions">Operaciones</Link>
 			</nav>
 
 			{userTransactions && (

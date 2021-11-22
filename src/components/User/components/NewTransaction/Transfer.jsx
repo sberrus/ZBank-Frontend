@@ -1,5 +1,5 @@
 //Imports
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 //Context
 import UseAuth from "../../../../Contexts/Auth/UseAuth";
@@ -84,7 +84,11 @@ const Transfer = ({ btnTitle, setRender, render }) => {
 							></button>
 						</div>
 						<div className="modal-body">
-							<form onSubmit={handleSubmit} id="transactionForm" className="my-3">
+							<form
+								onSubmit={handleSubmit}
+								id="transactionForm"
+								className="my-3"
+							>
 								<div className="d-flex flex-column">
 									<input
 										id="receptorID"

@@ -62,7 +62,6 @@ const LoginForm = () => {
 			});
 		});
 
-		return () => {};
 	}, []);
 
 	return (
