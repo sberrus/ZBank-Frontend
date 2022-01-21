@@ -1,9 +1,13 @@
-#loginWrapper {
-	z-index: 10000;
-	background-color: rgba(255, 255, 255, 0.98);
-}
-#loginForm input {
+form input {
 	text-transform: lowercase;
+	border: none;
+	border-bottom: 1px solid #d1d1d1;
+}
+form input:focus {
+	text-transform: lowercase;
+	border: none;
+	border-bottom: 1px solid #d1d1d1;
+	outline: none;
 }
 
 #wraper {
@@ -11,8 +15,16 @@
 }
 
 #decorationLayer {
+	z-index: -100;
 	user-select: none;
 	animation: loop 100s infinite linear;
+}
+
+#blurLayer {
+	z-index: -1;
+	height: 100%;
+	width: 100%;
+	background: #fff;
 }
 
 @keyframes loop {

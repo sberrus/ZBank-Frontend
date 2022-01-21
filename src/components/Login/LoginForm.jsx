@@ -79,6 +79,7 @@ const LoginForm = () => {
 							type="text"
 							name="username"
 							id="userID"
+							autoComplete="off"
 							className="rounded"
 							value={username}
 							onChange={(e) => {
@@ -102,7 +103,7 @@ const LoginForm = () => {
 						/>
 						<Link
 							to="/forgot-password"
-							className="text-end mt-1"
+							className="mt-1"
 							title="La mariguana empeora la memoria a corto plazo ¿sabias?"
 						>
 							¿Olvidaste tu contraseña?
@@ -111,12 +112,12 @@ const LoginForm = () => {
 					{errorMsg && <ErrorAlert msg={errorMsg} type={"danger"} />}
 
 					<div className="d-flex flex-column w-75 m-auto">
-						<button className="btn btn-primary float-end mb-1 float-end">
+						<button className="btn btn-dark float-end mb-1 float-end">
 							Entrar
 						</button>
 
-						<Link to="/register" className="text-center">
-							¿No tienes cuenta menor? Registrate
+						<Link to="/register" className="text-center mt-3">
+							¿No tienes cuenta? Registrate
 						</Link>
 					</div>
 				</form>

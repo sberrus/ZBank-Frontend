@@ -27,12 +27,7 @@ const RegisterForm = () => {
 		return () => {};
 	}, []);
 
-	const onSubmit = async ({
-		username,
-		password,
-		passwordConfirm,
-		invitationCode,
-	}) => {
+	const onSubmit = async ({ username, password, passwordConfirm, invitationCode }) => {
 		console.log({ username, password, passwordConfirm, invitationCode });
 
 		await axios({
@@ -52,9 +47,7 @@ const RegisterForm = () => {
 			.catch((err) => {
 				console.log(err.response);
 				const error =
-					err.response?.data?.error ||
-					err.response?.data[0]?.msg ||
-					"Error al registrar al usuario - any";
+					err.response?.data?.error || err.response?.data[0]?.msg || "Error al registrar al usuario - any";
 				setErrorMsg(error);
 			});
 	};
@@ -97,7 +90,6 @@ const RegisterForm = () => {
 								required: true,
 								maxLength: 15,
 							})}
-							className="rounded"
 						/>
 					</div>
 					<div className="mb-4 d-flex justify-content-center flex-column">
@@ -114,7 +106,6 @@ const RegisterForm = () => {
 								maxLength: 20,
 								minLength: 5,
 							})}
-							className="rounded"
 						/>
 					</div>
 					<div className="mb-4 d-flex justify-content-center flex-column">
@@ -131,7 +122,6 @@ const RegisterForm = () => {
 								maxLength: 20,
 								minLength: 5,
 							})}
-							className="rounded"
 						/>
 					</div>
 					{/* <div className="mb-4 d-flex justify-content-center flex-column">
@@ -149,9 +139,7 @@ const RegisterForm = () => {
 					</div> */}
 					{errorMsg && <ErrorAlert msg={errorMsg} type={"danger"} />}
 					<div className="d-flex flex-column w-50 m-auto">
-						<button className="btn btn-primary float-end mb-1 float-end">
-							Registrarse
-						</button>
+						<button className="btn btn-primary float-end mb-1 float-end">Registrarse</button>
 					</div>
 				</form>
 			</div>

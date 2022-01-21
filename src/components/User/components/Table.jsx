@@ -18,7 +18,7 @@ const Table = ({ userTransactions }) => {
 			{/* TABLE */}
 			<div className="w-100">
 				<h2>Últimos registros</h2>
-				<table className="table table-dark text-light">
+				<table className="table">
 					<thead>
 						<tr>
 							<th scope="col">Emisor/Receptor</th>

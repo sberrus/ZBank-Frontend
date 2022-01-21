@@ -55,58 +55,57 @@ const Transaction = () => {
 	};
 
 	return (
-		<div className="vh-100 container p-0">
+		<div className="vh-100 container-fluid p-0">
 			<Header user={auth.user} />
 			{/* Formulario de transacciones */}
-			<section id="tableTransaction" className="mt-1">
-				<form action="" onSubmit={handleSubmit}>
-					<div className="d-flex flex-column">
-						<label htmlFor="">ID Receptor</label>
-						<input
-							id="receptorID"
-							value={receiver}
-							autoComplete="off"
-							onChange={(e) => {
-								setReceiver(e.target.value);
-							}}
-						/>
-					</div>
-					<div className="d-flex flex-column">
-						<label htmlFor="">Monto</label>
-						<input
-							type="number"
-							id="receptorID"
-							inputMode="numeric"
-							value={ammount}
-							autoComplete="off"
-							onChange={(e) => {
-								setAmmount(e.target.value);
-							}}
-						/>
-					</div>
-					<div className="d-flex flex-column">
-						<label htmlFor="">Concepto</label>
-						<textarea
-							id="concept"
-							value={concept}
-							rows="5"
-							autoComplete="off"
-							onChange={(e) => {
-								setConcept(e.target.value);
-							}}
-						/>
-					</div>
-					{error && <ErrorAlert msg={error} type="danger" />}
-					<div className="d-flex flex-row-reverse">
-						<button
-							className="btn btn-success col-4 mt-4"
-							type="submit"
-						>
-							Enviar
-						</button>
-					</div>
-				</form>
-			</section>
+			<div className="container">
+				<section id="tableTransaction" className="mt-1">
+					<form action="" onSubmit={handleSubmit}>
+						<div className="d-flex flex-column">
+							<label htmlFor="">ID Receptor</label>
+							<input
+								id="receptorID"
+								value={receiver}
+								autoComplete="off"
+								onChange={(e) => {
+									setReceiver(e.target.value);
+								}}
+							/>
+						</div>
+						<div className="d-flex flex-column">
+							<label htmlFor="">Monto</label>
+							<input
+								type="number"
+								id="receptorID"
+								inputMode="numeric"
+								value={ammount}
+								autoComplete="off"
+								onChange={(e) => {
+									setAmmount(e.target.value);
+								}}
+							/>
+						</div>
+						<div className="d-flex flex-column">
+							<label htmlFor="">Concepto</label>
+							<textarea
+								id="concept"
+								value={concept}
+								rows="5"
+								autoComplete="off"
+								onChange={(e) => {
+									setConcept(e.target.value);
+								}}
+							/>
+						</div>
+						{error && <ErrorAlert msg={error} type="danger" />}
+						<div className="d-flex flex-row-reverse">
+							<button className="btn btn-success col-4 mt-4" type="submit">
+								Enviar
+							</button>
+						</div>
+					</form>
+				</section>
+			</div>
 			{/**Fin Lista de Transacciones */}
 		</div>
 	);

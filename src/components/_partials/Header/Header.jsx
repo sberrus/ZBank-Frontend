@@ -19,50 +19,47 @@ const Header = () => {
 	};
 	return (
 		<>
-			<nav className="navbar navbar-dark bg-dark mb-2" role="navigation">
-				<div className="container-fluid">
-					<div className="d-flex justify-content-between col-12">
-						<div className="col-2" id="imgContainer">
-							<Link to="/dashboard">
-								<img
-									src={YodaProfilePicture}
-									className="rounded-circle border border-3 border-success"
-									alt="[]"
-									id="userProfileImg"
-								/>
-							</Link>
+			<nav className="navbar navbar-light mb-3 border-bottom shadow container-fluid position-sticky top-0 bg-light" role="navigation">
+				<div className="d-flex justify-content-between w-100 container">
+					<div className="pt-1 col-10" id="uernameContainer">
+						<div className="d-flex">
+							<div className="me-3">
+								<Link to="/dashboard">
+									<img
+										src={YodaProfilePicture}
+										className="rounded-circle border border-3"
+										alt="[]"
+										id="userProfileImg"
+									/>
+								</Link>
+							</div>
+							<div className="me-5">
+								<h5 className="fw-bold p-0 m-0" id="username">
+									{auth.user.username}
+								</h5>
+								<small id="userID" className="d-block">
+									ID: {auth.user.userID}
+								</small>
+							</div>
+							<div className="d-flex flex-column">
+								<h2 className="text-success m-auto pb-3" id="account-balance">
+									{new Intl.NumberFormat("de-DE").format(parseInt(auth.user.balance))}$
+								</h2>
+							</div>
 						</div>
-						<div className="pt-1 ps-3 col-9" id="uernameContainer">
-							<h5 className="fw-bold p-0 m-0" id="username">
-								{auth.user.username}
-							</h5>
-							<small id="userID" className="d-block">
-								ID: {auth.user.userID}
-							</small>
-							<h2 className="text-success" id="account-balance">
-								{new Intl.NumberFormat("de-DE").format(
-									parseInt(auth.user.balance)
-								)}
-								$
-							</h2>
-						</div>
-						<div
-							id="logOut"
-							className="d-flex justify-content-center align-content-center col-1 m-auto"
+					</div>
+					<div id="logOut" className="d-flex justify-content-end col-2">
+						<button
+							className="btn btn-outline-danger"
+							onClick={() => {
+								handleLogout();
+							}}
 						>
-							<button
-								className="btn btn-outline-danger"
-								onClick={() => {
-									handleLogout();
-								}}
-							>
-								<i className="bi bi-box-arrow-right fs-5"></i>
-							</button>
-						</div>
+							<i className="bi bi-box-arrow-right fs-5"></i>
+						</button>
 					</div>
 				</div>
 			</nav>
-			<hr />
 		</>
 	);
 };

@@ -19,9 +19,7 @@ const User = () => {
 
 	//Component Data
 	//TODO: Mejorar despliegue de información del gráfico para que no se cargue una sola barra si solo hay una transacción. Que tenga 6 lementos y que vayan acoplandose el resto uno detras del otro
-	const [userTransactions, setUserTransactions] = useState(
-		[].fill(null, 0, 6)
-	);
+	const [userTransactions, setUserTransactions] = useState([].fill(null, 0, 6));
 
 	//States
 	const [user, setUser] = useState(null);
@@ -43,12 +41,9 @@ const User = () => {
 					updateUser(data);
 				});
 			await axios
-				.get(
-					`https://zbank.samdev.es/v1/transactions?accountID=${userID}`,
-					{
-						headers: { "x-token": localStorage.getItem("x-token") },
-					}
-				)
+				.get(`https://zbank.samdev.es/v1/transactions?accountID=${userID}`, {
+					headers: { "x-token": localStorage.getItem("x-token") },
+				})
 				.then(({ data }) => {
 					setUserTransactions(data.reversedArr);
 				})
@@ -61,26 +56,24 @@ const User = () => {
 	}, []);
 
 	return (
-		<div className="container p-0">
+		<>
 			{user && <Header user={user} />}
-			<nav className="d-flex justify-content-end">
-				<Link to="/transactions" className="btn btn-primary">
-					Operaciones
-				</Link>
-			</nav>
-
-			{userTransactions && (
-				<>
-					<div id="canva-grafico">
-						<BarChart
-							userTransactions={userTransactions}
-							user={auth.user}
-						/>
-					</div>
-					<Table userTransactions={userTransactions} />
-				</>
-			)}
-		</div>
+			<div className="container p-0">
+				{userTransactions && (
+					<>
+						<div id="canva-grafico">
+							<BarChart userTransactions={userTransactions} user={auth.user} />
+						</div>
+						<nav className="d-flex justify-content-end">
+							<Link to="/transactions" className="btn btn-primary">
+								Operaciones
+							</Link>
+						</nav>
+						<Table userTransactions={userTransactions} />
+					</>
+				)}
+			</div>
+		</>
 	);
 };
 
