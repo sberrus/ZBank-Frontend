@@ -58,11 +58,11 @@ const User = () => {
 	return (
 		<>
 			{user && <Header user={user} />}
-			<div className="container p-0">
+			<div className="container w-75">
 				{userTransactions && (
 					<>
 						<div id="canva-grafico">
-							<BarChart userTransactions={userTransactions} user={auth.user} />
+							<BarChart userTransactions={userTransactions} user={auth.user} heigth="35vh" />
 						</div>
 						<nav className="d-flex justify-content-end">
 							<Link to="/transactions" className="btn btn-primary">

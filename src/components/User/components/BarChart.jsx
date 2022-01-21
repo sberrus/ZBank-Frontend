@@ -35,7 +35,6 @@ const BarChart = ({ userTransactions, user }) => {
 				}}
 				options={{
 					responsive: true,
-
 					plugins: {
 						title: {
 							display: false,
