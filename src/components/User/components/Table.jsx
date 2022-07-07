@@ -37,9 +37,7 @@ const Table = ({ userTransactions }) => {
 											</span>
 											<small className="d-block">
 												<i className="bi bi-arrow-return-right text-success"></i>
-												<span className="d-inline-block ms-1">
-													{transaction.receiver.username}
-												</span>
+												<span className="d-inline-block ms-1">{transaction.receiver.username}</span>
 											</small>
 											<small className="text-secondary">
 												{transaction.date.split("T")[0].replaceAll("-", "/")}
@@ -52,9 +50,7 @@ const Table = ({ userTransactions }) => {
 											{/* Usuario recive dinero */}
 											<span className="d-block">
 												<i className="bi bi-arrow-90deg-down text-danger"></i>
-												<span className="d-inline-block ms-1">
-													{transaction.sender.username}
-												</span>
+												<span className="d-inline-block ms-1">{transaction.sender.username}</span>
 											</span>
 											<small className="d-block">
 												<i className="bi bi-arrow-return-right text-success"></i>
@@ -90,7 +86,7 @@ const Table = ({ userTransactions }) => {
 												</button>
 												<ul className="dropdown-menu p-0" aria-labelledby="opcionesTransaccion">
 													<li>
-														<a className="dropdown-item" href="#">
+														<a className="dropdown-item" href="/">
 															<i className="bi bi-arrow-repeat"></i> Repetir transacción
 														</a>
 													</li>

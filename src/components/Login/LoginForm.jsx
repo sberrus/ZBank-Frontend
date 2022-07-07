@@ -7,7 +7,7 @@ import axios from "axios";
 
 //Contexto
 import UseAuth from "../../Contexts/Auth/UseAuth";
-import ErrorAlert from "./Register/_Partials/ErrorAlert";
+import ErrorAlert from "./Register/components/ErrorAlert";
 
 const LoginForm = () => {
 	//History hook
@@ -38,10 +38,7 @@ const LoginForm = () => {
 			.then(({ data }) => {
 				//enviar token a componente padre para renderizar
 				localStorage.setItem("x-token", data.token);
-				localStorage.setItem(
-					"currentUser",
-					JSON.stringify(data.usuario)
-				);
+				localStorage.setItem("currentUser", JSON.stringify(data.usuario));
 				auth.login(data.usuario);
 				auth.registerToken(data.token);
 				history.push("/dashboard");
@@ -62,6 +59,7 @@ const LoginForm = () => {
 				setErrorMsg(null);
 			});
 		});
+		return () => {};
 	}, []);
 
 	return (
@@ -101,20 +99,14 @@ const LoginForm = () => {
 								setPassword(e.target.value);
 							}}
 						/>
-						<Link
-							to="/forgot-password"
-							className="mt-1"
-							title="La mariguana empeora la memoria a corto plazo ¿sabias?"
-						>
+						<Link to="/forgot-password" className="mt-1">
 							¿Olvidaste tu contraseña?
 						</Link>
 					</div>
 					{errorMsg && <ErrorAlert msg={errorMsg} type={"danger"} />}
 
 					<div className="d-flex flex-column w-75 m-auto">
-						<button className="btn btn-dark float-end mb-1 float-end">
-							Entrar
-						</button>
+						<button className="btn btn-dark float-end mb-1 float-end">Entrar</button>
 
 						<Link to="/register" className="text-center mt-3">
 							¿No tienes cuenta? Registrate

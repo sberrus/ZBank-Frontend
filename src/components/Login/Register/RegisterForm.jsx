@@ -1,18 +1,15 @@
 //Imports
 import React, { useEffect, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 //Components
 import axios from "axios";
-import ErrorAlert from "./_Partials/ErrorAlert";
+import ErrorAlert from "./components/ErrorAlert";
 
 const RegisterForm = () => {
 	//error logic states
 	const [errorMsg, setErrorMsg] = useState(null);
-
-	//useHistory
-	const history = useHistory();
 
 	//react-form-hook
 	const { register, handleSubmit } = useForm();
@@ -27,9 +24,7 @@ const RegisterForm = () => {
 		return () => {};
 	}, []);
 
-	const onSubmit = async ({ username, password, passwordConfirm, invitationCode }) => {
-		console.log({ username, password, passwordConfirm, invitationCode });
-
+	const onSubmit = async ({ username, password, passwordConfirm }) => {
 		await axios({
 			method: "post",
 			url: "https://zbank.samdev.es/v1/users",
@@ -40,8 +35,6 @@ const RegisterForm = () => {
 			},
 		})
 			.then(() => {
-				//Enviar datos a auth y a localstorage
-				history.push("/");
 				setErrorMsg(null);
 			})
 			.catch((err) => {
@@ -124,19 +117,6 @@ const RegisterForm = () => {
 							})}
 						/>
 					</div>
-					{/* <div className="mb-4 d-flex justify-content-center flex-column">
-						<label htmlFor="" className="d-block fw-light">
-							Código de invitación
-						</label>
-						<input
-							type="number"
-							inputMode="numeric"
-							{...register("invitationCode", {
-								required: true,
-							})}
-							className="rounded"
-						/>
-					</div> */}
 					{errorMsg && <ErrorAlert msg={errorMsg} type={"danger"} />}
 					<div className="d-flex flex-column w-50 m-auto">
 						<button className="btn btn-primary float-end mb-1 float-end">Registrarse</button>
