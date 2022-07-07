@@ -6,7 +6,7 @@ import LoginForm from "./LoginForm";
 import RegisterForm from "./Register/RegisterForm";
 
 //Styles
-import "./Login.css";
+import "./Login.scss";
 import ForgotPassword from "./ForgotPassword/ForgotPassword";
 
 //assets

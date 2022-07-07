@@ -1,11 +1,8 @@
-//Imports
+//imports
 import { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
-
-//Components
-
-//Contexto
+//context
 import UseAuth from "../../Contexts/Auth/UseAuth";
 import ErrorAlert from "./Register/components/ErrorAlert";
 
@@ -13,11 +10,10 @@ const LoginForm = () => {
 	//History hook
 	const history = useHistory();
 
-	//Contexto
+	//Context
 	const auth = UseAuth();
 
 	//Form Inputs
-	//todo: Implementar uso de react hook form para manipular el formulario
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [errorMsg, setErrorMsg] = useState(null);
@@ -99,9 +95,6 @@ const LoginForm = () => {
 								setPassword(e.target.value);
 							}}
 						/>
-						<Link to="/forgot-password" className="mt-1">
-							¿Olvidaste tu contraseña?
-						</Link>
 					</div>
 					{errorMsg && <ErrorAlert msg={errorMsg} type={"danger"} />}
 
