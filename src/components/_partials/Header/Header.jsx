@@ -8,7 +8,7 @@ import "./Header.css";
 import YodaProfilePicture from "../../../static/yodabb.jpg";
 
 //Contexto
-import UseAuth from "../../../Contexts/Auth/UseAuth";
+import UseAuth from "../../../context/Auth/UseAuth";
 
 const Header = () => {
 	//Context
@@ -19,7 +19,10 @@ const Header = () => {
 	};
 	return (
 		<>
-			<nav className="navbar navbar-light mb-3 border-bottom shadow container-fluid position-sticky top-0 bg-light" role="navigation">
+			<nav
+				className="navbar navbar-light mb-3 border-bottom shadow container-fluid position-sticky top-0 bg-light"
+				role="navigation"
+			>
 				<div className="d-flex justify-content-between w-100 container">
 					<div className="pt-1 col-10" id="uernameContainer">
 						<div className="d-flex">

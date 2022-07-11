@@ -1,6 +1,6 @@
 //imports
 import React, { useRef, useState } from "react";
-import UseAuth from "../../../../Contexts/Auth/UseAuth";
+import UseAuth from "../../../../context/Auth/UseAuth";
 import axios from "axios";
 //components
 import ErrorAlert from "../../../_partials/ErrorAlert";
@@ -46,12 +46,7 @@ const CashOut = ({ setRender, render }) => {
 	};
 	return (
 		<>
-			<button
-				type="button"
-				className="btn btn-primary"
-				data-bs-toggle="modal"
-				data-bs-target="#cashoutModal"
-			>
+			<button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cashoutModal">
 				Retirar Efectivo <i className="bi bi-cash"></i>
 			</button>
 
@@ -66,10 +61,7 @@ const CashOut = ({ setRender, render }) => {
 				<div className="modal-dialog ">
 					<div className="modal-content bg-dark">
 						<div className="modal-header">
-							<h5
-								className="modal-title"
-								id="staticBackdropLabel"
-							>
+							<h5 className="modal-title" id="staticBackdropLabel">
 								Retirar Efectivo
 							</h5>
 							<button
@@ -81,14 +73,8 @@ const CashOut = ({ setRender, render }) => {
 							></button>
 						</div>
 						<div className="modal-body">
-							<form
-								onSubmit={handleSubmitCashout}
-								id="cashoutForm"
-							>
-								<div
-									className="d-flex flex-column"
-									id="cashout"
-								>
+							<form onSubmit={handleSubmitCashout} id="cashoutForm">
+								<div className="d-flex flex-column" id="cashout">
 									<input
 										type="number"
 										id="ammount"
@@ -103,19 +89,12 @@ const CashOut = ({ setRender, render }) => {
 										}}
 									/>
 								</div>
-								{error && (
-									<ErrorAlert msg={error} type="danger" />
-								)}
+								{error && <ErrorAlert msg={error} type="danger" />}
 							</form>
 						</div>
 						<div className="modal-footer">
-							<button
-								type="submit"
-								form="cashoutForm"
-								className="btn btn-success"
-							>
-								Transferir efectivo{" "}
-								<i className="bi bi-cash"></i>
+							<button type="submit" form="cashoutForm" className="btn btn-success">
+								Transferir efectivo <i className="bi bi-cash"></i>
 							</button>
 						</div>
 					</div>

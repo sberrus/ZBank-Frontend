@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 
 //Context
-import UseAuth from "../../Contexts/Auth/UseAuth";
+import UseAuth from "../../context/Auth/UseAuth";
 
 //Components
 // import NewTransaction from "../User/components/NewTransaction";
@@ -23,12 +23,9 @@ const Transaction = () => {
 	useEffect(() => {
 		const callData = async () => {
 			await axios
-				.get(
-					`https://zbank.samdev.es/v1/transactions?transactionID=${transactionID}`,
-					{
-						headers: { "x-token": localStorage.getItem("x-token") },
-					}
-				)
+				.get(`https://zbank.samdev.es/v1/transactions?transactionID=${transactionID}`, {
+					headers: { "x-token": localStorage.getItem("x-token") },
+				})
 				.then(({ data }) => {
 					setInfo(data);
 				})
@@ -45,8 +42,7 @@ const Transaction = () => {
 			{info && (
 				<>
 					<small className="text-secondary">
-						{info.date.split("T")[0]} -{" "}
-						{info.date.split("T")[1].split(".")[0]}
+						{info.date.split("T")[0]} - {info.date.split("T")[1].split(".")[0]}
 					</small>
 					<h1>Monto: {info.ammount}</h1>
 					<hr />
@@ -57,8 +53,7 @@ const Transaction = () => {
 							</span>{" "}
 						</div>
 						<div className="col-6 text-end">
-							<span>Receptor:</span>{" "}
-							<span>{info.receiver.username}</span>
+							<span>Receptor:</span> <span>{info.receiver.username}</span>
 						</div>
 					</div>
 					{info.concept ? (
@@ -75,9 +70,7 @@ const Transaction = () => {
 								<button
 									className="btn btn-success"
 									onClick={() => {
-										history.push(
-											`/transactions?receiverID=${info.receiver.uid}`
-										);
+										history.push(`/transactions?receiverID=${info.receiver.uid}`);
 									}}
 								>
 									Enviar dinero a {info.receiver.username}
@@ -89,9 +82,7 @@ const Transaction = () => {
 								<button
 									className="btn btn-success"
 									onClick={() => {
-										history.push(
-											`/transactions?receiverID=${info.sender.uid}`
-										);
+										history.push(`/transactions?receiverID=${info.sender.uid}`);
 									}}
 								>
 									Enviar dinero a {info.sender.username}

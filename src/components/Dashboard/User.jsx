@@ -5,7 +5,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 //Context
-import UseAuth from "../../Contexts/Auth/UseAuth";
+import UseAuth from "../../context/Auth/UseAuth";
 
 //_partials
 import Header from "../_partials/Header/Header";

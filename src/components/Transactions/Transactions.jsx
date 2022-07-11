@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { withRouter, useHistory, useLocation } from "react-router-dom";
-import UseAuth from "../../Contexts/Auth/UseAuth";
+import UseAuth from "../../context/Auth/UseAuth";
 import Header from "../_partials/Header/Header";
 import "./Transactions.css";
 import ErrorAlert from "../_partials/ErrorAlert";

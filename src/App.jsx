@@ -2,7 +2,7 @@ import "./App.scss";
 import AppRouter from "./routers/AppRouter";
 import { BrowserRouter as Router } from "react-router-dom";
 
-import AuthProvider from "./Contexts/Auth/AuthProvider";
+import AuthProvider from "./context/Auth/AuthProvider";
 
 function App() {
 	return (

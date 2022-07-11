@@ -3,7 +3,7 @@ import { Route, Switch } from "react-router-dom";
 
 //Routes
 import Login from "../components/Login/Login";
-import User from "../components/User/User";
+import User from "../components/Dashboard/User";
 import Transactions from "../components/Transactions/Transactions";
 import RegisterForm from "../components/Login/Register/RegisterForm";
 import ForgotPassword from "../components/Login/ForgotPassword/ForgotPassword";
@@ -22,11 +22,7 @@ export default function AppRouter() {
 			{/* Rutas Públicas */}
 			<PublicRoute exact path="/" component={Login} />
 			<PublicRoute exact path="/register" component={RegisterForm} />
-			<PublicRoute
-				exact
-				path="/forgot-password"
-				component={ForgotPassword}
-			/>
+			<PublicRoute exact path="/forgot-password" component={ForgotPassword} />
 			{/* Rutas Privadas */}
 			<PrivateRoute exact path="/dashboard" component={User} />
 			<PrivateRoute exact path="/transactions" component={Transactions} />

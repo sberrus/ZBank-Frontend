@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 //Context
-import UseAuth from "../../../../Contexts/Auth/UseAuth";
+import UseAuth from "../../../../context/Auth/UseAuth";
 //Components
 import ErrorAlert from "../../../_partials/ErrorAlert";
 import { useRef } from "react/cjs/react.development";
@@ -50,12 +50,7 @@ const Transfer = ({ btnTitle, setRender, render }) => {
 
 	return (
 		<>
-			<button
-				type="button"
-				className="btn btn-primary"
-				data-bs-toggle="modal"
-				data-bs-target="#transferModal"
-			>
+			<button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#transferModal">
 				{btnTitle} <i className="bi bi-send"></i>
 			</button>
 
@@ -69,10 +64,7 @@ const Transfer = ({ btnTitle, setRender, render }) => {
 				<div className="modal-dialog">
 					<div className="modal-content bg-dark">
 						<div className="modal-header">
-							<h5
-								className="modal-title"
-								id="staticBackdropLabel"
-							>
+							<h5 className="modal-title" id="staticBackdropLabel">
 								{btnTitle}
 							</h5>
 							<button
@@ -84,11 +76,7 @@ const Transfer = ({ btnTitle, setRender, render }) => {
 							></button>
 						</div>
 						<div className="modal-body">
-							<form
-								onSubmit={handleSubmit}
-								id="transactionForm"
-								className="my-3"
-							>
+							<form onSubmit={handleSubmit} id="transactionForm" className="my-3">
 								<div className="d-flex flex-column">
 									<input
 										id="receptorID"
@@ -116,19 +104,12 @@ const Transfer = ({ btnTitle, setRender, render }) => {
 										}}
 									/>
 								</div>
-								{error && (
-									<ErrorAlert msg={error} type="danger" />
-								)}
+								{error && <ErrorAlert msg={error} type="danger" />}
 							</form>
 						</div>
 						<div className="modal-footer">
-							<button
-								type="submit"
-								form="transactionForm"
-								className="btn btn-success"
-							>
-								Realizar Transferencia{" "}
-								<i className="bi bi-send"></i>
+							<button type="submit" form="transactionForm" className="btn btn-success">
+								Realizar Transferencia <i className="bi bi-send"></i>
 							</button>
 						</div>
 					</div>

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 //context
-import UseAuth from "../../Contexts/Auth/UseAuth";
+import UseAuth from "../../context/Auth/UseAuth";
 import ErrorAlert from "./Register/components/ErrorAlert";
 
 const LoginForm = () => {

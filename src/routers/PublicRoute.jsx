@@ -1,6 +1,6 @@
 //imports
 import { Redirect } from "react-router-dom";
-import UseAuth from "../Contexts/Auth/UseAuth";
+import UseAuth from "../context/Auth/UseAuth";
 
 //context
 

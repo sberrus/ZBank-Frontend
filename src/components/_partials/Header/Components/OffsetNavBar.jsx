@@ -1,4 +1,4 @@
-import UseAuth from "../../../../Contexts/Auth/UseAuth";
+import UseAuth from "../../../../context/Auth/UseAuth";
 import { Link } from "react-router-dom";
 
 const OffsetNavBar = () => {
