@@ -16,7 +16,7 @@ const LoginForm = () => {
 	//Form Inputs
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
-	const [errorMsg, setErrorMsg] = useState(null);
+	const [errorMsg, setErrorMsg] = useState("");
 
 	const handleSubmit = async (e: FormEvent) => {
 		e.preventDefault();
@@ -26,6 +26,7 @@ const LoginForm = () => {
 			history.push("/dashboard");
 		} catch (error) {
 			console.log(error);
+			setErrorMsg("Error al iniciar sesión");
 		}
 	};
 	useEffect(() => {
