@@ -1,10 +1,10 @@
 //imports
 import { FormEvent, useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import axios, { AxiosRequestConfig } from "axios";
 //context
 import UseAuth from "../../context/Auth/UseAuth";
 import ErrorAlert from "./Register/components/ErrorAlert";
+import { login } from "../../utils/auth.util";
 
 const LoginForm = () => {
 	//History hook
@@ -20,36 +20,13 @@ const LoginForm = () => {
 
 	const handleSubmit = async (e: FormEvent) => {
 		e.preventDefault();
-		// useFetch hook
-		const authAPIEndpoint = "https://zbank.samdev.es/v1/auth";
-		//
-		const config: AxiosRequestConfig = {
-			method: "POST",
-			url: "https://zbank.samdev.es/v1/auth",
-			data: {
-				username: username.toLowerCase(),
-				password,
-			},
-		};
-		await axios(config)
-			.then(({ data }) => {
-				// save data locally
-				localStorage.setItem("x-token", data.token);
-				localStorage.setItem("currentUser", JSON.stringify(data.usuario));
-				// context
-				auth.login(data.usuario);
-				auth.registerToken(data.token);
-				// redirect
-				history.push("/dashboard");
-			})
-			.catch((err) => {
-				const error =
-					err.response?.data?.error ||
-					err.response?.data[0]?.msg ||
-					err.response?.data?.msg ||
-					"Error al iniciar Sesión - FrontEnd";
-				setErrorMsg(error);
-			});
+		try {
+			const res = await login(username, password);
+			auth.login(res.usuario);
+			history.push("/dashboard");
+		} catch (error) {
+			console.log(error);
+		}
 	};
 	useEffect(() => {
 		const inputs = document.querySelectorAll("input");

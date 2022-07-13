@@ -5,7 +5,7 @@ export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
 	//inicializamos un state para comprobar que haya un usuario existente en el localstorage. De lo contrario el contexto devolverá null.
-	const [user, setUser] = useState(JSON.parse(localStorage.getItem("currentUser")) || null);
+	const [user, setUser] = useState(JSON.parse(localStorage.getItem("currentUser")));
 	useEffect(() => {
 		//Handle localstorage compatibility
 		try {
