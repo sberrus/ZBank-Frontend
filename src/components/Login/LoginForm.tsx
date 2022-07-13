@@ -1,7 +1,7 @@
 //imports
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 //context
 import UseAuth from "../../context/Auth/UseAuth";
 import ErrorAlert from "./Register/components/ErrorAlert";
@@ -18,25 +18,28 @@ const LoginForm = () => {
 	const [password, setPassword] = useState("");
 	const [errorMsg, setErrorMsg] = useState(null);
 
-	const handleSubmit = async (e) => {
+	const handleSubmit = async (e: FormEvent) => {
 		e.preventDefault();
-		await axios({
-			method: "post",
+		// useFetch hook
+		const authAPIEndpoint = "https://zbank.samdev.es/v1/auth";
+		//
+		const config: AxiosRequestConfig = {
+			method: "POST",
 			url: "https://zbank.samdev.es/v1/auth",
 			data: {
 				username: username.toLowerCase(),
 				password,
 			},
-			headers: {
-				"x-token": localStorage.getItem("x-token"),
-			},
-		})
+		};
+		await axios(config)
 			.then(({ data }) => {
-				//enviar token a componente padre para renderizar
+				// save data locally
 				localStorage.setItem("x-token", data.token);
 				localStorage.setItem("currentUser", JSON.stringify(data.usuario));
+				// context
 				auth.login(data.usuario);
 				auth.registerToken(data.token);
+				// redirect
 				history.push("/dashboard");
 			})
 			.catch((err) => {
