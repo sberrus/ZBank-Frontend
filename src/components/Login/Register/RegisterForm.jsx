@@ -1,13 +1,16 @@
-//Imports
+// imports
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-
-//Components
+// components
 import axios from "axios";
 import ErrorAlert from "./components/ErrorAlert";
+// context
+import useAuth from "../../../context/Auth/UseAuth";
 
 const RegisterForm = () => {
+	// context
+	const auth = useAuth();
 	//error logic states
 	const [errorMsg, setErrorMsg] = useState(null);
 
@@ -24,6 +27,10 @@ const RegisterForm = () => {
 		return () => {};
 	}, []);
 
+	/**
+	 * Handle valid react-hook-form submit after pass the validations.
+	 * @param {*} param0 registered and validated form fields
+	 */
 	const onSubmit = async ({ username, password, passwordConfirm }) => {
 		await axios({
 			method: "post",
@@ -34,7 +41,9 @@ const RegisterForm = () => {
 				passwordConfirm,
 			},
 		})
-			.then(() => {
+			.then((res) => {
+				const user = res.data.user;
+				auth.login(user);
 				setErrorMsg(null);
 			})
 			.catch((err) => {
@@ -45,7 +54,10 @@ const RegisterForm = () => {
 			});
 	};
 
-	//handle errors
+	/**
+	 * Handle react-hook-form submit errors
+	 * @param {*} error callback error object
+	 */
 	const onError = (error) => {
 		console.log(error);
 		const errorStack = Object.keys(error);

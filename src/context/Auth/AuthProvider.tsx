@@ -1,29 +1,22 @@
-import React, { createContext, useState } from "react";
-type AuthProviderProps = {
-	children: JSX.Element;
-};
-type UserType = {
-	userID: string;
-	username: string;
-	role: "USER_ROLE" | "ADMIN_ROLE";
-	balance: number;
-	status: boolean;
-	uid: string;
-};
-//Instancia del contexto
-export const AuthContext = createContext({});
+import { createContext, useState } from "react";
+import { AuthContextType, UserType } from "../../types/Auth";
+import { ProviderPropsWithChildren } from "../../types/Utils";
 
-const AuthProvider = ({ children }: AuthProviderProps) => {
+//Instancia del contexto
+export const AuthContext = createContext<AuthContextType | null>(null);
+
+const AuthProvider = ({ children }: ProviderPropsWithChildren) => {
 	const [user, setUser] = useState<UserType | null>(() => {
 		const currentUser = JSON.parse(localStorage.getItem("currentUser")!);
 		return currentUser;
 	});
 
-	let contextValue = {
+	let contextValue: AuthContextType = {
 		user,
-		login(currentUser: any) {
+		login(currentUser) {
 			setUser(currentUser);
 			localStorage.setItem("currentUser", JSON.stringify(currentUser));
+			// localStorage.setItem("x-token", JSON.stringify(token));
 		},
 		logout() {
 			localStorage.removeItem("currentUser");

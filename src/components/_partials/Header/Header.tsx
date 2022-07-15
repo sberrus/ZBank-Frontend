@@ -15,7 +15,7 @@ const Header = () => {
 	const auth = UseAuth();
 
 	const handleLogout = () => {
-		auth.logout();
+		auth && auth.logout();
 	};
 	return (
 		<>
@@ -38,15 +38,15 @@ const Header = () => {
 							</div>
 							<div className="me-5">
 								<h5 className="fw-bold p-0 m-0" id="username">
-									{auth.user.username}
+									{auth?.user?.username}
 								</h5>
 								<small id="userID" className="d-block">
-									ID: {auth.user.userID}
+									ID: {auth?.user?.userID}
 								</small>
 							</div>
 							<div className="d-flex flex-column">
 								<h2 className="text-success m-auto pb-3" id="account-balance">
-									{new Intl.NumberFormat("de-DE").format(parseInt(auth.user.balance))}$
+									{new Intl.NumberFormat("de-DE").format(parseInt(`${auth?.user?.balance}`))}[symbol]
 								</h2>
 							</div>
 						</div>

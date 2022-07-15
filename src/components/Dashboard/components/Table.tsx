@@ -1,6 +1,7 @@
 import UseAuth from "../../../context/Auth/UseAuth";
+import { DashboardTableProps } from "../../../types/Transactions";
 
-const Table = ({ userTransactions }) => {
+const Table = ({ userTransactions }: DashboardTableProps) => {
 	//Context
 	const auth = UseAuth();
 	return (
@@ -26,7 +27,7 @@ const Table = ({ userTransactions }) => {
 						{userTransactions.map((transaction) => (
 							<tr key={transaction._id} id={transaction._id}>
 								<td>
-									{auth.user.userID === transaction.sender.uid ? (
+									{auth?.user?.userID === transaction.sender.uid ? (
 										<>
 											<span className="d-block">
 												{/* Usuario envia dinero */}
@@ -40,7 +41,7 @@ const Table = ({ userTransactions }) => {
 												<span className="d-inline-block ms-1">{transaction.receiver.username}</span>
 											</small>
 											<small className="text-secondary">
-												{transaction.date.split("T")[0].replaceAll("-", "/")}
+												{transaction.date.split("T")[0]}
 												{"  "}
 												{transaction.date.split("T")[1].split(".")[0]}
 											</small>
@@ -59,14 +60,14 @@ const Table = ({ userTransactions }) => {
 												</span>
 											</small>
 											<small className="text-secondary">
-												{transaction.date.split("T")[0].replaceAll("-", "/")}
+												{transaction.date.split("T")[0]}
 												{"  "}
 												{transaction.date.split("T")[1].split(".")[0]}
 											</small>
 										</>
 									)}
 								</td>
-								{auth.user.userID === transaction.sender.uid ? (
+								{auth?.user?.userID === transaction.sender.uid ? (
 									<>
 										<td className="fw-bold text-danger">
 											-{transaction.ammount}
