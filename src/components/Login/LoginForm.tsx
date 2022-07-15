@@ -33,7 +33,7 @@ const LoginForm = () => {
 		const inputs = document.querySelectorAll("input");
 		inputs.forEach((input) => {
 			input.addEventListener("change", () => {
-				setErrorMsg(null);
+				setErrorMsg("");
 			});
 		});
 		return () => {};

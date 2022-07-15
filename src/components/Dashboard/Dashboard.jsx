@@ -1,26 +1,19 @@
-//imports
+// imports
 import { useEffect, useState } from "react";
-import BarChart from "./components/BarChart";
 import axios from "axios";
 import { Link } from "react-router-dom";
-
-//Context
+// context
 import UseAuth from "../../context/Auth/UseAuth";
-
-//_partials
+// components
 import Header from "../_partials/Header/Header";
-import "./User.css";
 import Table from "./components/Table";
-// import NewTransaction from "./components/NewTransaction/NewTransactionHOC";
+// styles
+import "./User.scss";
 
-const User = () => {
-	//Contexto
+const Dashboard = () => {
+	//Context
 	const auth = UseAuth();
-
-	//Component Data
-	//TODO: Mejorar despliegue de información del gráfico para que no se cargue una sola barra si solo hay una transacción. Que tenga 6 lementos y que vayan acoplandose el resto uno detras del otro
-	const [userTransactions, setUserTransactions] = useState([].fill(null, 0, 6));
-
+	const [userTransactions, setUserTransactions] = useState([]);
 	//States
 	const [user, setUser] = useState(null);
 
@@ -61,9 +54,6 @@ const User = () => {
 			<div className="container w-75">
 				{userTransactions && (
 					<>
-						<div id="canva-grafico">
-							<BarChart userTransactions={userTransactions} user={auth.user} heigth="35vh" />
-						</div>
 						<nav className="d-flex justify-content-end">
 							<Link to="/transactions" className="btn btn-primary">
 								Operaciones
@@ -77,4 +67,4 @@ const User = () => {
 	);
 };
 
-export default User;
+export default Dashboard;

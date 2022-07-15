@@ -4,7 +4,7 @@ import { Bar } from "react-chartjs-2";
 const BarChart = ({ userTransactions, user }) => {
 	const reversedTrasactions = Object.assign([], userTransactions).reverse();
 
-	const data = reversedTrasactions.map((transaction) => {
+	const transactionAmmounts = reversedTrasactions.map((transaction) => {
 		return transaction.ammount;
 	});
 	const labels = reversedTrasactions.map((transaction) => {
@@ -18,7 +18,7 @@ const BarChart = ({ userTransactions, user }) => {
 	});
 
 	return (
-		<div>
+		<>
 			<Bar
 				id="barchart"
 				data={{
@@ -26,7 +26,7 @@ const BarChart = ({ userTransactions, user }) => {
 					datasets: [
 						{
 							label: "Montos",
-							data,
+							data: transactionAmmounts,
 							backgroundColor,
 							borderColor,
 							borderWidth: 1,
@@ -45,7 +45,7 @@ const BarChart = ({ userTransactions, user }) => {
 					},
 				}}
 			/>
-		</div>
+		</>
 	);
 };
 
