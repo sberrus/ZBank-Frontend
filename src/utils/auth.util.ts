@@ -15,8 +15,6 @@ export const login = async (username: string, password: string) => {
 		const res = await axios(config);
 		// save data locally
 		const data = await res.data;
-		localStorage.setItem("x-token", data.token);
-		localStorage.setItem("currentUser", JSON.stringify(data.usuario));
 		return data;
 	} catch (err) {
 		const error =

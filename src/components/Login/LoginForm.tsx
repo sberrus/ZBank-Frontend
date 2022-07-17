@@ -22,9 +22,9 @@ const LoginForm = () => {
 		e.preventDefault();
 		try {
 			const res = await login(username, password);
-			console.log(res.usuario);
-			auth?.login(res.usuario);
-			// history.push("/dashboard");
+			console.log(res.token, res.usuario);
+			auth?.login(res.usuario, res.token);
+			history.push("/dashboard");
 		} catch (error) {
 			console.log(error);
 			setErrorMsg("Error al iniciar sesión");

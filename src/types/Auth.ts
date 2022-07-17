@@ -9,7 +9,7 @@ export type UserType = {
 
 export interface AuthContextType {
 	user: UserType | null;
-	login: (user: UserType) => void;
+	login: (user: UserType, token?: string) => void;
 	logout: () => void;
 	isLogged: () => boolean;
 }

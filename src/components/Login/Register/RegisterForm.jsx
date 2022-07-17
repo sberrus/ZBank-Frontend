@@ -43,7 +43,8 @@ const RegisterForm = () => {
 		})
 			.then((res) => {
 				const user = res.data.user;
-				auth.login(user);
+				const token = res.data.token;
+				auth.login(user, token);
 				setErrorMsg(null);
 			})
 			.catch((err) => {

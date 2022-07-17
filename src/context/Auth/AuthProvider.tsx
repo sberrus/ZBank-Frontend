@@ -13,10 +13,13 @@ const AuthProvider = ({ children }: ProviderPropsWithChildren) => {
 
 	let contextValue: AuthContextType = {
 		user,
-		login(currentUser) {
+		login(currentUser, token = "") {
 			setUser(currentUser);
 			localStorage.setItem("currentUser", JSON.stringify(currentUser));
-			// localStorage.setItem("x-token", JSON.stringify(token));
+
+			if (token) {
+				localStorage.setItem("x-token", token);
+			}
 		},
 		logout() {
 			localStorage.removeItem("currentUser");

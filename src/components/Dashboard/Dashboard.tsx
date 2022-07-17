@@ -19,6 +19,7 @@ const Dashboard = () => {
 	const [user, setUser] = useState(null);
 
 	const updateUser = (data: UserType) => {
+		console.log(data);
 		auth && auth.login(data);
 	};
 
@@ -31,7 +32,8 @@ const Dashboard = () => {
 					.get(`https://zbank.samdev.es/v1/users?userID=${userID}`, {
 						headers: { "x-token": localStorage.getItem("x-token") || "" },
 					})
-					.then(({ data }) => {
+					.then((res) => {
+						const data = res.data;
 						setUser(data);
 						updateUser(data);
 					});
@@ -51,7 +53,7 @@ const Dashboard = () => {
 			}
 		};
 		callData();
-		// eslint-disable-next-line
+		return () => {};
 	}, []);
 
 	return (
