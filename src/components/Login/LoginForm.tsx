@@ -41,7 +41,7 @@ const LoginForm = () => {
 	}, []);
 
 	return (
-		<div className="container-fluid p-3 login-form-container">
+		<div className="container-fluid login-form-container">
 			<div className="blur-bg"></div>
 			<div className="login-form-body">
 				<h3 className="text-center mb-5">Bienvenido</h3>
@@ -80,7 +80,7 @@ const LoginForm = () => {
 					</div>
 					{errorMsg && <ErrorAlert msg={errorMsg} type={"danger"} />}
 
-					<div className="d-flex flex-column w-75 m-auto">
+					<div className="d-flex flex-column w-100 m-auto">
 						<button className="btn btn-dark float-end mb-1 float-end">Entrar</button>
 
 						<Link to="/register" className="text-center mt-3">

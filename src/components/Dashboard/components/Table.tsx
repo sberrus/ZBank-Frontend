@@ -12,15 +12,15 @@ const Table = ({ userTransactions }: DashboardTableProps) => {
 				<table className="table">
 					<thead>
 						<tr>
-							<th scope="col" className="col-3">
+							<th scope="col" className="col-6">
 								Emisor/Receptor
 							</th>
-							<th scope="col" className="col-8">
+							<th scope="col" className="col-6">
 								Monto
 							</th>
-							<th scope="col" className="col-1">
+							{/* <th scope="col" className="col-1">
 								Opciones
-							</th>
+							</th> */}
 						</tr>
 					</thead>
 					<tbody>
@@ -67,13 +67,13 @@ const Table = ({ userTransactions }: DashboardTableProps) => {
 										</>
 									)}
 								</td>
-								{auth?.user?.userID === transaction.sender.uid ? (
+								<td className="fw-bold text-danger">
+									-{transaction.ammount}
+									&nbsp;
+									<i className="bi bi-caret-down"></i>
+								</td>
+								{/* {auth?.user?.userID === transaction.sender.uid && (
 									<>
-										<td className="fw-bold text-danger">
-											-{transaction.ammount}
-											&nbsp;
-											<i className="bi bi-caret-down"></i>
-										</td>
 										<td className="w-25">
 											<div className="dropdown m-auto">
 												<button
@@ -95,13 +95,7 @@ const Table = ({ userTransactions }: DashboardTableProps) => {
 											</div>
 										</td>
 									</>
-								) : (
-									<td className="fw-bold text-success">
-										{transaction.ammount}
-										&nbsp;&nbsp;
-										<i className="bi bi-caret-up"></i>
-									</td>
-								)}
+								)} */}
 							</tr>
 						))}
 					</tbody>

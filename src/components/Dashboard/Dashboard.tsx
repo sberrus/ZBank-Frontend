@@ -8,9 +8,9 @@ import UseAuth from "../../context/Auth/UseAuth";
 import Header from "../_partials/Header/Header";
 import Table from "./components/Table";
 // styles
-import "./User.scss";
 import { UserType } from "../../types/Auth";
 
+// TODO: Crear hooks para realizar los fetch
 const Dashboard = () => {
 	//context
 	const auth = UseAuth();
@@ -59,7 +59,7 @@ const Dashboard = () => {
 	return (
 		<>
 			{user && <Header />}
-			<div className="container w-75">
+			<div className="container">
 				{userTransactions && (
 					<>
 						<nav className="d-flex justify-content-end">

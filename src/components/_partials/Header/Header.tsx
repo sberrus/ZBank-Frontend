@@ -46,7 +46,7 @@ const Header = () => {
 							</div>
 							<div className="d-flex flex-column">
 								<h2 className="text-success m-auto pb-3" id="account-balance">
-									{new Intl.NumberFormat("de-DE").format(parseInt(`${auth?.user?.balance}`))}[symbol]
+									{new Intl.NumberFormat("de-DE").format(parseInt(`${auth?.user?.balance}`))}[$]
 								</h2>
 							</div>
 						</div>
