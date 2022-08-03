@@ -1,33 +1,4 @@
-$blobDimensions: 150px;
-$blobPositionOffset: -100px;
 @import "../styles/variables.scss";
-
-.mainBackground {
-	height: 100vh;
-	background: #40293c;
-	position: relative;
-	overflow: hidden;
-	.blob {
-		width: $blobDimensions;
-		height: $blobDimensions;
-		border-radius: 50%;
-		background-color: #ff8f44;
-		filter: blur(80px);
-		box-shadow: 0px 0px 0px 100px #ff8e42;
-	}
-	.blobTop {
-		@extend .blob;
-		position: absolute;
-		top: $blobPositionOffset;
-		left: $blobPositionOffset;
-	}
-	.blobBottom {
-		@extend .blob;
-		position: absolute;
-		bottom: $blobPositionOffset;
-		right: $blobPositionOffset;
-	}
-}
 
 .content {
 	position: relative;

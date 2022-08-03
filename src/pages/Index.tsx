@@ -13,32 +13,25 @@ const Index = () => {
 		return () => {};
 	}, []);
 	return (
-		<div className={style.mainBackground}>
-			{/* content */}
-			<div className={style.content}>
-				{/* top decoration */}
-				<div className={style.animationContainer}>
-					<div>animation</div>
-				</div>
-
-				{/* cta */}
-				<div className={style.ctaContainer}>
-					{/* copy */}
-					<div className={style.copy}>
-						<h1>Put any awesome copy here</h1>
-						<p>Lets talk about money</p>
-
-						{/* cta button */}
-						<Link to="/login" className={style.ctaButton}>
-							Get Started
-						</Link>
-					</div>
-				</div>
+		<div className={style.content}>
+			{/* top decoration */}
+			<div className={style.animationContainer}>
+				<div>animation</div>
 			</div>
 
-			{/* background decoration */}
-			<div className={style.blobTop}></div>
-			<div className={style.blobBottom}></div>
+			{/* cta */}
+			<div className={style.ctaContainer}>
+				{/* copy */}
+				<div className={style.copy}>
+					<h1>Put any awesome copy here</h1>
+					<p>Lets talk about money</p>
+
+					{/* cta button */}
+					<Link to="/login" className={style.ctaButton}>
+						Get Started
+					</Link>
+				</div>
+			</div>
 		</div>
 	);
 };

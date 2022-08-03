@@ -7,23 +7,20 @@ import ForgotPassword from "../pages/ForgotPassword/ForgotPassword";
 import Transaction from "../components/Transactions/Transaction";
 import Dashboard from "../components/Dashboard/Dashboard";
 
-//Rutes Conditioning
-import PublicRoute from "./PublicRoute";
-import PrivateRoute from "./PrivateRoute";
-
 //404 handler
 import Error404 from "../components/404/Error404";
 import Index from "../pages/Index";
 import { Outlet, Route, Routes } from "react-router-dom";
 import Login from "../pages/Login/Login";
+import MainTemplate from "../templates/MainTemplate";
 
 export default function AppRouter() {
 	return (
 		<Routes>
 			{/* Public Routes */}
-			<Route path="/" element={<Outlet />}>
+			<Route path="/" element={<MainTemplate />}>
 				<Route index element={<Index />} />
-				<Route path="login" element={<Login />} />
+				<Route path="login/*" element={<Login />} />
 				<Route path="register" element={<RegisterForm />} />
 				<Route path="forgot-password" element={<ForgotPassword />} />
 
