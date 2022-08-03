@@ -1,4 +1,5 @@
 import { createContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { AuthContextType, UserType } from "../../types/Auth";
 import { ProviderPropsWithChildren } from "../../types/Utils";
 
@@ -6,6 +7,7 @@ import { ProviderPropsWithChildren } from "../../types/Utils";
 export const AuthContext = createContext<AuthContextType | null>(null);
 
 const AuthProvider = ({ children }: ProviderPropsWithChildren) => {
+	const navigate = useNavigate();
 	const [user, setUser] = useState<UserType | null>(() => {
 		const currentUser = JSON.parse(localStorage.getItem("currentUser")!);
 		return currentUser;
@@ -25,6 +27,7 @@ const AuthProvider = ({ children }: ProviderPropsWithChildren) => {
 			localStorage.removeItem("currentUser");
 			localStorage.removeItem("x-token");
 			setUser(null);
+			navigate("/");
 		},
 		isLogged() {
 			return !!user;

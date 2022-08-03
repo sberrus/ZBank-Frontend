@@ -1,14 +1,15 @@
 //imports
 import { FormEvent, useEffect, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 //context
 import UseAuth from "../../context/Auth/UseAuth";
-import ErrorAlert from "./Register/components/ErrorAlert";
 import { login } from "../../utils/auth.util";
+import { Link } from "react-router-dom";
+import ErrorAlert from "../../components/_partials/ErrorAlert";
 
 const LoginForm = () => {
 	//History hook
-	const history = useHistory();
+	const navigate = useNavigate();
 
 	//Context
 	const auth = UseAuth();
@@ -24,7 +25,7 @@ const LoginForm = () => {
 			const res = await login(username, password);
 			console.log(res.token, res.usuario);
 			auth?.login(res.usuario, res.token);
-			history.push("/dashboard");
+			navigate("/dashboard");
 		} catch (error) {
 			console.log(error);
 			setErrorMsg("Error al iniciar sesión");

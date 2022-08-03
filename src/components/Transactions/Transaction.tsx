@@ -1,13 +1,10 @@
 //Imports
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { useLocation, useHistory } from "react-router-dom";
-
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 //Context
 import UseAuth from "../../context/Auth/UseAuth";
-
 //Components
-// import NewTransaction from "../User/components/NewTransaction";
 import Header from "../_partials/Header/Header";
 
 const Transaction = () => {
@@ -16,7 +13,7 @@ const Transaction = () => {
 	//states
 	const [info, setInfo] = useState(null);
 	//history
-	const history = useHistory();
+	const navigate = useNavigate();
 	const { search } = useLocation();
 	const query = new URLSearchParams(search);
 	const transactionID = query.get("transactionID");
@@ -24,7 +21,7 @@ const Transaction = () => {
 		const callData = async () => {
 			await axios
 				.get(`https://zbank.samdev.es/v1/transactions?transactionID=${transactionID}`, {
-					headers: { "x-token": localStorage.getItem("x-token") },
+					headers: { "x-token": localStorage.getItem("x-token") || "token_error" },
 				})
 				.then(({ data }) => {
 					setInfo(data);
@@ -38,7 +35,7 @@ const Transaction = () => {
 
 	return (
 		<>
-			{auth.user && <Header />}
+			{auth?.user && <Header />}
 			{info && (
 				<>
 					<small className="text-secondary">
@@ -70,7 +67,7 @@ const Transaction = () => {
 								<button
 									className="btn btn-success"
 									onClick={() => {
-										history.push(`/transactions?receiverID=${info.receiver.uid}`);
+										navigate.push(`/transactions?receiverID=${info.receiver.uid}`);
 									}}
 								>
 									Enviar dinero a {info.receiver.username}
@@ -82,7 +79,7 @@ const Transaction = () => {
 								<button
 									className="btn btn-success"
 									onClick={() => {
-										history.push(`/transactions?receiverID=${info.sender.uid}`);
+										navigate.push(`/transactions?receiverID=${info.sender.uid}`);
 									}}
 								>
 									Enviar dinero a {info.sender.username}

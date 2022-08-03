@@ -1,10 +1,10 @@
 import { useState } from "react";
-import axios from "axios";
-import { withRouter, useHistory, useLocation } from "react-router-dom";
+import axios, { AxiosRequestConfig } from "axios";
 import UseAuth from "../../context/Auth/UseAuth";
 import Header from "../_partials/Header/Header";
 import "./Transactions.css";
 import ErrorAlert from "../_partials/ErrorAlert";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Transaction = () => {
 	//Contexto de loggeo
@@ -24,25 +24,26 @@ const Transaction = () => {
 	});
 
 	//useHistory
-	const history = useHistory();
+	const navigate = useNavigate();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		await axios({
+		const config: AxiosRequestConfig = {
 			method: "post",
 			url: "https://zbank.samdev.es/v1/transactions",
 			data: {
-				sender: auth.user.userID,
+				sender: auth?.user?.userID,
 				receiver,
 				ammount,
 				concept,
 			},
-			headers: { "x-token": localStorage.getItem("x-token") },
-		})
+			headers: { "x-token": localStorage?.getItem("x-token") || "Token_Error" },
+		};
+		await axios(config)
 			.then(({ data }) => {
 				//enviar token a componente padre para renderizar
 				console.log("Transferencia enviada con exito", data);
-				history.push("/dashboard");
+				navigate("/dashboard");
 			})
 			.catch((err) => {
 				const error =
@@ -90,7 +91,7 @@ const Transaction = () => {
 							<textarea
 								id="concept"
 								value={concept}
-								rows="5"
+								rows={5}
 								autoComplete="off"
 								onChange={(e) => {
 									setConcept(e.target.value);
@@ -110,4 +111,4 @@ const Transaction = () => {
 		</div>
 	);
 };
-export default withRouter(Transaction);
+export default Transaction;

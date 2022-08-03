@@ -1,18 +1,18 @@
 //imports
-import { Switch, Route, Redirect, withRouter } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 //Components
 import LoginForm from "./LoginForm";
-import RegisterForm from "./Register/RegisterForm";
 
 //Styles
 import "./Login.scss";
-import ForgotPassword from "./ForgotPassword/ForgotPassword";
 
 //assets
 import Blob from "../../static/blob.svg";
+import RegisterForm from "../Register/RegisterForm";
+import ForgotPassword from "../ForgotPassword/ForgotPassword";
 
-const Login = (props) => {
+const Login = () => {
 	return (
 		<div id="background" className="container-fluid">
 			<div id="wraper" className="row vh-100 position-relative">
@@ -25,12 +25,11 @@ const Login = (props) => {
 					<div className="col-12 col-md-6 col-lg-5 col-xl-4 m-auto h-100 d-flex flex-column justify-content-center">
 						<div className="d-flex border rounded position-relative" id="loginWrapper">
 							<div className="position-absolute" id="blurLayer"></div>
-							<Switch>
-								<Route path="/register" component={RegisterForm} />
-								<Route path="/forgot-password" component={ForgotPassword} />
-								<Route path="/" exact component={LoginForm} props={props} />
-								<Redirect to="/" />
-							</Switch>
+							<Routes>
+								<Route path="/" element={<LoginForm />} />
+								<Route path="/register" element={<RegisterForm />} />
+								<Route path="/forgot-password" element={<ForgotPassword />} />
+							</Routes>
 						</div>
 					</div>
 				</section>
@@ -39,4 +38,4 @@ const Login = (props) => {
 	);
 };
 
-export default withRouter(Login);
+export default Login;

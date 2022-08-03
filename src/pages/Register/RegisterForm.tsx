@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 // components
 import axios from "axios";
-import ErrorAlert from "./components/ErrorAlert";
 // context
-import useAuth from "../../../context/Auth/UseAuth";
+import useAuth from "../../context/Auth/UseAuth";
+import ErrorAlert from "../../components/_partials/ErrorAlert";
 
 const RegisterForm = () => {
 	// context
@@ -79,7 +79,7 @@ const RegisterForm = () => {
 	return (
 		<div className="container w-75 py-4 login-form-container">
 			<div className="login-form-body">
-				<Link to="/" className="text-start mb-1 d-block">
+				<Link to="/login" className="text-start mb-1 d-block">
 					Volver a Login
 				</Link>
 				<h3 className="text-center mb-5">Registrarse</h3>

@@ -1,0 +1,68 @@
+$blobDimensions: 150px;
+$blobPositionOffset: -100px;
+@import "../styles/variables.scss";
+
+.mainBackground {
+	height: 100vh;
+	background: #40293c;
+	position: relative;
+	overflow: hidden;
+	.blob {
+		width: $blobDimensions;
+		height: $blobDimensions;
+		border-radius: 50%;
+		background-color: #ff8f44;
+		filter: blur(80px);
+		box-shadow: 0px 0px 0px 100px #ff8e42;
+	}
+	.blobTop {
+		@extend .blob;
+		position: absolute;
+		top: $blobPositionOffset;
+		left: $blobPositionOffset;
+	}
+	.blobBottom {
+		@extend .blob;
+		position: absolute;
+		bottom: $blobPositionOffset;
+		right: $blobPositionOffset;
+	}
+}
+
+.content {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	height: inherit;
+	z-index: 100;
+	.animationContainer {
+		height: 50%;
+	}
+	.ctaContainer {
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+		.copy {
+			width: 70%;
+			text-align: center;
+			margin: auto;
+			h1 {
+				font-weight: 300;
+			}
+			p {
+				color: #9f9f9f;
+			}
+			.ctaButton {
+				display: block;
+				margin-top: 2em;
+				background: #e3b578;
+				border: 3px solid #775f3a;
+				padding: 0.75em 2.5em;
+				border-radius: 2rem;
+				color: $dark;
+				text-decoration: none;
+			}
+		}
+	}
+}
