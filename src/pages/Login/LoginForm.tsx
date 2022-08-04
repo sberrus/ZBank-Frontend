@@ -84,7 +84,7 @@ const LoginForm = () => {
 					<div className="d-flex flex-column w-100 m-auto">
 						<button className="btn btn-dark float-end mb-1 float-end">Entrar</button>
 
-						<Link to="/register" className="text-center mt-3">
+						<Link to="register" className="text-center mt-3">
 							¿No tienes cuenta? Registrate
 						</Link>
 					</div>

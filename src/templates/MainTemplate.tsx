@@ -3,7 +3,9 @@ import style from "./MainTemplate.module.scss";
 const MainTemplate = () => {
 	return (
 		<div className={style.mainBackground}>
-			<Outlet />
+			<div className={style.content}>
+				<Outlet />
+			</div>
 
 			{/* background decoration */}
 			<div className={style.blobTop}></div>

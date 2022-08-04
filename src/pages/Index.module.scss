@@ -1,12 +1,10 @@
 @import "../styles/variables.scss";
 
 .content {
-	position: relative;
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
 	height: inherit;
-	z-index: 100;
 	.animationContainer {
 		height: 50%;
 	}

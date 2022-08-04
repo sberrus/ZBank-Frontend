@@ -1,6 +1,5 @@
 //imports
 import { Link } from "react-router-dom";
-import "./ForgotPassword.css";
 
 const ForgotPassword = () => {
 	return (

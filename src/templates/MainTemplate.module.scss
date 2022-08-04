@@ -1,10 +1,15 @@
 $blobDimensions: 150px;
-$blobPositionOffset: -100px;
+$blobPositionOffset: -130px;
 .mainBackground {
 	height: 100vh;
 	background: #40293c;
 	position: relative;
 	overflow: hidden;
+	.content {
+		height: inherit;
+		position: relative;
+		z-index: 1;
+	}
 	.blob {
 		width: $blobDimensions;
 		height: $blobDimensions;
