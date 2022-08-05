@@ -10,6 +10,10 @@ import { Link } from "react-router-dom";
 import ErrorAlert from "@components/_partials/ErrorAlert";
 // styles
 import style from "./Login.module.scss";
+// assets
+import fingerPrint from "@assets/decoration/fingerPrint.svg";
+
+//
 const LoginForm = () => {
 	//History hook
 	const navigate = useNavigate();
@@ -46,8 +50,8 @@ const LoginForm = () => {
 
 	return (
 		<div className={style.wrapper}>
-			<div className={style.imgContainer}>
-				<img src="" alt="login decoration" className={style.imgResponsive} />
+			<div className={style.fingerPrintContainer}>
+				<img src={fingerPrint} alt="login decoration" className={style.fingerPrint} />
 			</div>
 			<form action="" onSubmit={handleSubmit}>
 				<div className="mb-3 d-flex justify-content-center flex-column">

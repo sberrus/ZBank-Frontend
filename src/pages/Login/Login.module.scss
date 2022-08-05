@@ -1,11 +1,13 @@
 .wrapper {
 	padding: 0 1em;
-	.imgContainer {
+	.fingerPrintContainer {
+		position: relative;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		.imgResponsive {
-			width: 100%;
+		height: 35vh;
+		.fingerPrint {
+			width: 40%;
 		}
 	}
 }
