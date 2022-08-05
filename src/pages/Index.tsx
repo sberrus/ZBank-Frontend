@@ -1,9 +1,13 @@
-// styles
+// imports
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+// context
 import UseAuth from "../context/Auth/UseAuth";
+// styles
 import style from "./Index.module.scss";
+// assets
+import Blob from "../static/decoration/blob.svg";
 
 const Index = () => {
 	const auth = UseAuth();
@@ -13,24 +17,22 @@ const Index = () => {
 		return () => {};
 	}, []);
 	return (
-		<div className={style.content}>
-			{/* top decoration */}
-			<div className={style.animationContainer}>
-				<div>animation</div>
-			</div>
-
+		<div className={style.wrapper}>
 			{/* cta */}
 			<div className={style.ctaContainer}>
 				{/* copy */}
 				<div className={style.copy}>
-					<h1>Put any awesome copy here</h1>
-					<p>Lets talk about money</p>
+					<h1>Awesome copy text here</h1>
+					<p>A place for smart investors and awesome traders</p>
 
 					{/* cta button */}
 					<Link to="/login" className={style.ctaButton}>
 						Get Started
 					</Link>
 				</div>
+			</div>
+			<div className={style.blobContainer}>
+				<img src={Blob} alt="blob decoration" className={style.blob} />
 			</div>
 		</div>
 	);

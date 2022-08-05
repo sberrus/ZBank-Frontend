@@ -6,10 +6,6 @@ const MainTemplate = () => {
 			<div className={style.content}>
 				<Outlet />
 			</div>
-
-			{/* background decoration */}
-			<div className={style.blobTop}></div>
-			<div className={style.blobBottom}></div>
 		</div>
 	);
 };
