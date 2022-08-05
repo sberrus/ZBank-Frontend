@@ -49,6 +49,7 @@
   },
   "devDependencies": {
     "@types/react-router-dom": "^5.3.3",
-    "sass": "^1.54.0"
+    "sass": "^1.54.0",
+    "vite-tsconfig-paths": "^3.5.0"
   }
 }

@@ -1,4 +1,5 @@
 @import "../styles/variables.scss";
+@import "../styles/button";
 
 .wrapper {
 	display: flex;
@@ -15,21 +16,11 @@
 		.copy {
 			h1 {
 				font-weight: 300;
+				margin-bottom: 0;
 			}
 			p {
 				color: $secondary;
-				margin: 1.5em 0;
-			}
-			.ctaButton {
-				display: inline-block;
-				background: $primary;
-				background: linear-gradient(150deg, #70dae6 0%, #81e6b6 50%, #def787 100%);
-				padding: 0.5em 1.5em;
-				border-radius: 0.2rem;
-				color: $dark;
-				font-weight: 500;
-				text-decoration: none;
-				text-align: center;
+				margin-bottom: 1.5em;
 			}
 		}
 	}

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import "./Header.css";
 
 //TODO: Crear funcionalidad para avatares.
-import YodaProfilePicture from "../../../static/yodabb.jpg";
+import YodaProfilePicture from "../../../assets/yodabb.jpg";
 
 //Contexto
 import UseAuth from "../../../context/Auth/UseAuth";

@@ -7,7 +7,7 @@ import UseAuth from "../context/Auth/UseAuth";
 // styles
 import style from "./Index.module.scss";
 // assets
-import Blob from "../static/decoration/blob.svg";
+import Blob from "../assets/decoration/blob.svg";
 
 const Index = () => {
 	const auth = UseAuth();
@@ -22,11 +22,11 @@ const Index = () => {
 			<div className={style.ctaContainer}>
 				{/* copy */}
 				<div className={style.copy}>
-					<h1>Awesome copy text here</h1>
+					<h1>AWESOME COPY TEXT HERE</h1>
 					<p>A place for smart investors and awesome traders</p>
 
 					{/* cta button */}
-					<Link to="/login" className={style.ctaButton}>
+					<Link to="/login" className={style.buttonPrimary}>
 						Get Started
 					</Link>
 				</div>

@@ -1,12 +1,13 @@
 //imports
 import { FormEvent, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+// utils
+import { login } from "@utils/auth.util";
 //context
-import UseAuth from "../../context/Auth/UseAuth";
-//
-import { login } from "../../utils/auth.util";
+import UseAuth from "@context/Auth/UseAuth";
+// components
 import { Link } from "react-router-dom";
-import ErrorAlert from "../../components/_partials/ErrorAlert";
+import ErrorAlert from "@components/_partials/ErrorAlert";
 // styles
 import style from "./Login.module.scss";
 const LoginForm = () => {
