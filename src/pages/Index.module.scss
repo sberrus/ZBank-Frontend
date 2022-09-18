@@ -6,6 +6,10 @@
 	.topDecoration {
 		position: relative;
 		height: 35vh;
+		transform: translateY(-100%);
+		opacity: 0;
+		filter: blur(100px);
+		animation: showDecoration 2s ease forwards;
 		.circle {
 			position: absolute;
 			top: -100px;
@@ -29,6 +33,9 @@
 		}
 	}
 	.copy {
+		transform: translateY(100%);
+		opacity: 0;
+		animation: showCopy 1.5s 1.5s ease forwards;
 		.title {
 			font-size: 5em;
 			font-weight: 100;
@@ -43,5 +50,21 @@
 			display: flex;
 			justify-content: flex-end;
 		}
+	}
+}
+
+@keyframes showDecoration {
+	to {
+		transform: translateY(0%);
+		opacity: 1;
+		filter: blur(0px);
+	}
+}
+
+@keyframes showCopy {
+	to {
+		transform: translateX(0%);
+		opacity: 1;
+		filter: blur(0px);
 	}
 }

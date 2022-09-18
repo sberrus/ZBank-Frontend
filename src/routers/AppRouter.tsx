@@ -1,19 +1,19 @@
 //Imports
-import { Outlet, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 //Routes
 import Transactions from "../components/Transactions/Transactions";
 // TODO: work in transaction page
-import Transaction from "../components/Transactions/Transaction";
+// import Transaction from "../components/Transactions/Transaction";
 import Dashboard from "../components/Dashboard/Dashboard";
 
 //404 handler
 import Error404 from "../components/404/Error404";
 import Index from "../pages/Index";
 import MainTemplate from "../templates/MainTemplate";
-import LoginForm from "../pages/Login/LoginForm";
-import RegisterForm from "../pages/Login/RegisterForm";
-import ForgotPassword from "../pages/Login/ForgotPassword";
+import LoginForm from "../pages/Auth/LoginForm";
+import RegisterForm from "../pages/Auth/RegisterForm";
+import ForgotPassword from "../pages/Auth/ForgotPassword";
 
 export default function AppRouter() {
 	return (

@@ -49,14 +49,21 @@ const LoginForm = () => {
 	}, []);
 
 	return (
-		<div className={style.wrapper}>
-			<div className={style.fingerPrintContainer}>
+		<div className={style.login}>
+			{/* decoration */}
+			<div className={style.decoration}>
 				<img src={fingerPrint} alt="login decoration" className={style.fingerPrint} />
 			</div>
-			<form action="" onSubmit={handleSubmit}>
+			{/* copy */}
+			<div className={style.copy}>
+				<h5 className={style.title}>Welcome back</h5>
+				<p className={style.text}>Glad to see you again.</p>
+			</div>
+			{/* form */}
+			<form onSubmit={handleSubmit} className={style.form}>
 				<div className="mb-3 d-flex justify-content-center flex-column">
 					<label htmlFor="" className="d-block fw-light">
-						ID Usuario
+						User
 					</label>
 					<input
 						type="text"
@@ -72,7 +79,7 @@ const LoginForm = () => {
 				</div>
 				<div className="mb-4 d-flex justify-content-center flex-column">
 					<label htmlFor="" className="d-block fw-light">
-						Contraseña
+						Password
 					</label>
 					<input
 						type="password"
@@ -87,12 +94,16 @@ const LoginForm = () => {
 				</div>
 				{errorMsg && <ErrorAlert msg={errorMsg} type={"danger"} />}
 
-				<div className="d-flex flex-column w-100 m-auto">
-					<button className="btn btn-dark float-end mb-1 float-end">Entrar</button>
-
-					<Link to="register" className="text-center mt-3">
-						¿No tienes cuenta? Registrate
-					</Link>
+				<div className={style.buttonContainer}>
+					<button className={style.buttonPrimary}>Entrar</button>
+				</div>
+				<div className={style.notAccountContainer}>
+					<p>
+						Don't have an account{" "}
+						<Link to="register" className={style.link}>
+							Register
+						</Link>
+					</p>
 				</div>
 			</form>
 		</div>

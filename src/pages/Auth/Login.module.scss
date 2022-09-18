@@ -1,0 +1,54 @@
+@import "../../styles/variables";
+@import "../../styles/buttons";
+.login {
+	padding: 0 1em;
+	.decoration {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 35vh;
+		.fingerPrint {
+			width: 40%;
+			transition: all 2s;
+			filter: drop-shadow(0px 0px 3px $primary);
+		}
+	}
+	.copy {
+		.title {
+			font-weight: 200;
+			font-size: 2em;
+			margin: 0;
+		}
+		.text {
+			font-weight: 400;
+		}
+	}
+	.form {
+		label {
+			color: $primary;
+		}
+		input {
+			background-color: $dark;
+			border: 1px solid $primary;
+			outline: 1px solid $primary;
+			color: $primary;
+			padding: 5px;
+			&:focus {
+				outline: 1px solid $primary;
+				border: 1px solid $primary;
+			}
+		}
+	}
+	.buttonContainer {
+		.buttonPrimary {
+			width: 100%;
+		}
+	}
+	.notAccountContainer {
+		margin-top: 1em;
+		.link {
+			text-decoration: none;
+			color: $primary;
+		}
+	}
+}
