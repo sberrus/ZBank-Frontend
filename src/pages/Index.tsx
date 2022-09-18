@@ -1,13 +1,12 @@
 // imports
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // context
 import UseAuth from "../context/Auth/UseAuth";
 // styles
 import style from "./Index.module.scss";
-// assets
-import Blob from "../assets/decoration/blob.svg";
 
 const Index = () => {
 	const auth = UseAuth();
@@ -17,24 +16,21 @@ const Index = () => {
 		return () => {};
 	}, []);
 	return (
-		<div className={style.wrapper}>
-			{/* cta */}
-			<div className={style.ctaContainer}>
-				{/* copy */}
-				<div className={style.copy}>
-					<h1>AWESOME COPY TEXT HERE</h1>
-					<p>A place for smart investors and awesome traders</p>
-
-					{/* cta button */}
+		<Container className={style.landing}>
+			<section className={style.topDecoration}>
+				<div className={style.circle}></div>
+				<div className={style.circleTransparent}></div>
+			</section>
+			<section className={style.copy}>
+				<h1 className={style.title}>ZBank</h1>
+				<p className={style.text}>Welcome to the next generation bank concept</p>
+				<div className={style.buttonContainer}>
 					<Link to="/login" className={style.buttonPrimary}>
-						Get Started
+						Get Started <i className="bi bi-arrow-right"></i>
 					</Link>
 				</div>
-			</div>
-			<div className={style.blobContainer}>
-				<img src={Blob} alt="blob decoration" className={style.blob} />
-			</div>
-		</div>
+			</section>
+		</Container>
 	);
 };
 

@@ -1,49 +1,47 @@
-@import "../styles/variables.scss";
-@import "../styles/button";
+@import "../styles/variables";
+@import "../styles/buttons";
 
-.wrapper {
-	display: flex;
+.landing {
 	position: relative;
-	justify-content: space-between;
-	flex-direction: column;
-	height: 100%;
-	.ctaContainer {
-		width: 100%;
-		display: flex;
-		justify-content: center;
-		padding: 1.25em;
-		box-sizing: border-box;
-		.copy {
-			h1 {
-				font-weight: 300;
-				margin-bottom: 0;
-			}
-			p {
-				color: $secondary;
-				margin-bottom: 1.5em;
-			}
-		}
-	}
-	.blobContainer {
+	.topDecoration {
 		position: relative;
-		bottom: 0;
-		width: 100%;
-		overflow: hidden;
-		.blob {
-			position: relative;
-			top: -80px;
+		height: 35vh;
+		.circle {
+			position: absolute;
+			top: -100px;
 			left: -100px;
-			width: 250%;
-			animation: blobRotation 125s infinite;
+			width: 250px;
+			height: 250px;
+			border-radius: 50%;
+			background-color: $primary;
+			z-index: 2;
+		}
+		.circleTransparent {
+			position: absolute;
+			top: -100px;
+			right: -100px;
+			width: 300px;
+			height: 300px;
+			border-radius: 50%;
+			background-color: $primary;
+			opacity: 0.075;
+			z-index: 1;
 		}
 	}
-}
-
-@keyframes blobRotation {
-	0% {
-		transform: rotate(0deg);
-	}
-	100% {
-		transform: rotate(360deg);
+	.copy {
+		.title {
+			font-size: 5em;
+			font-weight: 100;
+			line-height: 1;
+		}
+		.text {
+			font-weight: 200;
+			font-size: 1.25em;
+			margin: 1em 0;
+		}
+		.buttonContainer {
+			display: flex;
+			justify-content: flex-end;
+		}
 	}
 }
