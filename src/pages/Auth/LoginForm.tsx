@@ -63,7 +63,7 @@ const LoginForm = () => {
 			<form onSubmit={handleSubmit} className={style.form}>
 				<div className="mb-3 d-flex justify-content-center flex-column">
 					<label htmlFor="" className="d-block fw-light">
-						User
+						Username
 					</label>
 					<input
 						type="text"
@@ -100,7 +100,7 @@ const LoginForm = () => {
 				<div className={style.notAccountContainer}>
 					<p>
 						Don't have an account{" "}
-						<Link to="register" className={style.link}>
+						<Link to="/register" className={style.link}>
 							Register
 						</Link>
 					</p>

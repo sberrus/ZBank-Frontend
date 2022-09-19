@@ -1,0 +1,18 @@
+@import "./variables";
+.form {
+	label {
+		color: $primary;
+	}
+	input {
+		background-color: $dark;
+		border: 1px solid $primary;
+		border-radius: 0.25rem;
+		outline: 1px solid $primary;
+		color: $primary;
+		padding: 5px;
+		&:focus {
+			outline: 1px solid $primary;
+			border: 1px solid $primary;
+		}
+	}
+}

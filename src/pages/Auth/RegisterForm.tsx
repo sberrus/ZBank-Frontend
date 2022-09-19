@@ -1,21 +1,29 @@
 // imports
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 // components
 import axios from "axios";
 // context
 import useAuth from "../../context/Auth/UseAuth";
 import ErrorAlert from "../../components/_partials/ErrorAlert";
-
+// style
+import style from "./RegisterForm.module.scss";
+// assets
+import Form from "../../assets/decoration/form.svg";
+type FormValues = {
+	username: string;
+	password: string;
+	passwordConfirm: string;
+};
 const RegisterForm = () => {
 	// context
 	const auth = useAuth();
 	//error logic states
-	const [errorMsg, setErrorMsg] = useState(null);
+	const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
 	//react-form-hook
-	const { register, handleSubmit } = useForm();
+	const { register, handleSubmit } = useForm<FormValues>();
 
 	useEffect(() => {
 		const inputs = document.querySelectorAll("input");
@@ -24,14 +32,16 @@ const RegisterForm = () => {
 				setErrorMsg(null);
 			});
 		});
-		return () => {};
+		return () => {
+			inputs.forEach((input) => input.removeEventListener("focus", () => {}));
+		};
 	}, []);
 
 	/**
 	 * Handle valid react-hook-form submit after pass the validations.
 	 * @param {*} param0 registered and validated form fields
 	 */
-	const onSubmit = async ({ username, password, passwordConfirm }) => {
+	const onSubmit: SubmitHandler<FormValues> = async ({ username, password, passwordConfirm }) => {
 		await axios({
 			method: "post",
 			url: "https://zbank.samdev.es/v1/users",
@@ -44,7 +54,7 @@ const RegisterForm = () => {
 			.then((res) => {
 				const user = res.data.user;
 				const token = res.data.token;
-				auth.login(user, token);
+				auth?.login(user, token);
 				setErrorMsg(null);
 			})
 			.catch((err) => {
@@ -59,7 +69,7 @@ const RegisterForm = () => {
 	 * Handle react-hook-form submit errors
 	 * @param {*} error callback error object
 	 */
-	const onError = (error) => {
+	const onError = (error: any) => {
 		console.log(error);
 		const errorStack = Object.keys(error);
 		if (errorStack.includes("username")) {
@@ -74,68 +84,76 @@ const RegisterForm = () => {
 		if (errorStack.includes("invitationCode")) {
 			setErrorMsg("ID Code de partida Obligatoria");
 		}
+		if (error.type === "maxLength") {
+			setErrorMsg("Username max lenght is 15");
+		}
 	};
 
 	return (
-		<div className="container w-75 py-4 login-form-container">
-			<div className="login-form-body">
-				<Link to="/login" className="text-start mb-1 d-block">
-					Volver a Login
-				</Link>
-				<h3 className="text-center mb-5">Registrarse</h3>
-				<form action="" onSubmit={handleSubmit(onSubmit, onError)}>
-					<div className="mb-3 d-flex justify-content-center flex-column">
-						<label htmlFor="" className="d-block fw-light">
-							Nombre de usuario
-						</label>
-						<input
-							type="text"
-							max="15"
-							autoComplete="off"
-							{...register("username", {
-								required: true,
-								maxLength: 15,
-							})}
-						/>
-					</div>
-					<div className="mb-4 d-flex justify-content-center flex-column">
-						<label htmlFor="" className="d-block fw-light">
-							Contraseña
-						</label>
-						<input
-							type="password"
-							min="5"
-							max="20"
-							autoComplete="off"
-							{...register("password", {
-								required: true,
-								maxLength: 20,
-								minLength: 5,
-							})}
-						/>
-					</div>
-					<div className="mb-4 d-flex justify-content-center flex-column">
-						<label htmlFor="" className="d-block fw-light">
-							Confirmar contraseña
-						</label>
-						<input
-							type="password"
-							min="5"
-							max="20"
-							autoComplete="off"
-							{...register("passwordConfirm", {
-								required: true,
-								maxLength: 20,
-								minLength: 5,
-							})}
-						/>
-					</div>
-					{errorMsg && <ErrorAlert msg={errorMsg} type={"danger"} />}
-					<div className="d-flex flex-column w-50 m-auto">
-						<button className="btn btn-primary float-end mb-1 float-end">Registrarse</button>
-					</div>
-				</form>
+		<div className={style.registerForm}>
+			{/* back button */}
+			<Link to="/login" className={style.backButton}>
+				<i className="bi bi-arrow-left"></i> Back to login
+			</Link>
+			{/* decoration */}
+			<div className={style.decoration}>
+				<img src={Form} alt="login decoration" className={style.formImage} />
 			</div>
+			{/* copy */}
+			<div className={style.copy}>
+				<h3 className={style.title}>Register</h3>
+				<p className={style.text}>Create an account to unlock all features</p>
+			</div>
+			<form onSubmit={handleSubmit(onSubmit, onError)} className={style.form}>
+				<div className="mb-3 d-flex justify-content-center flex-column">
+					<label htmlFor="" className="d-block fw-light">
+						Username
+					</label>
+					<input
+						type="text"
+						max="15"
+						autoComplete="off"
+						{...register("username", {
+							required: true,
+							maxLength: 15,
+						})}
+					/>
+				</div>
+				<div className="mb-4 d-flex justify-content-center flex-column">
+					<label htmlFor="" className="d-block fw-light">
+						Password
+					</label>
+					<input
+						type="password"
+						min="5"
+						max="20"
+						autoComplete="off"
+						{...register("password", {
+							required: true,
+							maxLength: 20,
+							minLength: 5,
+						})}
+					/>
+				</div>
+				<div className="mb-4 d-flex justify-content-center flex-column">
+					<label htmlFor="" className="d-block fw-light">
+						Password Confirm
+					</label>
+					<input
+						type="password"
+						min="5"
+						max="20"
+						autoComplete="off"
+						{...register("passwordConfirm", {
+							required: true,
+							maxLength: 20,
+							minLength: 5,
+						})}
+					/>
+				</div>
+				{errorMsg && <ErrorAlert msg={errorMsg} type={"danger"} />}
+				<button className={style.buttonPrimary}>Register</button>
+			</form>
 		</div>
 	);
 };

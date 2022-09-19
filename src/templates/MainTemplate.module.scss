@@ -1,6 +1,6 @@
 @import "../styles/variables.scss";
 .mainBackground {
-	height: 100vh;
+	min-height: 100vh;
 	background: #1d1d1d;
 	position: relative;
 	overflow: hidden;

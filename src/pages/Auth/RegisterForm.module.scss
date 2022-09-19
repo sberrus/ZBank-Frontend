@@ -1,14 +1,21 @@
+@import "../../styles/forms";
 @import "../../styles/variables";
 @import "../../styles/buttons";
-@import "../../styles/forms";
-.login {
-	padding: 0 1em;
+
+.registerForm {
+	padding: 1em;
+	.backButton {
+		display: block;
+		padding: 0.25em;
+		text-decoration: none;
+		color: $primary;
+	}
 	.decoration {
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		height: 35vh;
-		.fingerPrint {
+		height: 30vh;
+		.formImage {
 			width: 40%;
 			transition: all 2s;
 			filter: drop-shadow(0px 0px 3px $primary);
@@ -24,17 +31,7 @@
 			font-weight: 400;
 		}
 	}
-
-	.buttonContainer {
-		.buttonPrimary {
-			width: 100%;
-		}
-	}
-	.notAccountContainer {
-		margin-top: 1em;
-		.link {
-			text-decoration: none;
-			color: $primary;
-		}
+	.buttonPrimary {
+		width: 100%;
 	}
 }
