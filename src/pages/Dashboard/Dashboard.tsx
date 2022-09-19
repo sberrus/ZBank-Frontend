@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 // context
 import UseAuth from "../../context/Auth/UseAuth";
 // components
-import Header from "../_partials/Header/Header";
+import Header from "../../components/_partials/Header/Header";
 import Table from "./components/Table";
 // styles
 import { UserType } from "../../types/Auth";
@@ -19,8 +19,7 @@ const Dashboard = () => {
 	const [user, setUser] = useState(null);
 
 	const updateUser = (data: UserType) => {
-		console.log(data);
-		auth && auth.login(data);
+		auth?.login(data);
 	};
 
 	useEffect(() => {
@@ -45,10 +44,10 @@ const Dashboard = () => {
 						setUserTransactions(data.reversedArr);
 					})
 					.catch((error) => {
-						console.log(error);
+						console.log("🚀 ~ file: Dashboard.tsx ~ line 57 ~ callData ~ error", error);
 					});
 			} catch (error) {
-				console.log(error);
+				console.log("🚀 ~ file: Dashboard.tsx ~ line 51 ~ callData ~ error", error);
 				auth?.logout();
 			}
 		};
@@ -58,7 +57,7 @@ const Dashboard = () => {
 
 	return (
 		<>
-			{user && <Header />}
+			<Header />
 			<div className="container">
 				{userTransactions && (
 					<>

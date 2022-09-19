@@ -5,7 +5,7 @@ import { Route, Routes } from "react-router-dom";
 import Transactions from "../components/Transactions/Transactions";
 // TODO: work in transaction page
 // import Transaction from "../components/Transactions/Transaction";
-import Dashboard from "../components/Dashboard/Dashboard";
+import Dashboard from "../pages/Dashboard/Dashboard";
 
 //404 handler
 import Error404 from "../components/404/Error404";

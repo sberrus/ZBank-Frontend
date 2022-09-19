@@ -3,7 +3,7 @@ import React, { useRef, useState } from "react";
 import UseAuth from "../../../../context/Auth/UseAuth";
 import axios from "axios";
 //components
-import ErrorAlert from "../../../_partials/ErrorAlert";
+import ErrorAlert from "../../../../components/_partials/ErrorAlert";
 //context
 
 const CashOut = ({ setRender, render }) => {

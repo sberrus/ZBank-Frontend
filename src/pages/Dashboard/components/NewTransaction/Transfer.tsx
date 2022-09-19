@@ -4,7 +4,7 @@ import axios from "axios";
 //Context
 import UseAuth from "../../../../context/Auth/UseAuth";
 //Components
-import ErrorAlert from "../../../_partials/ErrorAlert";
+import ErrorAlert from "../../../../components/_partials/ErrorAlert";
 import { useRef } from "react/cjs/react.development";
 
 const Transfer = ({ btnTitle, setRender, render }) => {
