@@ -6,10 +6,10 @@ export type ClientType = {
 export type TransactionType = {
 	sender: ClientType;
 	receiver: ClientType;
-	_id: string;
 	concept: string;
 	date: string;
 	ammount: number;
+	_id: string;
 	__v: number;
 };
 

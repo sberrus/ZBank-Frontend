@@ -8,7 +8,10 @@ import UseAuth from "../../context/Auth/UseAuth";
 import Header from "../../components/_partials/Header/Header";
 import Table from "./components/Table";
 // styles
+import style from "./Dashboard.module.scss";
+// types
 import { UserType } from "../../types/Auth";
+import { Container } from "react-bootstrap";
 
 // TODO: Crear hooks para realizar los fetch
 const Dashboard = () => {
@@ -58,17 +61,22 @@ const Dashboard = () => {
 	return (
 		<>
 			<Header />
-			<div className="container">
-				{userTransactions && (
-					<>
-						<nav className="d-flex justify-content-end">
-							<Link to="/transactions" className="btn btn-primary">
-								Operaciones
-							</Link>
-						</nav>
-						<Table userTransactions={userTransactions} />
-					</>
-				)}
+			<div className={style.dashboard}>
+				<Container>
+					{userTransactions && (
+						<>
+							<div className={style.tabs}>
+								<div className={style.tab}>
+									<Link to="/transactions" className={style.buttonPrimary}>
+										Operaciones
+									</Link>
+								</div>
+							</div>
+							{/* table */}
+							<Table />
+						</>
+					)}
+				</Container>
 			</div>
 		</>
 	);
