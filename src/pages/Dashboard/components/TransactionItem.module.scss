@@ -1,5 +1,38 @@
 @import "../../../styles/variables";
 
 .transaction {
-	display: flex;
+	display: flex !important;
+	justify-content: space-between !important;
+	background-color: $dark !important;
+	color: $primary !important;
+	border: 1px solid $primary !important;
+	font-size: 1.25em !important;
+
+	.ammount {
+		align-self: flex-start !important;
+		&.outcome {
+			color: $danger-bright2 !important;
+		}
+		&.income {
+			color: $primary-bright !important;
+		}
+	}
+	.info {
+		.deliver {
+			text-align: start;
+			&.outcome {
+				color: $danger-bright2 !important;
+			}
+			&.income {
+				color: $primary-bright !important;
+			}
+			.sender {
+				font-size: 0.9em;
+			}
+		}
+		.date {
+			text-align: start;
+			font-size: 0.75em;
+		}
+	}
 }
