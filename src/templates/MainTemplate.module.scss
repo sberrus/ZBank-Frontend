@@ -1,10 +1,13 @@
 @import "../styles/variables.scss";
 .mainBackground {
+	transition: all 1s;
 	min-height: 100vh;
-	background: #1d1d1d;
+	background: $dark;
+	color: $light;
 	position: relative;
 	overflow: hidden;
 	.content {
+		transition: all 1s;
 		height: inherit;
 		position: relative;
 		z-index: 1;

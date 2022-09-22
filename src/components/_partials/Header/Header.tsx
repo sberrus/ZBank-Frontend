@@ -1,10 +1,12 @@
-// styles
-import "./Header.css";
+// imports
+import { Container, Dropdown, Navbar } from "react-bootstrap";
+import { Link } from "react-router-dom";
 // assets
 import Logo from "../../../assets/logo/logo.svg";
 // context
 import UseAuth from "../../../context/Auth/UseAuth";
-import { Container, Navbar } from "react-bootstrap";
+// styles
+import style from "./Header.module.scss";
 
 const Header = () => {
 	//Context
@@ -13,22 +15,30 @@ const Header = () => {
 	const handleLogout = () => {
 		auth?.logout();
 	};
+
 	return (
 		<>
-			<Navbar expand="lg" variant="dark" bg="dark">
+			<Navbar expand="lg" variant="dark" bg="dark" className={style.navbar}>
 				<Container>
-					<Navbar.Brand href="#">
+					<Navbar.Brand as={Link} to="/dashboard" className={style.brand}>
 						<img alt="logo" src={Logo} width="30" height="30" className="d-inline-block align-top" />{" "}
 						{auth?.user?.username}
 					</Navbar.Brand>
-					<button
-						className="btn btn-outline-danger"
-						onClick={() => {
-							handleLogout();
-						}}
-					>
-						<i className="bi bi-box-arrow-right fs-5"></i>
-					</button>
+					{/* config and settings */}
+					<Dropdown align="end" className={style.dropdown}>
+						<Dropdown.Toggle variant="outline-success" id="dropdown-basic" className={style.button}>
+							<i className="bi bi-sliders"></i>
+						</Dropdown.Toggle>
+						<Dropdown.Menu className={style.menu}>
+							<Dropdown.Item as={Link} to="/dashboard">
+								Home
+							</Dropdown.Item>
+							<Dropdown.Divider />
+							<Dropdown.Item href="#/action-3" onClick={handleLogout}>
+								Log out <i className="bi bi-box-arrow-right"></i>
+							</Dropdown.Item>
+						</Dropdown.Menu>
+					</Dropdown>
 				</Container>
 			</Navbar>
 		</>

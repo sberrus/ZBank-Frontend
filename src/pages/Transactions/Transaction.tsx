@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 //Context
 import UseAuth from "../../context/Auth/UseAuth";
 //Components
-import Header from "../_partials/Header/Header";
+import Header from "../../components/_partials/Header/Header";
 
 const Transaction = () => {
 	//contexto

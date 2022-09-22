@@ -68,7 +68,7 @@ const Dashboard = () => {
 							<div className={style.tabs}>
 								<div className={style.tab}>
 									<Link to="/transactions" className={style.buttonPrimary}>
-										Operaciones
+										Transactions
 									</Link>
 								</div>
 							</div>

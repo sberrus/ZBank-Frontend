@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios, { AxiosRequestConfig } from "axios";
 import UseAuth from "../../context/Auth/UseAuth";
-import Header from "../_partials/Header/Header";
-import "./Transactions.css";
-import ErrorAlert from "../_partials/ErrorAlert";
+import Header from "../../components/_partials/Header/Header";
+import ErrorAlert from "../../components/_partials/ErrorAlert";
 import { useLocation, useNavigate } from "react-router-dom";
+import style from "./Transactions.module.scss";
 
 const Transaction = () => {
 	//Contexto de loggeo
@@ -17,16 +17,12 @@ const Transaction = () => {
 	const [ammount, setAmmount] = useState("");
 	const [error, setError] = useState(null);
 	const [concept, setConcept] = useState("");
-	const [receiver, setReceiver] = useState((receiver) => {
-		//params
-		const query = new URLSearchParams(search);
-		return query.get("receiverID") ? query.get("receiverID") : "";
-	});
+	const [receiver, setReceiver] = useState("");
 
 	//useHistory
 	const navigate = useNavigate();
 
-	const handleSubmit = async (e) => {
+	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 		const config: AxiosRequestConfig = {
 			method: "post",
@@ -55,13 +51,24 @@ const Transaction = () => {
 			});
 	};
 
+	const catchReceiver = () => {
+		const query = new URLSearchParams(search);
+		const receiver = query.get("receiverID");
+		if (receiver) setReceiver(receiver);
+	};
+	// effect
+	useEffect(() => {
+		catchReceiver();
+		return () => {};
+	}, []);
+
 	return (
-		<div className="vh-100 container-fluid p-0">
-			<Header user={auth.user} />
+		<div className={`${style.transactions} vh-100 container-fluid p-0`}>
+			<Header />
 			{/* Formulario de transacciones */}
 			<div className="container">
 				<section id="tableTransaction" className="mt-1">
-					<form action="" onSubmit={handleSubmit}>
+					<form onSubmit={handleSubmit} className={style.form}>
 						<div className="d-flex flex-column">
 							<label htmlFor="">ID Receptor</label>
 							<input
@@ -99,11 +106,9 @@ const Transaction = () => {
 							/>
 						</div>
 						{error && <ErrorAlert msg={error} type="danger" />}
-						<div className="d-flex flex-row-reverse">
-							<button className="btn btn-success col-4 mt-4" type="submit">
-								Enviar
-							</button>
-						</div>
+						<button className={style.buttonPrimary} type="submit">
+							Enviar
+						</button>
 					</form>
 				</section>
 			</div>

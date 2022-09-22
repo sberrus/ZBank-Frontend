@@ -2,7 +2,7 @@
 import { Route, Routes } from "react-router-dom";
 
 //Routes
-import Transactions from "../components/Transactions/Transactions";
+import Transactions from "../pages/Transactions/Transactions";
 // TODO: work in transaction page
 // import Transaction from "../components/Transactions/Transaction";
 import Dashboard from "../pages/Dashboard/Dashboard";
