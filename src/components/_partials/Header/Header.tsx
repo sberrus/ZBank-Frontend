@@ -22,7 +22,9 @@ const Header = () => {
 				<Container>
 					<Navbar.Brand as={Link} to="/dashboard" className={style.brand}>
 						<img alt="logo" src={Logo} width="30" height="30" className="d-inline-block align-top" />{" "}
-						{auth?.user?.username}
+						<span className={style.username}>
+							{auth?.user?.username} - {auth?.user?.userID}
+						</span>
 					</Navbar.Brand>
 					{/* config and settings */}
 					<Dropdown align="end" className={style.dropdown}>
