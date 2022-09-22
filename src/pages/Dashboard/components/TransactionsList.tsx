@@ -1,17 +1,20 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { ListGroup } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { TransactionType } from "types/Transactions";
 import UseAuth from "../../../context/Auth/UseAuth";
+import TransactionItem from "./TransactionItem";
 // style
-import style from "./Transactions.module.scss";
+import style from "./TransactionsList.module.scss";
 
-const Table = () => {
+const TransactionList = () => {
 	//Context
 	const auth = UseAuth();
 	// states
 	const [transactions, setTransactions] = useState<TransactionType[]>([]);
 
+	// TODO: MOVE THIS LOGIC TO ./HELPERS
 	// methods
 	const getTransactions = async () => {
 		const userID = auth?.user?.userID;
@@ -20,7 +23,7 @@ const Table = () => {
 				headers: { "x-token": localStorage.getItem("x-token") || "" },
 			})
 			.then(({ data }) => {
-				console.log(data);
+				setTransactions(data.reversedArr);
 			})
 			.catch((error) => {
 				console.log("🚀 ~ file: Dashboard.tsx ~ line 57 ~ callData ~ error", error);
@@ -40,7 +43,11 @@ const Table = () => {
 			{/* table */}
 			<div className={style.table}>
 				{transactions.length > 0 ? (
-					<>transacciones</>
+					<ListGroup>
+						{transactions.map((transaction) => (
+							<TransactionItem key={transaction._id} transaction={transaction} />
+						))}
+					</ListGroup>
 				) : (
 					<div className={style.noTransactions}>
 						<h5 className={style.title}>It seems like you have no transactions yet</h5>
@@ -54,4 +61,4 @@ const Table = () => {
 	);
 };
 
-export default Table;
+export default TransactionList;

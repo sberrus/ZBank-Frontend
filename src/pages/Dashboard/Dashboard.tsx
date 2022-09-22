@@ -1,4 +1,5 @@
 // imports
+import { Container } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -6,12 +7,11 @@ import { Link } from "react-router-dom";
 import UseAuth from "../../context/Auth/UseAuth";
 // components
 import Header from "../../components/_partials/Header/Header";
-import Table from "./components/Transactions";
+import TransactionList from "./components/TransactionsList";
 // styles
 import style from "./Dashboard.module.scss";
 // types
 import { UserType } from "../../types/Auth";
-import { Container } from "react-bootstrap";
 
 // TODO: Crear hooks para realizar los fetch
 const Dashboard = () => {
@@ -94,7 +94,7 @@ const Dashboard = () => {
 						<span className={style.balance}>{auth?.user?.balance} zym</span>
 					</div>
 					{/* table */}
-					<Table />
+					<TransactionList />
 				</Container>
 			</div>
 		</>

@@ -1,12 +1,13 @@
 @import "./variables.scss";
-// fonts
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100;200;300;400;500;600;700&display=swap");
-
-body {
-	font-family: "IBM Plex Sans", sans-serif;
-	background-color: $dark;
-}
 
 // bootstrap
 @import "bootstrap";
 @import "../../node_modules/bootstrap-icons/";
+
+// fonts
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@100;200;300;400;500;600;700&display=swap");
+
+body {
+	font-family: "IBM Plex Mono", sans-serif;
+	background-color: $dark;
+}
