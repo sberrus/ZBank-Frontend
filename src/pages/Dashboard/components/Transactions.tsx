@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { TransactionType } from "types/Transactions";
 import UseAuth from "../../../context/Auth/UseAuth";
 // style
-import style from "./Table.module.scss";
+import style from "./Transactions.module.scss";
 
 const Table = () => {
 	//Context
@@ -35,17 +35,21 @@ const Table = () => {
 
 	//
 	return (
-		<div className={style.table}>
-			{transactions.length > 0 ? (
-				<>hay transacciones</>
-			) : (
-				<div className={style.noTransactions}>
-					<h5>It seems like you have no transactions yet.</h5>
-					<Link to="/transactions" className={style.buttonSecondary}>
-						Make first transaction <i className="bi bi-plus"></i>
-					</Link>
-				</div>
-			)}
+		<div className={style.transactions}>
+			<h3 className={style.title}>Transactions</h3>
+			{/* table */}
+			<div className={style.table}>
+				{transactions.length > 0 ? (
+					<>transacciones</>
+				) : (
+					<div className={style.noTransactions}>
+						<h5 className={style.title}>It seems like you have no transactions yet</h5>
+						<Link to="/transactions" className={style.buttonSecondary}>
+							Make first transaction
+						</Link>
+					</div>
+				)}
+			</div>
 		</div>
 	);
 };

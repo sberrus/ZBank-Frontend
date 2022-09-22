@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import UseAuth from "../../context/Auth/UseAuth";
 // components
 import Header from "../../components/_partials/Header/Header";
-import Table from "./components/Table";
+import Table from "./components/Transactions";
 // styles
 import style from "./Dashboard.module.scss";
 // types
@@ -91,7 +91,7 @@ const Dashboard = () => {
 							<small>id: </small>
 							{auth?.user?.userID}
 						</span>
-						<span className={style.balance}>{auth?.user?.balance} sym</span>
+						<span className={style.balance}>{auth?.user?.balance} zym</span>
 					</div>
 					{/* table */}
 					<Table />
