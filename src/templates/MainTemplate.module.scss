@@ -5,10 +5,10 @@
 	background: $dark;
 	color: $light;
 	position: relative;
-	overflow: hidden;
+	overflow-x: hidden;
 	.content {
 		transition: all 1s;
-		height: inherit;
+		height: 100vh;
 		position: relative;
 		z-index: 1;
 	}
