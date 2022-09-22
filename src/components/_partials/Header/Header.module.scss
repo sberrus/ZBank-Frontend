@@ -27,6 +27,12 @@
 			hr {
 				color: $primary;
 			}
+			a:active,
+			a:focus,
+			a:hover {
+				background-color: $primary;
+				color: $dark;
+			}
 		}
 	}
 }

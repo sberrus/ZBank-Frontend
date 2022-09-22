@@ -5,7 +5,33 @@
 		margin: 1em 0;
 		display: flex;
 		justify-content: flex-end;
-		.tab {
+	}
+	.clientInfo {
+		border: 1px solid $primary;
+		border-radius: 0.33rem;
+		padding: 1em;
+		position: relative;
+
+		.copyButton {
+			position: absolute;
+			right: 10px;
+			top: 10px;
+			color: $primary;
+			.icon {
+				transition: all 1s;
+			}
+		}
+		.username,
+		.balance {
+			display: block;
+			text-align: center;
+			color: $primary-dark;
+			font-weight: 600;
+			font-size: 18px;
+		}
+		.balance {
+			color: $primary;
+			font-size: 25px;
 		}
 	}
 }
