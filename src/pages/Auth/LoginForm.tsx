@@ -1,8 +1,6 @@
 //imports
 import { FormEvent, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-// utils
-import { login } from "@utils/auth.util";
 //context
 import UseAuth from "@context/Auth/UseAuth";
 // components
@@ -15,9 +13,6 @@ import fingerPrint from "@assets/decoration/fingerPrint.svg";
 
 //
 const LoginForm = () => {
-	//History hook
-	const navigate = useNavigate();
-
 	//Context
 	const auth = UseAuth();
 
@@ -28,15 +23,7 @@ const LoginForm = () => {
 
 	const handleSubmit = async (e: FormEvent) => {
 		e.preventDefault();
-		try {
-			const res = await login(username, password);
-			console.log(res.token, res.usuario);
-			auth?.login(res.usuario, res.token);
-			navigate("/dashboard");
-		} catch (error) {
-			console.log(error);
-			setErrorMsg("Error al iniciar sesión");
-		}
+		auth?.login({ username, password });
 	};
 	useEffect(() => {
 		const inputs = document.querySelectorAll("input");

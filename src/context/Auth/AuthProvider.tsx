@@ -1,9 +1,13 @@
+// imports
 import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+// helpers
+import { loginUser } from "helpers/auth.helper";
+// types
 import { AuthContextType, UserType } from "../../types/Auth";
 import { ProviderPropsWithChildren } from "../../types/Utils";
 
-//Instancia del contexto
+// context
 export const AuthContext = createContext<AuthContextType | null>(null);
 
 const AuthProvider = ({ children }: ProviderPropsWithChildren) => {
@@ -15,12 +19,20 @@ const AuthProvider = ({ children }: ProviderPropsWithChildren) => {
 
 	let contextValue: AuthContextType = {
 		user,
-		login(currentUser, token = "") {
-			setUser(currentUser);
-			localStorage.setItem("currentUser", JSON.stringify(currentUser));
-
-			if (token) {
-				localStorage.setItem("x-token", token);
+		async login({ username, password }) {
+			try {
+				const userResponse = await loginUser({ username, password });
+				console.log(userResponse);
+				// set global user
+				setUser(userResponse.usuario);
+				// persist data in localstorage
+				localStorage.setItem("currentUser", JSON.stringify(userResponse.usuario));
+				localStorage.setItem("x-token", userResponse.token);
+				// navigate
+				navigate("/dashboard");
+			} catch (error) {
+				console.log("🚀 ~ file: AuthProvider.tsx ~ line 26 ~ login ~ error", error);
+				// use notifier
 			}
 		},
 		logout() {

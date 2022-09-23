@@ -1,3 +1,16 @@
+/**
+ * Global context object
+ */
+export interface AuthContextType {
+	user: UserType | null;
+	login: ({ username, password }: LoginRawData) => void;
+	logout: () => void;
+	isLogged: () => boolean;
+}
+
+/**
+ * global user object
+ */
 export type UserType = {
 	userID: string;
 	username: string;
@@ -7,9 +20,18 @@ export type UserType = {
 	uid: string;
 };
 
-export interface AuthContextType {
-	user: UserType | null;
-	login: (user: UserType, token?: string) => void;
-	logout: () => void;
-	isLogged: () => boolean;
-}
+/**
+ * Data retrived in login form
+ */
+export type LoginRawData = {
+	username: string;
+	password: string;
+};
+
+/**
+ * auth-login succesfully response
+ */
+export type LoginResponse = {
+	usuario: UserType;
+	token: string;
+};

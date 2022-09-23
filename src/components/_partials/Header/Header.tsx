@@ -34,7 +34,7 @@ const Header = () => {
 								Home
 							</Dropdown.Item>
 							<Dropdown.Divider />
-							<Dropdown.Item href="#/action-3" onClick={handleLogout}>
+							<Dropdown.Item onClick={handleLogout}>
 								Log out <i className="bi bi-box-arrow-right"></i>
 							</Dropdown.Item>
 						</Dropdown.Menu>
