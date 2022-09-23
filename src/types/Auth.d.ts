@@ -3,6 +3,7 @@
  */
 export interface AuthContextType {
 	user: UserType | null;
+	updateUser: () => void;
 	login: ({ username, password }: LoginRawData) => void;
 	register: ({ username, password, passwordConfirm }: RegisterRawData) => void;
 	logout: () => void;
@@ -48,5 +49,13 @@ export type LoginResponse = {
  */
 export type RegisterResponse = {
 	user: UserType;
+	token: string;
+};
+
+/**
+ *
+ */
+export type RefreshUserType = {
+	userID: string;
 	token: string;
 };

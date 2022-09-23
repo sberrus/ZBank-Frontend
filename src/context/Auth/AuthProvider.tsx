@@ -2,7 +2,7 @@
 import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 // helpers
-import { loginUser, registerUser } from "helpers/auth.helper";
+import { loginUser, refreshUser, registerUser } from "helpers/auth.helper";
 // types
 import { AuthContextType, UserType } from "../../types/Auth";
 import { ProviderPropsWithChildren } from "../../types/Utils";
@@ -19,6 +19,19 @@ const AuthProvider = ({ children }: ProviderPropsWithChildren) => {
 
 	let contextValue: AuthContextType = {
 		user,
+		async updateUser() {
+			// check if there is any user logged
+			if (!user) {
+				this.logout();
+			}
+			// update user
+			const userID = user?.userID!;
+			const token = localStorage.getItem("x-token")!;
+
+			const refreshedUser = await refreshUser({ userID, token });
+			setUser(refreshedUser);
+			localStorage.setItem("currentUser", JSON.stringify(refreshedUser));
+		},
 		async login({ username, password }) {
 			try {
 				const loginResponse = await loginUser({ username, password });

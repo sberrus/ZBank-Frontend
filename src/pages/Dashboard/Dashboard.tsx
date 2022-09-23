@@ -1,6 +1,6 @@
 // imports
 import { Container } from "react-bootstrap";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 // context
 import UseAuth from "../../context/Auth/UseAuth";
@@ -23,6 +23,11 @@ const Dashboard = () => {
 			setIsCopy(true);
 		}
 	};
+
+	useEffect(() => {
+		auth?.updateUser();
+		return () => {};
+	}, []);
 
 	return (
 		<>

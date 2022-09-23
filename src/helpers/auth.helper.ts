@@ -1,4 +1,4 @@
-import { LoginRawData, LoginResponse, RegisterRawData, RegisterResponse } from "types/Auth";
+import { LoginRawData, LoginResponse, RefreshUserType, RegisterRawData, RegisterResponse, UserType } from "types/Auth";
 // consts
 const ENDPOINT = "https://zbank.samdev.es/v1/auth";
 /**
@@ -45,8 +45,27 @@ export const registerUser = async ({
 			passwordConfirm,
 		}),
 	};
-	const res = await fetch(_ENDPOINT, config);
-	const resgisterResponse = await res.json();
 
-	return resgisterResponse;
+	try {
+		const res = await fetch(_ENDPOINT, config);
+		const resgisterResponse = await res.json();
+
+		return resgisterResponse;
+	} catch (error) {
+		throw new Error("Error when login in user");
+	}
+};
+
+export const refreshUser = async ({ userID, token }: RefreshUserType): Promise<UserType> => {
+	const _ENDPOINT = `https://zbank.samdev.es/v1/users?userID=${userID}`;
+	const config: RequestInit = {
+		headers: { "x-token": token },
+	};
+	try {
+		const res = await fetch(_ENDPOINT, config);
+		const refreshedData = await res.json();
+		return refreshedData;
+	} catch (error) {
+		throw new Error("Error when login in user");
+	}
 };
