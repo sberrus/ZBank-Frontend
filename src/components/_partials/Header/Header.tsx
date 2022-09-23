@@ -20,7 +20,7 @@ const Header = () => {
 		<>
 			<Navbar expand="lg" variant="dark" bg="dark" className={style.navbar}>
 				<Container>
-					<Navbar.Brand as={Link} to="/dashboard" className={style.brand}>
+					<Navbar.Brand as={Link} to="/app" className={style.brand}>
 						<img alt="logo" src={Logo} width="30" height="30" className="d-inline-block align-top" />{" "}
 						<span className={style.username}>{auth?.user?.username}</span>
 					</Navbar.Brand>
@@ -30,7 +30,7 @@ const Header = () => {
 							<i className="bi bi-sliders"></i>
 						</Dropdown.Toggle>
 						<Dropdown.Menu className={style.menu}>
-							<Dropdown.Item as={Link} to="/dashboard">
+							<Dropdown.Item as={Link} to="/app">
 								Home
 							</Dropdown.Item>
 							<Dropdown.Divider />

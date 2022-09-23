@@ -12,7 +12,7 @@ const Index = () => {
 	const auth = UseAuth();
 	const navigate = useNavigate();
 	useEffect(() => {
-		auth && auth.isLogged() && navigate("/dashboard");
+		auth && auth.isLogged() && navigate("/app");
 		return () => {};
 	}, []);
 	return (
@@ -25,7 +25,7 @@ const Index = () => {
 				<h1 className={style.title}>ZBank</h1>
 				<p className={style.text}>Welcome to the next generation bank concept</p>
 				<div className={style.buttonContainer}>
-					<Link to="/login" className={style.buttonPrimary}>
+					<Link to="/auth/login" className={style.buttonPrimary}>
 						Get Started <i className="bi bi-arrow-right"></i>
 					</Link>
 				</div>

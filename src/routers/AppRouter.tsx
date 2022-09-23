@@ -1,5 +1,5 @@
 //Imports
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 
 //Routes
 import Transactions from "../pages/Transactions/Transactions";
@@ -8,12 +8,13 @@ import Transactions from "../pages/Transactions/Transactions";
 import Dashboard from "../pages/Dashboard/Dashboard";
 
 //404 handler
-import Error404 from "../components/404/Error404";
 import Index from "../pages/Index";
 import MainTemplate from "../templates/MainTemplate";
 import LoginForm from "../pages/Auth/LoginForm";
 import RegisterForm from "../pages/Auth/RegisterForm";
 import ForgotPassword from "../pages/Auth/ForgotPassword";
+import OnlyPublicRoute from "./OnlyPublicRoute";
+import OnlyPrivateRoute from "./OnlyPrivateRoute";
 
 export default function AppRouter() {
 	return (
@@ -21,19 +22,19 @@ export default function AppRouter() {
 			{/* Public Routes */}
 			<Route path="/" element={<MainTemplate />}>
 				<Route index element={<Index />} />
-				<Route path="/login" element={<LoginForm />} />
-				<Route path="/register" element={<RegisterForm />} />
-				<Route path="/forgot-password" element={<ForgotPassword />} />
+				{/* only public routes */}
+				<Route path="auth" element={<OnlyPublicRoute />}>
+					<Route path="login" element={<LoginForm />} />
+					<Route path="register" element={<RegisterForm />} />
+					<Route path="forgot-password" element={<ForgotPassword />} />
+				</Route>
 
 				{/* Private Routes */}
-				<Route path="/dashboard" element={<Dashboard />} />
-				<Route path="/transactions" element={<Transactions />} />
-				{/* <Route path="/transaction" element={<Transaction />} /> */}
-			</Route>
-
-			{/* 404 handlers */}
-			<Route path="*">
-				<Route element={<Error404 />} />
+				<Route path="app" element={<OnlyPrivateRoute />}>
+					<Route index element={<Dashboard />} />
+					<Route path="transactions" element={<Transactions />} />
+				</Route>
+				<Route path="*" element={<Navigate to="/" />} />
 			</Route>
 		</Routes>
 	);
