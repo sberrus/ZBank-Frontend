@@ -4,7 +4,7 @@ import { ListGroup } from "react-bootstrap";
 // styles
 import style from "./TransactionItem.module.scss";
 // types
-import { TransactionType } from "types/Transactions";
+import { TransactionType } from "types/Transaction";
 import { useEffect, useState } from "react";
 
 type TransactionItemProps = {

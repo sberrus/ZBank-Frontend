@@ -1,4 +1,4 @@
-import { LoginRawData, LoginResponse } from "types/Auth";
+import { LoginRawData, LoginResponse, RegisterRawData, RegisterResponse } from "types/Auth";
 // consts
 const ENDPOINT = "https://zbank.samdev.es/v1/auth";
 /**
@@ -7,7 +7,7 @@ const ENDPOINT = "https://zbank.samdev.es/v1/auth";
  */
 export const loginUser = async ({ username, password }: LoginRawData): Promise<LoginResponse> => {
 	// configs
-	const config = {
+	const config: RequestInit = {
 		method: "POST",
 		headers: {
 			"content-type": "application/json",
@@ -28,4 +28,25 @@ export const loginUser = async ({ username, password }: LoginRawData): Promise<L
 	} catch (error) {
 		throw new Error("Error when login in user");
 	}
+};
+
+export const registerUser = async ({
+	username,
+	password,
+	passwordConfirm,
+}: RegisterRawData): Promise<RegisterResponse> => {
+	const _ENDPOINT = "https://zbank.samdev.es/v1/users";
+	const config: RequestInit = {
+		method: "post",
+		headers: { "content-type": "application/json" },
+		body: JSON.stringify({
+			username: username.toLowerCase(),
+			password,
+			passwordConfirm,
+		}),
+	};
+	const res = await fetch(_ENDPOINT, config);
+	const resgisterResponse = await res.json();
+
+	return resgisterResponse;
 };

@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { ListGroup } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { TransactionType } from "types/Transactions";
+import { TransactionType } from "types/Transaction";
 import UseAuth from "../../../context/Auth/UseAuth";
 import TransactionItem from "./TransactionItem";
 // style

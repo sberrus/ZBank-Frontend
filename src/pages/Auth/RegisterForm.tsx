@@ -11,19 +11,16 @@ import ErrorAlert from "../../components/_partials/ErrorAlert";
 import style from "./RegisterForm.module.scss";
 // assets
 import Form from "../../assets/decoration/form.svg";
-type FormValues = {
-	username: string;
-	password: string;
-	passwordConfirm: string;
-};
+// types
+import { RegisterRawData } from "types/Auth";
+
 const RegisterForm = () => {
 	// context
 	const auth = useAuth();
 	//error logic states
 	const [errorMsg, setErrorMsg] = useState<string | null>(null);
-
 	//react-form-hook
-	const { register, handleSubmit } = useForm<FormValues>();
+	const { register, handleSubmit } = useForm<RegisterRawData>();
 
 	useEffect(() => {
 		const inputs = document.querySelectorAll("input");
@@ -37,32 +34,8 @@ const RegisterForm = () => {
 		};
 	}, []);
 
-	/**
-	 * Handle valid react-hook-form submit after pass the validations.
-	 * @param {*} param0 registered and validated form fields
-	 */
-	const onSubmit: SubmitHandler<FormValues> = async ({ username, password, passwordConfirm }) => {
-		await axios({
-			method: "post",
-			url: "https://zbank.samdev.es/v1/users",
-			data: {
-				username: username.toLowerCase(),
-				password,
-				passwordConfirm,
-			},
-		})
-			.then((res) => {
-				const user = res.data.user;
-				const token = res.data.token;
-				auth?.login(user, token);
-				setErrorMsg(null);
-			})
-			.catch((err) => {
-				console.log(err.response);
-				const error =
-					err.response?.data?.error || err.response?.data[0]?.msg || "Error al registrar al usuario - any";
-				setErrorMsg(error);
-			});
+	const onSubmit: SubmitHandler<RegisterRawData> = async ({ username, password, passwordConfirm }) => {
+		auth?.register({ username, password, passwordConfirm });
 	};
 
 	/**
@@ -70,7 +43,6 @@ const RegisterForm = () => {
 	 * @param {*} error callback error object
 	 */
 	const onError = (error: any) => {
-		console.log(error);
 		const errorStack = Object.keys(error);
 		if (errorStack.includes("username")) {
 			setErrorMsg("Nombre de Usuario Obligatorio");

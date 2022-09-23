@@ -2,7 +2,7 @@
 import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 // helpers
-import { loginUser } from "helpers/auth.helper";
+import { loginUser, registerUser } from "helpers/auth.helper";
 // types
 import { AuthContextType, UserType } from "../../types/Auth";
 import { ProviderPropsWithChildren } from "../../types/Utils";
@@ -21,12 +21,27 @@ const AuthProvider = ({ children }: ProviderPropsWithChildren) => {
 		user,
 		async login({ username, password }) {
 			try {
-				const userResponse = await loginUser({ username, password });
+				const loginResponse = await loginUser({ username, password });
 				// set global user
-				setUser(userResponse.usuario);
+				setUser(loginResponse.usuario);
 				// persist data in localstorage
-				localStorage.setItem("currentUser", JSON.stringify(userResponse.usuario));
-				localStorage.setItem("x-token", userResponse.token);
+				localStorage.setItem("currentUser", JSON.stringify(loginResponse.usuario));
+				localStorage.setItem("x-token", loginResponse.token);
+				// navigate
+				navigate("/dashboard");
+			} catch (error) {
+				console.log("🚀 ~ file: AuthProvider.tsx ~ line 33 ~ login ~ error", error);
+				// use notifier
+			}
+		},
+		async register({ username, password, passwordConfirm }) {
+			try {
+				const registerResponse = await registerUser({ username, password, passwordConfirm });
+				// set global user
+				setUser(registerResponse.user);
+				// persist data in localstorage
+				localStorage.setItem("currentUser", JSON.stringify(registerResponse.user));
+				localStorage.setItem("x-token", registerResponse.token);
 				// navigate
 				navigate("/dashboard");
 			} catch (error) {

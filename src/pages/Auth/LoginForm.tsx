@@ -87,7 +87,7 @@ const LoginForm = () => {
 				<div className={style.notAccountContainer}>
 					<p>
 						Don't have an account{" "}
-						<Link to="/register" className={style.link}>
+						<Link to="/auth/register" className={style.link}>
 							Register
 						</Link>
 					</p>
