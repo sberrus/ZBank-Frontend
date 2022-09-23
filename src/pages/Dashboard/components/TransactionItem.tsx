@@ -44,7 +44,8 @@ const TransactionItem = ({ transaction }: TransactionItemProps) => {
 				</div>
 				{/* date */}
 				<div className={style.date}>
-					{date?.getDay()}/{date?.getMonth()}/{date?.getUTCFullYear()} - {date?.getHours()}:{date?.getMinutes()}
+					{date?.getDate()}/{`${date?.getMonth()! + 1}`}/{date?.getUTCFullYear()} - {date?.getHours()}:
+					{date?.getMinutes()}
 				</div>{" "}
 			</div>
 			{/* transaction ammount */}

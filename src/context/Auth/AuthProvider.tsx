@@ -22,7 +22,6 @@ const AuthProvider = ({ children }: ProviderPropsWithChildren) => {
 		async login({ username, password }) {
 			try {
 				const userResponse = await loginUser({ username, password });
-				console.log(userResponse);
 				// set global user
 				setUser(userResponse.usuario);
 				// persist data in localstorage

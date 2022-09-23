@@ -1,7 +1,6 @@
 // imports
 import { Container } from "react-bootstrap";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 // context
 import UseAuth from "../../context/Auth/UseAuth";
@@ -10,10 +9,8 @@ import Header from "../../components/_partials/Header/Header";
 import TransactionList from "./components/TransactionsList";
 // styles
 import style from "./Dashboard.module.scss";
-// types
-import { UserType } from "../../types/Auth";
 
-// TODO: Crear hooks para realizar los fetch
+//
 const Dashboard = () => {
 	//context
 	const auth = UseAuth();
@@ -26,6 +23,7 @@ const Dashboard = () => {
 			setIsCopy(true);
 		}
 	};
+
 	return (
 		<>
 			<Header />
