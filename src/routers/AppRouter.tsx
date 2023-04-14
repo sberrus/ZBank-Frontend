@@ -10,9 +10,9 @@ import Dashboard from '../pages/Dashboard/Dashboard'
 //404 handler
 import Index from '../pages/Index'
 import MainTemplate from '../templates/MainTemplate'
-import LoginForm from '../pages/Auth/login/Login'
-import RegisterForm from '../pages/Auth/RegisterForm'
-import ForgotPassword from '../pages/Auth/ForgotPassword'
+import LoginForm from '../pages/auth/login/Login'
+import RegisterForm from '../pages/auth/register/RegisterForm'
+import ForgotPassword from '../pages/auth/ForgotPassword'
 import OnlyPublicRoute from './OnlyPublicRoute'
 import OnlyPrivateRoute from './OnlyPrivateRoute'
 

@@ -1,6 +1,5 @@
 // imports
-import React, { FormEvent, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { FormEvent, useEffect, useState } from 'react'
 
 // context
 import UseAuth from '@context/Auth/UseAuth'
@@ -9,7 +8,7 @@ import UseAuth from '@context/Auth/UseAuth'
 import ErrorAlert from '@components/_partials/ErrorAlert'
 
 // style
-import style from './Login.module.scss'
+import style from '../auth.module.scss'
 
 const Form = () => {
   //Context
@@ -68,9 +67,7 @@ const Form = () => {
       </div>
       {errorMsg && <ErrorAlert msg={errorMsg} type={'danger'} />}
 
-      <div className={style.buttonContainer}>
-        <button className={style.buttonPrimary}>Entrar</button>
-      </div>
+      <button className={style.buttonPrimary}>Entrar</button>
     </form>
   )
 }

@@ -6,7 +6,7 @@ import style from './layout.module.scss'
 
 const GridDecoration = () => {
   // hooks
-  const [animationCount, setAnimationCount] = useState(1)
+  const [colorFlag, setColorFlag] = useState(true)
   const [rowCount, setRowCount] = useState(0)
   const [columnCount, setColumnCount] = useState(0)
   const [tiles, setTiles] = useState<null[] | null>(null)
@@ -36,19 +36,17 @@ const GridDecoration = () => {
     setTiles(temp)
   }
 
-  const colors = ['#00e5ff', '#00ff84', '#c8ffff', '#cce31e']
-
   const handleClick = (idx: number) => {
-    setAnimationCount((prev) => prev + 1)
-
     anime({
       targets: '.tile',
-      backgroundColor: colors[Math.floor(Math.random() * colors.length)],
+      backgroundColor: colorFlag ? '#81e6b6' : '#def787',
       delay: anime.stagger(50, {
         grid: [columnCount, rowCount],
         from: idx
       })
     })
+
+    setColorFlag(!colorFlag)
   }
 
   // effect

@@ -6,7 +6,7 @@
   height: 100%;
   align-items: center;
   .formContainer {
-    width: 40%;
+    width: 50%;
   }
 
   @keyframes bg-pan {
@@ -18,13 +18,13 @@
     }
   }
   .decorationContainer {
-    --g1: #00e5ff81;
-    --g2: #00ff8483;
+    --g1: #81e6b6;
+    --g2: #a8a8a8;
     animation: bg-pan 10s linear infinite;
     position: relative;
     background: linear-gradient(to right, var(--g1), var(--g2), var(--g1));
     background-size: 200%;
-    width: 60%;
+    width: 50%;
     height: 100%;
     display: grid;
     grid-template-rows: repeat(var(--rows), 1fr);
@@ -55,7 +55,6 @@
 // responsive
 @media (max-width: $mobile-viewport) {
   .layout {
-    display: block;
     .formContainer {
       width: 100%;
     }
