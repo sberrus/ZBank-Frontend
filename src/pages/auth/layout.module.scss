@@ -19,11 +19,10 @@
   }
   .decorationContainer {
     --g1: #81e6b6;
-    --g2: #a8a8a8;
-    animation: bg-pan 10s linear infinite;
+    animation: bg-pan 5s linear infinite;
     position: relative;
-    background: linear-gradient(to right, var(--g1), var(--g2), var(--g1));
-    background-size: 200%;
+    background: linear-gradient(to right, var(--g1), $warning, var(--g1));
+    background-size: 150%;
     width: 50%;
     height: 100%;
     display: grid;

@@ -57,6 +57,7 @@ const GridDecoration = () => {
     window.addEventListener('resize', createTiles)
     return () => {
       window.removeEventListener('resize', () => console.log('evento eliminado'))
+      setColorFlag(false)
     }
   }, [])
 
