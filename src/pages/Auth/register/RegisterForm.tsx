@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import { SubmitHandler, useForm } from 'react-hook-form'
 // context
 import useAuth from '../../../context/Auth/UseAuth'
-import ErrorAlert from '../../../components/_partials/ErrorAlert'
 // style
 import style from '../auth.module.scss'
 // assets
@@ -119,7 +118,6 @@ const RegisterForm = () => {
               })}
             />
           </div>
-          {errorMsg && <ErrorAlert msg={errorMsg} type={'danger'} />}
           <button className={style.buttonPrimary}>Register</button>
         </form>
         <p className={style.link}>

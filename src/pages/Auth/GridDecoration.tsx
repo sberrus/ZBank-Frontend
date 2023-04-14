@@ -39,7 +39,7 @@ const GridDecoration = () => {
   const handleClick = (idx: number) => {
     anime({
       targets: '.tile',
-      backgroundColor: colorFlag ? '#81e6b6' : '#def787',
+      backgroundColor: colorFlag ? '#def787' : '#81e6b6',
       delay: anime.stagger(50, {
         grid: [columnCount, rowCount],
         from: idx

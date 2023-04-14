@@ -65,7 +65,7 @@ const Form = () => {
           }}
         />
       </div>
-      {errorMsg && <ErrorAlert msg={errorMsg} type={'danger'} />}
+      {errorMsg ?? <ErrorAlert msg={errorMsg} type={'danger'} />}
 
       <button className={style.buttonPrimary}>Entrar</button>
     </form>
