@@ -38,13 +38,14 @@ const GridDecoration = () => {
 
   const colors = ['#E53935', '#FDD835', '#F4511E', '#4CAF50', '#2196F3', '#9C27B0']
 
-  const handleClick = () => {
+  const handleClick = (idx: number) => {
     setAnimationCount((prev) => prev + 1)
     anime({
       targets: '.tile',
       backgroundColor: colors[animationCount % (colors.length - 1)],
-      delay: anime.stagger(50, {
-        grid: [columnCount, rowCount]
+      delay: anime.stagger(150, {
+        grid: [columnCount, rowCount],
+        from: idx
       })
     })
   }
@@ -67,7 +68,13 @@ const GridDecoration = () => {
       className={style.decorationContainer}
     >
       {tiles?.map((v, idx) => (
-        <div key={idx} className={`${style.tile} tile`} onClick={handleClick}>
+        <div
+          key={idx}
+          className={`${style.tile} tile`}
+          onClick={() => {
+            handleClick(idx)
+          }}
+        >
           {' '}
         </div>
       ))}
