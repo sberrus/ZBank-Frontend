@@ -18,3 +18,10 @@ const AuthLayout = ({ children }: AuthLayoutProps) => {
 }
 
 export default AuthLayout
+
+/**
+ *
+ * TASKS
+ *
+ * todo: Add error handling in all components
+ */

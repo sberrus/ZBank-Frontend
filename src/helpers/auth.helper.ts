@@ -1,6 +1,6 @@
 import { LoginRawData, LoginResponse, RefreshUserType, RegisterRawData, RegisterResponse, UserType } from "types/Auth";
 // consts
-const ENDPOINT = "https://zbank.samdev.es/v1/auth";
+const ENDPOINT = window.location.hostname === "localhost" ? "https://zbank.samdev.es/v1/auth" : "https://zbank.samdev.es/v1/auth";
 
 
 /**
@@ -29,7 +29,7 @@ export const loginUser = async ({ username, password }: LoginRawData): Promise<L
     }
     return loginResponse;
   } catch (error) {
-    throw new Error("Error when login in user");
+    throw new Error("Error when login user");
   }
 };
 
