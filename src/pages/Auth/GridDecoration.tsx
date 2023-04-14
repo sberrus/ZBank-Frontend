@@ -18,8 +18,8 @@ const GridDecoration = () => {
   const createTiles = () => {
     let tilesCount = 0
     let temp = []
-    const rows = Math.floor(gridContainer.current?.clientHeight! / 100)
-    const columns = Math.floor(gridContainer.current?.clientWidth! / 100)
+    const rows = Math.floor(gridContainer.current?.clientHeight! / 75)
+    const columns = Math.floor(gridContainer.current?.clientWidth! / 75)
 
     if (rows && columns) {
       tilesCount = Math.floor(rows * columns)
@@ -36,14 +36,15 @@ const GridDecoration = () => {
     setTiles(temp)
   }
 
-  const colors = ['#E53935', '#FDD835', '#F4511E', '#4CAF50', '#2196F3', '#9C27B0']
+  const colors = ['#00e5ff', '#00ff84', '#c8ffff', '#cce31e']
 
   const handleClick = (idx: number) => {
     setAnimationCount((prev) => prev + 1)
+
     anime({
       targets: '.tile',
-      backgroundColor: colors[animationCount % (colors.length - 1)],
-      delay: anime.stagger(150, {
+      backgroundColor: colors[Math.floor(Math.random() * colors.length)],
+      delay: anime.stagger(50, {
         grid: [columnCount, rowCount],
         from: idx
       })

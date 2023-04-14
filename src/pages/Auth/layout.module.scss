@@ -8,8 +8,22 @@
   .formContainer {
     width: 40%;
   }
+
+  @keyframes bg-pan {
+    from {
+      background-position: 0% center;
+    }
+    to {
+      background-position: -200% center;
+    }
+  }
   .decorationContainer {
+    --g1: #00e5ff81;
+    --g2: #00ff8483;
+    animation: bg-pan 10s linear infinite;
     position: relative;
+    background: linear-gradient(to right, var(--g1), var(--g2), var(--g1));
+    background-size: 200%;
     width: 60%;
     height: 100%;
     display: grid;
@@ -17,7 +31,16 @@
     grid-template-columns: repeat(var(--columns), 1fr);
 
     .tile {
-      border: 1px solid #fff;
+      position: relative;
+      &::before {
+        background-color: rgb(20, 20, 20);
+        content: '';
+        position: absolute;
+        inset: 0.5px;
+      }
+      &:hover {
+        opacity: 0.95;
+      }
     }
   }
 }
